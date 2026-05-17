@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마력</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;
+            --main-color: #f8faff;
+            --point-color: #1a237e;
+            --bg-grey: #eeeeee;
+            --border-color: #ced4da;
+            --link-color: #0275d8;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 12px 20px;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid #bbb;
+            margin-bottom: 5px;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 300px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid #eee;
+            padding: 8px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 35%;
+            color: var(--point-color);
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #000;
+            font-weight: 800;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        .wiki-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 접기/펴기 박스 (기본 펼침) */
+        .collapsible-container {
+            border: 1px solid var(--border-color);
+            margin: 15px 0;
+        }
+
+        .collapsible-header {
+            background-color: var(--main-color);
+            padding: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            color: var(--point-color);
+        }
+
+        .collapsible-content {
+            padding: 15px;
+            display: block; /* 기본 펼침 */
+        }
+
+        .collapsible-container.closed .collapsible-content {
+            display: none;
+        }
+
+        .grade-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .grade-table th, .grade-table td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: center;
+        }
+
+        .grade-table th {
+            background-color: var(--main-color);
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div>Wiki Project</div>
+</header>
+
+<div class="container">
+    <div class="wiki-title">마력</div>
+    <div class="wiki-date">최근 수정 시각: 2020-02-14 15:22:04</div>
+
+    <!-- 인포박스 -->
+    <div class="infobox">
+        <div class="infobox-title">마력</div>
+        <table class="infobox-table">
+            <tr><th>분류</th><td>에너지, 마법 원천</td></tr>
+            <tr><th>발생 원천</th><td>인간 내부</td></tr>
+            <tr><th>관련 지표</th><td>마력량, 마력 발생량</td></tr>
+            <tr><th>관련 문서</th><td><a href="허구세계.html" class="wiki-link">허구세계</a>, <a href="마법.html" class="wiki-link">마법</a></td></tr>
+        </table>
+    </div>
+
+    <p>
+        <strong>마력</strong>은 인간의 내부에서 자연적으로 발생하는 에너지이며, 모든 <a href="마법.html" class="wiki-link">마법</a> 행위의 근간이 되는 자원이다. 
+        일반적으로 마력 발생량과 개인이 보유할 수 있는 마력량은 비례하는 성질을 띠며, 현대 마법학에서는 이를 등급화하여 개개인의 능력을 평가하는 척도로 삼는다.
+    </p>
+
+    <!-- 목차 -->
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li>1. 개요</li>
+            <li>2. 마력량
+                <ul>
+                    <li>2.1. 특징</li>
+                    <li>2.2. 증가 방법</li>
+                </ul>
+            </li>
+            <li>3. 마력 등급</li>
+            <li>4. 관련 문서</li>
+        </ul>
+    </div>
+
+    <h2>1. 개요</h2>
+    <p>
+        인간이라면 누구나 내부에서 마력을 생성한다. 하지만 이를 의도적으로 조절하고 외부로 투사하여 현상을 일으키는 것은 <a href="허구세계.html" class="wiki-link">허구세계</a>를 구축한 마법사들만이 가능하다. 마법 능력이 없는 일반인 역시 마력을 생산하지만, 활용법을 몰라 자연스럽게 대기 중으로 방출하게 된다.
+    </p>
+
+    <h2>2. 마력량</h2>
+    <h3>2.1. 특징</h3>
+    <ul>
+        <li><strong>신체의 마력 수용량</strong>: 개인이 신체 내부에 담아둘 수 있는 마력의 총량을 의미한다.</li>
+        <li><strong>주변 환경 침착</strong>: 수용량 이상으로 생성된 마력은 본인의 의사와 관계없이 주변 환경에 스며든다. 이러한 현상이 극대화된 곳이 <a href="허구침착지대.html" class="wiki-link">허구 침착 지대</a>이다.</li>
+        <li><strong>평가 기준</strong>: 마법사를 평가할 때 가장 객관적인 지표로 쓰인다.</li>
+    </ul>
+
+    <h3>2.2. 증가 방법</h3>
+    <div class="collapsible-container" id="increaseBox">
+        <div class="collapsible-header" onclick="toggleBox('increaseBox')">
+            마력량 증폭 및 발달 요인 <span>[접기/펼치기]</span>
+        </div>
+        <div class="collapsible-content">
+            <ul>
+                <li><strong>신체 성장</strong>: 육체가 성장함에 따라 마력 수용량도 자연스럽게 확장된다.</li>
+                <li><strong>명상</strong>: 정신적인 수련을 통해 마력 발생 효율을 높일 수 있다.</li>
+                <li><strong><a href="마력압축.html" class="wiki-link">마력 압축</a></strong>: 수용량 초과의 마력을 강제로 붙잡아 두는 방식. 아이디어는 쉽지만 안정적인 교육이 필수적이다. 적응기가 없으면 신체에 큰 무리가 간다.</li>
+                <li><strong>정신 붕괴</strong>: 역설적으로 정신이 회복되지 않아도 마력량은 폭발적으로 증가하는 경우가 확인된다.</li>
+                <li><strong>허구세계 요소 증가</strong>: 자신의 <a href="허구세계.html" class="wiki-link">허구세계</a> 내의 모순을 해결하거나 새로운 요소를 추가할 때 마력량이 비약적으로 상승한다.</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>3. 마력 등급</h2>
+    <p>
+        마력량은 <strong>F부터 S</strong>까지로 구분된다. 각 등급 내에서도 <code>---, --, -, +, ++, +++</code>의 세부 단계가 존재한다. (예: F+++ 다음 등급은 E---)
+    </p>
+
+    <table class="grade-table">
+        <thead>
+            <tr>
+                <th>등급</th>
+                <th>파괴력 기준 (물리력)</th>
+                <th>특이사항</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>F</strong></td>
+                <td>성인 주먹질 수준</td>
+                <td>자연 성장 시 F+가 한계</td>
+            </tr>
+            <tr>
+                <td><strong>E</strong></td>
+                <td>벽돌 파괴 수준</td>
+                <td>마법 관련직 신입 급</td>
+            </tr>
+            <tr>
+                <td><strong>D</strong></td>
+                <td>목조 건물 파괴 수준</td>
+                <td>전문 교육 이수자 수준</td>
+            </tr>
+            <tr>
+                <td><strong>C</strong></td>
+                <td>석재 건물 파괴 수준</td>
+                <td>일반 재능의 한계, <a href="가문형질.html" class="wiki-link">신체 변화</a> 발생 시작</td>
+            </tr>
+            <tr>
+                <td><strong>B</strong></td>
+                <td>마을 파괴 수준</td>
+                <td>생리현상(식사, 수면) 초월 시작</td>
+            </tr>
+            <tr>
+                <td><strong>A</strong></td>
+                <td>핵폭탄 수준</td>
+                <td>수명 한계 초월, 국가당 0~5명 존재</td>
+            </tr>
+            <tr>
+                <td><strong>S</strong></td>
+                <td>대륙 파괴 수준</td>
+                <td>전 세계 1명 존재 (<a href="로버타밴스.html" class="wiki-link">로버타 밴스</a>)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>4. 관련 문서</h2>
+    <ul>
+        <li><a href="허구세계.html" class="wiki-link">허구세계</a></li>
+        <li><a href="마법.html" class="wiki-link">마법</a></li>
+        <li><a href="가문형질.html" class="wiki-link">가문 형질</a></li>
+        <li><a href="허구침착지대.html" class="wiki-link">허구 침착 지대</a></li>
+        <li><a href="로버타밴스.html" class="wiki-link">로버타 밴스</a></li>
+        <li><a href="마력압축.html" class="wiki-link">마력 압축</a></li>
+    </ul>
+
+</div>
+
+<script>
+    function toggleBox(id) {
+        const box = document.getElementById(id);
+        box.classList.toggle('closed');
+    }
+</script>
+
+</body>
+</html>
