@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한라 국제 마법 아카데미 - 전체 문서 목록</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-1Thin.woff2') format('woff2');
+            font-weight: 100;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-2ExtraLight.woff2') format('woff2');
+            font-weight: 200;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-3Light.woff2') format('woff2');
+            font-weight: 300;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2');
+            font-weight: 600;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-9Black.woff2') format('woff2');
+            font-weight: 900;
+            font-display: swap;
+        }
+
+        /* 색상 변수 */
+        :root {
+            --base-color: #ffffff;      /* 흰색 박스 */
+            --main-color: #f8faff;      /* 분류 배경색 */
+            --point-color: #1a237e;     /* 포인트 네이비 */
+            --bg-grey: #eeeeee;         /* PC 배경 회색 */
+            --border-color: #ced4da;
+            --link-color: #0275d8;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif; /* 폰트 적용 */
+            font-weight: 400;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* 메인 컨테이너 (흰색 박스) */
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background-color: var(--base-color);
+            padding: 40px;
+            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            min-height: 80vh;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-top: 0;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--point-color);
+            padding-bottom: 10px;
+            color: #111;
+        }
+
+        /* 분류 아코디언 */
+        .category-container {
+            border: 1px solid var(--border-color);
+            margin-bottom: 12px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .category-header {
+            background-color: var(--main-color);
+            color: var(--point-color);
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: background 0.2s;
+        }
+
+        .category-header:hover {
+            background-color: #e9efff;
+        }
+
+        .category-header::after {
+            content: '[ 펼치기 ]';
+            font-size: 0.85rem;
+            font-weight: 400;
+        }
+
+        .category-container.active .category-header::after {
+            content: '[ 접기 ]';
+        }
+
+        .category-content {
+            display: none;
+            padding: 20px;
+            background-color: #fff;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .category-container.active .category-content {
+            display: block;
+        }
+
+        /* 문서 리스트 */
+        .document-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .document-list li a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-weight: 500;
+            font-size: 1rem;
+            display: inline-block;
+            transition: transform 0.1s;
+        }
+
+        .document-list li a:hover {
+            text-decoration: underline;
+            transform: translateX(3px);
+        }
+
+        /* 반응형 (모바일) */
+        @media (max-width: 768px) {
+            body {
+                background-color: var(--base-color);
+            }
+            .container {
+                margin: 0;
+                padding: 20px 15px;
+                box-shadow: none;
+                border: none;
+                border-radius: 0;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+            .document-list {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    Wiki Project
+</header>
+
+<div class="container">
+    <h1>전체 문서 목록</h1>
+
+    <!-- 분류 1 -->
+    <div class="category-container">
+        <div class="category-header">분류 1</div>
+        <div class="category-content">
+            <ul class="document-list">
+                <li><a href="예시1.html">예시1.html</a></li>
+                <li><a href="예시2.html">예시2.html</a></li>
+                <li><a href="예시3.html">예시3.html</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 분류 2 -->
+    <div class="category-container">
+        <div class="category-header">분류 2</div>
+        <div class="category-content">
+            <ul class="document-list">
+                <li><a href="문서가.html">문서가.html</a></li>
+                <li><a href="문서나.html">문서나.html</a></li>
+                <li><a href="문서다.html">문서다.html</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 분류 3 -->
+    <div class="category-container">
+        <div class="category-header">분류 3</div>
+        <div class="category-content">
+            <ul class="document-list">
+                <li><a href="테스트1.html">테스트1.html</a></li>
+                <li><a href="테스트2.html">테스트2.html</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 추가용 예시 -->
+    <div class="category-container">
+        <div class="category-header">신규 분류</div>
+        <div class="category-content">
+            <ul class="document-list">
+                <li><a href="신규문서.html">신규문서.html</a></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // 아코디언 작동 스크립트
+    document.querySelectorAll('.category-header').forEach(header => {
+        header.addEventListener('click', () => {
+            const container = header.parentElement;
+            container.classList.toggle('active');
+        });
+    });
+</script>
+
+</body>
+</html>
