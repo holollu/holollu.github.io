@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>역사 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;
+            --main-color: #f8faff;
+            --point-color: #1a237e;
+            --bg-grey: #eeeeee;
+            --border-color: #ced4da;
+            --link-color: #0275d8;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid #bbb;
+            margin-bottom: 5px;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 300px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid #eee;
+            padding: 8px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 35%;
+            color: var(--point-color);
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #000;
+            font-weight: 800;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/halla.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">역사</div>
+    <div class="wiki-date">최근 수정 시각: 2020-02-28 09:15:22</div>
+
+    <!-- 인포박스 -->
+    <div class="infobox">
+        <div class="infobox-title">역사</div>
+        <table class="infobox-table">
+            <tr><th>분류</th><td>인문과학, 시대</td></tr>
+            <tr><th>범위</th><td>인류의 기원 ~ 현재</td></tr>
+            <tr><th>주요 변곡점</th><td>근대 마법 체계화, 제2차 세계 대전 종전</td></tr>
+        </table>
+    </div>
+
+    <p>
+        <strong>역사</strong>는 인류가 출현한 이래로 현재에 이르기까지 겪어온 사회, 문화, 기술의 발자취를 종합적으로 기록한 학문이자 과거의 총체이다.
+    </p>
+
+    <!-- 목차 -->
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li>1. 고대</li>
+            <li>2. 중세</li>
+            <li>3. 근대</li>
+            <li>4. 현대</li>
+        </ul>
+    </div>
+
+    <h2 id="ancient">1. 고대</h2>
+    <p>
+        (초략)<br>
+        <br>
+        문명이 태동하던 시기, 인류 사회에서 종교와 마법의 구분은 매우 모호했다. 각 부족과 초기 국가의 샤먼, 주술사들은 자연적으로 발현되는 마법을 구사하며 기후를 예측하거나 제사를 주관하며 집단을 이끌어갔다.<br>
+        <br>
+        (중략)<br>
+        <br>
+        아시아 지역, 특히 중국에서는 춘추전국시대를 기점으로 철학과 투쟁의 역사가 결합하며 큰 변환점을 맞이했다. 이 시기를 기점으로 '강호무림'이라는 거대한 공유 허구세계가 대륙 전역으로 퍼져나갔으며, 이는 단순한 무술을 넘어 동양 군사 및 사상사의 거대한 축을 형성하게 되었다.<br>
+        <br>
+        (후략)
+    </p>
+
+    <h2 id="medieval">2. 중세</h2>
+    <p>
+        (초략)<br>
+        <br>
+        서양에서는 종교적 교조주의가 극에 달하며 마녀사냥이 빈번하게 발생했다. 이는 주류 종교의 지배력을 벗어나, 개별적인 개인의 허구세계를 구축하여 마법을 구사하던 개별 마법사들을 이단으로 규정하고 겨냥한 대대적인 억압이었다.<br>
+        <br>
+        (중략)<br>
+        <br>
+        동양의 상황도 통치 체제의 안정화 과정에서 비슷한 양상을 보였다. 조선의 경우, 유교적 중앙집권 질서를 공고히 유지하기 위해 국가 주도로 민간에서 자생적으로 발생한 허구세계를 강하게 탄압하고 엄격히 통제하는 정책을 펼쳤다.<br>
+        <br>
+        (후략)
+    </p>
+
+    <h2 id="modern">3. 근대</h2>
+    <p>
+        (초략)<br>
+        <br>
+        산업 혁명과 과학 기술의 발전이 이루어지는 동시에 마법 또한 근대적인 학문으로 편입되어 고도의 체계화를 이룩했다. 전쟁의 양상 역시 획기적으로 변화하여, 전장에서는 대량 생산된 화약 총기와 고도화된 전술 마법이 혼재된 복합적인 화력전이 전개되었다.<br>
+        <br>
+        (중략)<br>
+        <br>
+        제국주의의 팽창과 함께 20세기 초반에는 군국주의, 파시즘 등의 과격한 이데올로기가 대두되었다. 이러한 사상들은 단순한 정치 이념에 그치지 않고, 국가 단위의 대중이 강렬하게 믿고 공유하는 사상적 허구세계로 작용하여 군대의 물리적 마력과 파괴력을 극단적으로 증폭시키는 참혹한 결과를 낳았다.<br>
+        <br>
+        (후략)
+    </p>
+
+    <h2 id="contemporary">4. 현대</h2>
+    <p>
+        (초략)<br>
+        <br>
+        인류사상 가장 광범위한 피해를 남긴 제2차 세계 대전은 1945년 8월 6일과 9일에 걸쳐 마침표를 찍었다. 최초로 마력량 S---급에 도달한 것으로 기록된 로버타 밴스가 단신으로 일본을 공격하여 치명적인 타격을 입혔고, 이로 인해 전쟁은 사실상 종결되었다. 종전 직후 로버타 밴스는 참혹한 전쟁을 되풀이하지 않고 세계 평화를 수호하기 위한 목적으로, 대한민국 제주도에 한라 국제 마법 아카데미를 건설하여 전후 국제 질서에 막대한 영향을 끼쳤다.<br>
+        <br>
+        (중략)<br>
+        <br>
+        21세기에 접어들며 인류는 현상 유지 수준의 기술과 마법 인프라를 바탕으로 다가오는 보건, 사회적 위기에 대처하고 있다. 가장 최근인 2020년 1월 10일에는 새로운 팬데믹의 위협이 될 뻔했던 우한폐렴(이후 COVID-19로 명명)의 전 지구적 방역이 성공적으로 완료되며 일상을 유지하고 있다.<br>
+        <br>
+        (후략)
+    </p>
+
+</div>
+
+</body>
+</html>
+
