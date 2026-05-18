@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>강호무림(허구세계) - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;
+            --main-color: #f8faff;
+            --point-color: #1a237e;
+            --bg-grey: #eeeeee;
+            --border-color: #ced4da;
+            --link-color: #0275d8;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid #bbb;
+            margin-bottom: 5px;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 300px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid #eee;
+            padding: 8px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 35%;
+            color: var(--point-color);
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #000;
+            font-weight: 800;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        .wiki-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div>Wiki Project</div>
+</header>
+
+<div class="container">
+    <div class="wiki-title">강호무림(허구세계)</div>
+    <div class="wiki-date">최근 수정 시각: 2020-02-27 10:45:12</div>
+
+    <!-- 인포박스 -->
+    <div class="infobox">
+        <div class="infobox-title">강호무림</div>
+        <table class="infobox-table">
+            <tr><th>분류</th><td>공유 허구세계</td></tr>
+            <tr><th>종류</th><td>무공</td></tr>
+            <tr><th>규모 등급</th><td>행성+</td></tr>
+            <tr><th>기원</th><td>고대 중국 (춘추전국시대)</td></tr>
+            <tr><th>관련 문서</th><td><a href="허구세계.html" class="wiki-link">허구세계</a></td></tr>
+        </table>
+    </div>
+
+    <p>
+        <strong>강호무림</strong>은 동양적 세계관을 바탕으로 구축된 대규모 공유 <a href="허구세계.html" class="wiki-link">허구세계</a>이다. 다양한 무술과 내공의 개념을 핵심 요소로 삼으며, 이를 통해 마력을 운용하는 '무공' 체계를 형성하고 있다.
+    </p>
+
+    <!-- 목차 -->
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li>1. 개요</li>
+            <li>2. 역사적 배경</li>
+            <li>3. 특징 및 구성 요소</li>
+            <li>4. 믿음의 변천</li>
+            <li>5. 규모</li>
+            <li>6. 관련 문서</li>
+        </ul>
+    </div>
+
+    <h2>1. 개요</h2>
+    <p>
+        개인이 독자적으로 구축하기 힘든 허구세계를 다수가 공유하여 사용하는 대표적인 사례 중 하나이다. 마법사는 강호무림이라는 필터를 통해 마력을 투사하며, 이는 현실에서 신체 능력의 강화나 특수한 권법, 검기 등의 형태로 방출된다.
+    </p>
+
+    <h2>2. 역사적 배경</h2>
+    <p>
+        고대 중국의 춘추전국시대를 기점으로 형성되기 시작했다. 당시의 샤먼이나 주술사들이 사용하던 원시적인 마법 체계가 동양 철학 및 무술과 결합하면서 '강호무림'이라는 거대한 공유 허구세계로 발전하여 널리 퍼지게 되었다.
+    </p>
+
+    <h2>3. 특징 및 구성 요소</h2>
+    <ul>
+        <li><strong>동양적 세계관</strong>: 음양오행, 기(氣) 등의 동양 철학적 요소가 세계관의 근간을 이룬다.</li>
+        <li><strong>무술과 내공</strong>: 마력을 '내공'으로 해석하며, 이를 신체나 무기에 실어 내보내는 '무술'의 형태를 띤다.</li>
+        <li><strong>다양한 해석</strong>: 공유 허구세계의 특성상 사용하는 개인이나 문파의 해석에 따라 세부적인 요소와 구현되는 마법(무공)의 형태가 달라진다.</li>
+    </ul>
+
+    <h2>4. 믿음의 변천</h2>
+    <p>
+        과거에는 이 세계관을 실제 존재하는 <strong>진실</strong>로 믿는 경향이 강했으나, 현대에 들어서는 이를 <strong>상상</strong>의 산물로 인지하고 활용하는 방식이 주류를 이루고 있다. 
+    </p>
+
+    <h2>5. 규모</h2>
+    <p>
+        강호무림 허구세계는 행성+급의 방대한 규모를 자랑한다.<br>
+        단, 해석이 부족할 경우 가용한 규모는 작아진다.
+    </p>
+
+    <h2>6. 관련 문서</h2>
+    <ul>
+        <li><a href="허구세계.html" class="wiki-link">허구세계</a></li>
+    </ul>
+
+</div>
+
+</body>
+</html>
