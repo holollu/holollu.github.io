@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>허구 침착 지대 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;
+            --main-color: #f8faff;
+            --point-color: #1a237e;
+            --bg-grey: #eeeeee;
+            --border-color: #ced4da;
+            --link-color: #0275d8;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid #bbb;
+            margin-bottom: 5px;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 300px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid #eee;
+            padding: 8px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 35%;
+            color: var(--point-color);
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #000;
+            font-weight: 800;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        .wiki-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/halla.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">허구 침착 지대</div>
+    <div class="wiki-date">최근 수정 시각: 2020-02-24 18:05:11</div>
+
+    <!-- 인포박스 -->
+    <div class="infobox">
+        <div class="infobox-title">허구 침착 지대</div>
+        <table class="infobox-table">
+            <tr><th>분류</th><td>특수 구역, 물리 법칙 왜곡</td></tr>
+            <tr><th>발생 조건</th><td>높은 마력 밀도, 공통된 인식</td></tr>
+            <tr><th>관련 문서</th><td><a href="마력.html" class="wiki-link">마력</a></td></tr>
+        </table>
+    </div>
+
+    <p>
+        <strong>허구 침착 지대</strong>는 다수의 사람들이 특정 장소에 대해 공유하는 공통된 인식이 쌓여(침착되어), 해당 구역의 물리 법칙을 왜곡시키는 특수한 지대를 의미한다.
+    </p>
+
+    <!-- 목차 -->
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li>1. 개요</li>
+            <li>2. 형성 조건</li>
+            <li>3. 주요 사례</li>
+            <li>4. 관련 문서</li>
+        </ul>
+    </div>
+
+    <h2>1. 개요</h2>
+    <p>
+        인간의 <a href="마력.html" class="wiki-link">마력</a>은 수용량을 초과할 경우 주변 환경에 스며드는 성질을 가지고 있다. 이러한 마력이 특정 장소에 고밀도로 축적되고, 그 장소를 바라보는 수많은 사람의 인식이 하나로 모일 때 그 장소는 현실의 물리 법칙에서 벗어난 고유의 특성을 띠게 된다.
+    </p>
+
+    <h2>2. 형성 조건</h2>
+    <p>
+        허구 침착 지대가 형성되기 위해서는 다음과 같은 조건이 모두 충족되어야 한다.
+    </p>
+    <ul>
+        <li><strong>높은 마력 밀도</strong>: 해당 장소가 매우 높은 마력 밀도를 유지해야 한다. 마력은 인간 내부에서 발생하므로, 사람이 아예 없는 곳에는 형성되지 않는다.</li>
+        <li><strong>공통된 인식</strong>: 매우 많은 사람이 해당 장소를 보며 동일한 인식을 가져야 한다. 이러한 인식이 마력과 결합하여 지대의 성격을 규정한다.</li>
+    </ul>
+
+    <h2>3. 주요 사례</h2>
+    <ul>
+        <li><strong>성 베드로 대성당</strong>: 방문자들의 공통된 믿음과 인식이 침착되어, 지대 내에서는 심신의 안정화가 이루어지고 회복력이 상승하는 효과가 나타난다.</li>
+        <li><strong><a href="한라국제마법아카데미.html" class="wiki-link">한라 국제 마법 아카데미</a></strong>: 아카데미의 정당한 학생일 경우 마법 성장 속도가 증폭되는 현상 역시 일종의 허구 침착 지대 효과로 분류된다.</li>
+    </ul>
+
+    <h2>4. 관련 문서</h2>
+    <ul>
+        <li><a href="마력.html" class="wiki-link">마력</a></li>
+        <li><a href="한라국제마법아카데미.html" class="wiki-link">한라 국제 마법 아카데미</a></li>
+    </ul>
+
+</div>
+
+</body>
+</html>
