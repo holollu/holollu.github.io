@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마법 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;
+            --main-color: #f8faff;
+            --point-color: #1a237e;
+            --bg-grey: #eeeeee;
+            --border-color: #ced4da;
+            --link-color: #0275d8;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid #bbb;
+            margin-bottom: 5px;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 300px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid #eee;
+            padding: 8px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 35%;
+            color: var(--point-color);
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #000;
+            font-weight: 800;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        .wiki-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div>Wiki Project</div>
+</header>
+
+<div class="container">
+    <div class="wiki-title">마법</div>
+    <div class="wiki-date">최근 수정 시각: 2020-02-26 11:04:12</div>
+
+    <!-- 인포박스 -->
+    <div class="infobox">
+        <div class="infobox-title">마법(Magic)</div>
+        <table class="infobox-table">
+            <tr><th>분류</th><td>기술, 현상 구현</td></tr>
+            <tr><th>발동 매개</th><td><a href="허구세계.html" class="wiki-link">허구세계</a></td></tr>
+            <tr><th>에너지원</th><td><a href="마력.html" class="wiki-link">마력</a></td></tr>
+            <tr><th>관련 문서</th><td><a href="마력.html" class="wiki-link">마력</a>, <a href="허구세계.html" class="wiki-link">허구세계</a>, <a href="역사(마법).html" class="wiki-link">역사(마법)</a></td></tr>
+        </table>
+    </div>
+
+    <p>
+        <strong>마법</strong>은 자신의 상상 속에 구축된 <a href="허구세계.html" class="wiki-link">허구세계</a>를 매개로 하여, 인간 내부의 에너지인 <a href="마력.html" class="wiki-link">마력</a>을 현실의 물리적 현상으로 변환하여 방출하는 기술을 의미한다. 현대 사회에서 마법은 단순한 초능력이 아닌, 체계화된 교육과 훈련을 통해 습득 가능한 고등 기술로 취급된다.
+    </p>
+
+    <!-- 목차 -->
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li>1. 개요</li>
+            <li>2. 발현 원리</li>
+            <li>3. 교육 및 사회적 인식</li>
+            <li>4. 허구세계에 따른 변칙성
+                <ul>
+                    <li>4.1. 불지옥 허구세계의 예시</li>
+                    <li>4.2. 서재 허구세계의 예시</li>
+                </ul>
+            </li>
+            <li>5. 종교적 관점</li>
+            <li>6. 관련 문서</li>
+        </ul>
+    </div>
+
+    <h2>1. 개요</h2>
+    <p>
+        인간은 누구나 마력을 생산하지만, 마법사가 아닌 일반인은 이를 현상화하지 못하고 대기로 방출한다. 마법은 이 방출되는 마력을 <a href="허구세계.html" class="wiki-link">허구세계</a>라는 필터에 통과시켜 구체적인 형태를 부여하는 과정이다. 
+    </p>
+
+    <h2>2. 발현 원리</h2>
+    <p>
+        마법의 발현 과정은 크게 네 단계로 구분된다.
+    </p>
+    <ol>
+        <li><strong>의도 설정</strong>: 마법사가 구현하고자 하는 목적(예: 발화, 치유 등)을 설정한다.</li>
+        <li><strong>마력 투사</strong>: 설정된 의도와 함께 마력을 자신의 허구세계에 주입한다.</li>
+        <li><strong>의도 변화</strong>: 투사된 의도가 허구세계의 규칙, 환경, 설정에 따라 재해석된다.</li>
+        <li><strong>방출</strong>: 재해석된 의도에 맞춰 마력이 현실의 물리력으로 변화하여 나타난다.</li>
+    </ol>
+
+    <h2>3. 교육 및 사회적 인식</h2>
+    <p>
+        마법 의무교육이 실시되고 있는 경우, 인구 대부분이 기초적인 마법을 사용할 수 있다. 이로 인해 마법을 전혀 구사하지 못하는 사람은 현대 사회에서 '문맹'과 비슷한 사회적 취급을 받는다.
+    </p>
+
+    <h2>4. 허구세계에 따른 변칙성</h2>
+    <p>
+        마법은 투사된 의도가 허구세계 내에서 어떻게 '처리'되느냐에 따라 효율과 형태가 극명하게 갈린다.
+    </p>
+
+    <h3>4.1. 불지옥 허구세계의 예시</h3>
+    <p>
+        <strong>불지옥</strong> 성질의 허구세계를 소유한 마법사가 '회복' 의도를 투사할 경우, 상처를 세포 단위로 재생시키는 것이 아니라 '불꽃으로 피부를 태워 지져서 출혈을 멈추는' 방식으로 결과가 나타난다. 이는 허구세계의 본질이 파괴와 열기에 치중되어 있기 때문이다.
+    </p>
+
+    <h3>4.2. 서재 허구세계의 예시</h3>
+    <p>
+        <strong>서재</strong> 형태의 허구세계를 가진 마법사가 '물 소환' 의도를 투사할 경우, 허구세계 내에서 물과 관련된 책을 찾아내고 그 책에 다시 마력을 투사해야만 물이 소환된다. 이러한 우회적인 방식은 직관적인 원소 계열 허구세계보다 약 2배 이상의 마력을 소모하게 만드는 비효율을 초래하기도 한다.
+    </p>
+
+    <h2>5. 종교적 관점</h2>
+    <p>
+        대부분의 종교 집단은 자신들의 마법적 행위를 '마법'이라 부르지 않고 <strong>기적</strong>이라 칭한다. 이는 종교의 허구세계가 '상상'이 아닌 절대적인 '믿음(진실)'을 전제로 하기 때문이다. 이들은 자신의 믿음 체계가 허구세계의 일종이라는 학계의 분석을 강력히 부정하며, 이로 인해 타 종교 및 일반 마법학계와의 갈등이 빈번하게 발생한다.
+    </p>
+
+    <h2>6. 관련 문서</h2>
+    <ul>
+        <li><a href="마력.html" class="wiki-link">마력</a></li>
+        <li><a href="허구세계.html" class="wiki-link">허구세계</a></li>
+        <li><a href="역사(마법).html" class="wiki-link">역사(마법)</a></li>
+    </ul>
+
+</div>
+
+</body>
+</html>
