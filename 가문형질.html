@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가문 형질 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;
+            --main-color: #f8faff;
+            --point-color: #1a237e;
+            --bg-grey: #eeeeee;
+            --border-color: #ced4da;
+            --link-color: #0275d8;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid #bbb;
+            margin-bottom: 5px;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 300px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid #eee;
+            padding: 8px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 35%;
+            color: var(--point-color);
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #000;
+            font-weight: 800;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        .wiki-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div>Wiki Project</div>
+</header>
+
+<div class="container">
+    <div class="wiki-title">가문 형질</div>
+    <div class="wiki-date">최근 수정 시각: 2020-02-29 23:59:01</div>
+
+    <!-- 인포박스 -->
+    <div class="infobox">
+        <div class="infobox-title">가문 형질</div>
+        <table class="infobox-table">
+            <tr><th>분류</th><td>유전 형질, 마법적 변이</td></tr>
+            <tr><th>발생 조건</th><td>C급 이상 마력, 동일 허구세계 공유</td></tr>
+            <tr><th>희귀도</th><td>매우 희귀 (일부 명문가)</td></tr>
+            <tr><th>관련 문서</th><td><a href="마력.html" class="wiki-link">마력</a>, <a href="허구세계.html" class="wiki-link">허구세계</a></td></tr>
+        </table>
+    </div>
+
+    <p>
+        <strong>가문 형질</strong>은 높은 등급의 마법사가 겪는 신체 변화가 후대에 유전되어 고착화된 현상을 의미한다.
+    </p>
+
+    <!-- 목차 -->
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li>1. 개요</li>
+            <li>2. 형성 원리</li>
+            <li>3. 격세 유전</li>
+            <li>4. 주요 예시</li>
+            <li>5. 관련 문서</li>
+        </ul>
+    </div>
+
+    <h2>1. 개요</h2>
+    <p>
+        <a href="마력.html" class="wiki-link">마력</a> 등급이 C급 이상에 도달한 마법사는 자신이 보유한 허구세계의 성질에 따라 신체 변화를 겪게 된다. 이러한 변화가 특정 혈통 내에서 반복적으로 나타나고, 해당 가문이 공통된 허구세계(가문사, 전설 등)를 공유할 경우 그 변화가 유전 형질로서 완전히 고착되는데, 이를 가문 형질이라 부른다.
+    </p>
+
+    <h2>2. 형성 원리</h2>
+    <p>
+        가문 형질이 형성되기 위해서는 다음과 같은 조건이 충족되어야 한다.
+    </p>
+    <ol>
+        <li><strong>고위 마법사의 배출</strong>: 신체 변화가 발생하는 C급 이상의 마법사가 가문 내에서 지속적으로 등장해야 한다.</li>
+        <li><strong>허구세계의 공유</strong>: 후대 마법사들이 선대와 동일하거나 매우 유사한 <a href="허구세계.html" class="wiki-link">허구세계</a>를 계승해야 한다.</li>
+        <li><strong>역사적 축적</strong>: 위의 과정이 수 세대에 걸쳐 반복되면서 유전 형질이 강화되고 고착화될 만큼 긴 역사가 필요하다.</li>
+    </ol>
+    <p>
+        이러한 조건 때문에 가문 형질은 역사가 깊은 극히 일부의 명문가에서만 발견된다.
+    </p>
+
+    <h2>3. 격세 유전</h2>
+    <p>
+        가문 형질은 모든 후손에게 반드시 발현되는 것은 아니다. 부모 세대에서 나타나지 않더라도 조부모나 그 이전 세대의 형질이 갑작스럽게 발현되는 <strong>격세 유전</strong>의 가능성이 존재한다.
+    </p>
+
+    <h2>4. 주요 예시</h2>
+    <ul>
+        <li><strong>거인 형질</strong>: 신체가 상시 거대화되는 형질.</li>
+        <li><strong>요괴 혈</strong>: 인간의 범주를 벗어난 신체 구조나 감각 기관을 가지게 되는 형질.</li>
+        <li><strong>기타 변이</strong>: 특정 원소에 대한 영구적인 저항력이나 특이한 안구/머리카락 색 등.</li>
+    </ul>
+
+    <h2>5. 관련 문서</h2>
+    <ul>
+        <li><a href="마력.html" class="wiki-link">마력</a></li>
+        <li><a href="허구세계.html" class="wiki-link">허구세계</a></li>
+    </ul>
+
+</div>
+
+</body>
+</html>
