@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>청암 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;
+            --main-color: #f8faff;
+            --point-color: #1a237e;
+            --bg-grey: #eeeeee;
+            --border-color: #ced4da;
+            --link-color: #0275d8;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid #bbb;
+            margin-bottom: 5px;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 300px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-image {
+            width: 100%;
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
+            padding-top: 10px;
+        }
+
+        .infobox-image img {
+            max-width: 90%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .infobox-caption {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            padding: 0 10px;
+            word-break: keep-all;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid #eee;
+            padding: 8px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 35%;
+            color: var(--point-color);
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #000;
+            font-weight: 800;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        .wiki-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/halla.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">청암</div>
+    <div class="wiki-date">최근 수정 시각: 2020-02-27 15:42:10</div>
+
+    <!-- 인포박스 -->
+    <div class="infobox">
+        <div class="infobox-title">청암</div>
+        <div class="infobox-image">
+            <img src="https://itimg.kr/2574/NAIS_1779199713064.webp" alt="청암 사진">
+        </div>
+        <table class="infobox-table">
+            <tr><th>국적</th><td>무국적 (과거 明)</td></tr>
+            <tr><th>출생</th><td>1589년 8월 3일</td></tr>
+            <tr><th>마력 등급</th><td><strong>A+</strong></td></tr>
+            <tr><th>소속</th><td><a href="한라국제마법아카데미.html" class="wiki-link">한라 국제 마법 아카데미</a></td></tr>
+            <tr><th>직책</th><td>실전 전투 정교수</td></tr>
+            <tr><th>허구세계</th><td><a href="강호무림(허구세계).html" class="wiki-link">강호무림</a> (규모: 행성+)</td></tr>
+        </table>
+    </div>
+
+    <p>
+        <strong>청암</strong>은 <a href="한라국제마법아카데미.html" class="wiki-link">한라 국제 마법 아카데미</a>의 원년 멤버이자 현재 실전 전투 과목을 담당하고 있는 정교수이다. 명나라 시대부터 생존해 온 <strong>A+</strong> 등급의 고위 마법사로, '강호무림' 허구세계의 살아있는 역사로 평가받는다.
+    </p>
+
+    <!-- 목차 -->
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li>1. 개요</li>
+            <li>2. 외형적 특징</li>
+            <li>3. 생애 및 행적</li>
+            <li>4. 마법 능력 및 허구세계</li>
+            <li>5. 여담 및 특이사항</li>
+            <li>6. 관련 문서</li>
+        </ul>
+    </div>
+
+    <h2>1. 개요</h2>
+    <p>
+        16세기에 태어나 역사 속 문파인 '화산파'의 장문인을 역임했던 인물이다. 현대에 이르러서는 전 세계에서 모인 우수한 마법사들에게 전투와 생존의 본질을 가르치는 깐깐하고 엄격한 스승으로 널리 알려져 있다. 
+    </p>
+
+    <h2>2. 외형적 특징</h2>
+    <p>
+        고위 마력의 영향으로 <strong>노화 정지</strong> 상태에 있으나, A급에 도달한 시기가 늦어 외견상으로는 노년의 모습을 띠고 있다. 하지만 178cm, 84kg의 매우 탄탄한 근육질 체형을 유지하고 있으며, 뒤로 넘긴 백장발과 흑안이 특징이다.
+    </p>
+
+    <h2>3. 생애 및 행적</h2>
+    <p>
+        공개된 이력에 따르면, 1589년 명나라의 중산층 가정에서 태어나 화산파에 입문했다. 뛰어난 재능으로 50세의 나이에 화산파 장문인 자리에 올랐으며, 90세에 마력 A--- 등급을 달성하며 인외의 영역에 발을 들였다.
+    </p>
+    <p>
+        120세에 후임에게 장문인 자리를 물려주고 일선에서 물러났으나, 서기 1800년경 화산파가 시대의 흐름 속에 자연스럽게 쇠락하여 해산하는 것을 지켜보아야 했다. 이후 은거하던 중, 제2차 세계 대전 종전 직후 한라 국제 마법 아카데미를 설립하던 로버타 밴스의 스카우트 제의를 받아들여 아카데미의 원년 교수로 합류하게 되었다.
+    </p>
+
+    <h2>4. 마법 능력 및 허구세계</h2>
+    <p>
+        그는 도교적 사상과 검술의 수련법을 기반으로 해석된 <a href="강호무림(허구세계).html" class="wiki-link">강호무림</a> 공유 허구세계를 사용한다. 허구세계를 진실로 믿는 진실형 마법사이며, 허구세계의 규모는 행성+에 달한다.
+    </p>
+    <ul>
+        <li><strong>검강(劍罡)</strong>: 마력을 검에 투사하여 극도로 응축시킨 물리력의 결정체를 다룬다.</li>
+    </ul>
+
+    <h2>5. 여담 및 특이사항</h2>
+    <p>
+        검술과 수련, 자아성찰을 매우 중요시하며 평소에는 정제되고 과묵한 태도를 유지한다. 하지만 아카데미 학생들 사이에서는 그를 상대할 때 <strong>절대 언급해서는 안 되는 금기</strong>가 하나 존재한다.
+    </p>
+    <p>
+        현대 무협 소설이나 매체 등에서 화산파의 대표 무공으로 자주 등장하는 <strong>'매화검법'</strong>은 실제 역사상의 화산파에는 존재하지 않았던 후대의 창작물이다. 하지만 신입생들이나 일반인들이 이를 오해하여 "교수님도 매화검법을 쓰실 수 있습니까?" 혹은 실제 화산파와 매화검법을 엮는 질문을 할 경우 눈에 띄게 불쾌해하며 짜증을 내는 모습을 볼 수 있다.
+    </p>
+
+    <h2>6. 관련 문서</h2>
+    <ul>
+        <li><a href="한라국제마법아카데미.html" class="wiki-link">한라 국제 마법 아카데미</a></li>
+        <li><a href="강호무림(허구세계).html" class="wiki-link">강호무림(허구세계)</a></li>
+    </ul>
+
+</div>
+
+</body>
+</html>
+
