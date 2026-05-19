@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>봄이 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;
+            --main-color: #f8faff;
+            --point-color: #1a237e;
+            --bg-grey: #eeeeee;
+            --border-color: #ced4da;
+            --link-color: #0275d8;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid #bbb;
+            margin-bottom: 5px;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 300px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-image {
+            width: 100%;
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
+            padding-top: 10px;
+        }
+
+        .infobox-image img {
+            max-width: 90%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .infobox-caption {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            padding: 0 10px;
+            word-break: keep-all;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid #eee;
+            padding: 8px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 35%;
+            color: var(--point-color);
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #000;
+            font-weight: 800;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        .wiki-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/halla.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">봄이</div>
+    <div class="wiki-date">최근 수정 시각: 2020-02-25 11:20:00</div>
+
+    <!-- 인포박스 -->
+    <div class="infobox">
+        <div class="infobox-title">봄이</div>
+        <div class="infobox-image">
+            <img src="https://itimg.kr/2574/NAIS_1779205409685.webp" alt="봄이 사진">
+        </div>
+        <table class="infobox-table">
+            <tr><th>국적</th><td>대한민국</td></tr>
+            <tr><th>출생</th><td>1741년 4월 5일</td></tr>
+            <tr><th>마력 등급</th><td><strong>A</strong></td></tr>
+            <tr><th>소속</th><td><a href="한라국제마법아카데미.html" class="wiki-link">한라 국제 마법 아카데미</a></td></tr>
+            <tr><th>직책</th><td>의료마법 정교수 / 의무실 담당</td></tr>
+            <tr><th>허구세계</th><td>인신소우주 (규모: 행성)</td></tr>
+        </table>
+    </div>
+
+    <p>
+        <strong>봄이</strong>는 <a href="한라국제마법아카데미.html" class="wiki-link">한라 국제 마법 아카데미</a>의 의무실 담당이자 의료마법 정교수이다. 조선 시대에 태어나 200년 넘게 생존해 온 <strong>A등급</strong> 마법사로, 동양의학과 서양의학 양쪽을 모두 섭렵한 의료 전문가 중 한 명이다.
+    </p>
+
+    <!-- 목차 -->
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li>1. 개요</li>
+            <li>2. 외형</li>
+            <li>3. 생애 및 주요 행적</li>
+            <li>4. 마법 능력 및 허구세계</li>
+            <li>5. 관련 문서</li>
+        </ul>
+    </div>
+
+    <h2>1. 개요</h2>
+    <p>
+        아카데미 학생들과 교직원들의 건강과 치유를 전담하는 인물로, 의료 목적에 특화된 고도화된 허구세계를 다룬다. 오랜 세월 축적된 의학적 지식에 마법을 결합하여 현대 의학으로 해결하기 힘든 상처와 질병마저도 치료하는 것으로 유명하다.
+    </p>
+
+    <h2>2. 외형</h2>
+    <p>
+        허구세계의 특성상 마력이 B에 도달하고 노화 정지가 되어 외견상으로는 청년의 모습을 간직하고 있다. 신장 149cm의 체구를 지녔으며, 예전부터 고수해 온 검은 댕기머리에 흰색 롱원피스와 연분홍 가디건을 즐겨 입는다.
+    </p>
+
+    <h2>3. 생애 및 주요 행적</h2>
+    <p>
+        공개된 기록에 따르면 1741년(영조 17년) 조선에서 태어났다.
+    </p>
+    <ul>
+        <li><strong>조선 시대</strong>: 1750년 의녀로 선발되어 의술을 펼치기 시작했다. 재능이 출중하여 1764년에 마력 B등급을 달성하였고, 그 공로와 실력을 인정받아 1774년 면천 되었다.</li>
+        <li><strong>제주도 유배</strong>: 1786년 문효세자의 사망 사건 당시 연대 책임을 지고 양인의 신분은 유지한 채 제주도로 유배되는 아픔을 겪기도 했다. 유배지에서도 끊임없는 수련을 거듭해 1852년에 마력 A--- 등급에 도달했다.</li>
+        <li><strong>근현대</strong>: 1909년 민적법 시행 당시 기존의 이름 '봄이'에서 '봄'을 성씨로, '이'를 이름으로 등록하였다. </li>
+        <li><strong>아카데미 합류</strong>: 1945년 제2차 세계 대전 종전 후, 아카데미를 설립 중이던 <strong>로버타 밴스</strong>에게 스카우트되어 의료마법 교수로 부임하였다. 이후 1951년 대한민국에서 국민의료법이 시행될 당시, 국가고시에 합격하여 <strong>한의사 면허와 서양의학 의사 면허를 동시에 취득</strong>하는 진기록을 세우기도 했다.</li>
+    </ul>
+
+    <h2>4. 마법 능력 및 허구세계</h2>
+    <p>
+        봄이 교수가 사용하는 허구세계의 명칭은 <strong>'인신소우주(人身小宇宙)'</strong>이다. 성리학적 관점에서 인체를 하나의 작은 우주로 바라보는 개념에 기반한 의료 전용 허구세계이다. 
+    </p>
+    <ul>
+        <li>과거에는 조선 시대 의원과 의녀들이 다 같이 공유하던 허구세계였으나, 수백 년의 세월 동안 그녀 스스로 서양 의학과 현대 과학적 요소를 끊임없이 추가하고 모순을 해결하면서, 현재는 원본과 사실상 별개의 독자적이고 방대한 세계로 발전하였다.</li>
+        <li>자신의 허구세계를 진실이 아닌 '상상'의 영역으로 인지하고 운용한다.</li>
+        <li>마력의 영향으로 인해 타인을 치유하는 것뿐만 아니라, 본인 스스로도 인간의 범주를 뛰어넘는 탁월한 재생력과 신체 저항력을 보유하고 있다.</li>
+    </ul>
+
+    <h2>5. 관련 문서</h2>
+    <ul>
+        <li><a href="한라국제마법아카데미.html" class="wiki-link">한라 국제 마법 아카데미</a></li>
+        <li><a href="로버타밴스.html" class="wiki-link">로버타 밴스</a></li>
+    </ul>
+
+</div>
+
+</body>
+</html>
