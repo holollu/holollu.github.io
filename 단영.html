@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>단영 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;
+            --main-color: #f8faff;
+            --point-color: #1a237e;
+            --bg-grey: #eeeeee;
+            --border-color: #ced4da;
+            --link-color: #0275d8;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid #bbb;
+            margin-bottom: 5px;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 300px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-image {
+            width: 100%;
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
+            padding-top: 10px;
+        }
+
+        .infobox-image img {
+            max-width: 90%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .infobox-caption {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            padding: 0 10px;
+            word-break: keep-all;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid #eee;
+            padding: 8px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 35%;
+            color: var(--point-color);
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #000;
+            font-weight: 800;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        .wiki-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/halla.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">단영</div>
+    <div class="wiki-date">최근 수정 시각: 2020-02-28 16:30:00</div>
+
+    <!-- 인포박스 -->
+    <div class="infobox">
+        <div class="infobox-title">단영</div>
+        <div class="infobox-image">
+            <img src="https://itimg.kr/2574/NAIS_1779204056835.webp" alt="단영 사진">
+        </div>
+        <table class="infobox-table">
+            <tr><th>국적</th><td>무국적 (과거 宋)</td></tr>
+            <tr><th>출생</th><td>1170년 9월 22일</td></tr>
+            <tr><th>마력 등급</th><td><strong>A+++</strong></td></tr>
+            <tr><th>소속</th><td><a href="한라국제마법아카데미.html" class="wiki-link">한라 국제 마법 아카데미</a></td></tr>
+            <tr><th>직책</th><td>실전 전투 정교수</td></tr>
+            <tr><th>허구세계</th><td><a href="강호무림(허구세계).html" class="wiki-link">강호무림</a> (규모: 행성+++)</td></tr>
+        </table>
+    </div>
+
+    <p>
+        <strong>단영</strong>은 <a href="한라국제마법아카데미.html" class="wiki-link">한라 국제 마법 아카데미</a>의 실전 전투 과목을 담당하고 있는 정교수이다. 남송 시대부터 생존해 온 <strong>A+++</strong> 등급의 최상위권 마법사로, 현실에서 '천마(天魔)'라 지칭되는 유일한 인물이다.
+    </p>
+
+    <!-- 목차 -->
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li>1. 개요</li>
+            <li>2. 외형적 특징</li>
+            <li>3. 생애 및 행적</li>
+            <li>4. 마법 능력 및 허구세계</li>
+            <li>5. 성향 및 여담</li>
+            <li>6. 관련 문서</li>
+        </ul>
+    </div>
+
+    <h2>1. 개요</h2>
+    <p>
+        12세기 남송 시대에 태어나 무림맹과의 항쟁을 거쳐 패배했고, 이후 수백 년간 폐관했던 역사적인 인물이다. 1995년 세간에 발견된 이후, 아카데미 총장인 <a href="로버타밴스.html" class="wiki-link">로버타 밴스</a>에게 스카우트되어 현대 마법 교육의 최전선에서 학생들을 지도하고 있다.
+    </p>
+
+    <h2>2. 외형적 특징</h2>
+    <p>
+        800년이 넘는 세월을 살아왔으나, 마력에 의한 <strong>노화 정지</strong>의 영향으로 외견상으로는 20대 청년의 모습을 유지하고 있다. 
+    </p>
+    <p>
+        167cm의 신장에 흑장발과 흑안을 지니고 있으며, 현대 사회에 완벽히 적응하여 검은 오버핏 테일러드 자켓과 와이드 슬랙스, 흰 터틀넥 등 세련된 현대 복식을 즐겨 입는다.
+    </p>
+
+    <h2>3. 생애 및 행적</h2>
+    <p>
+        역사적 기록과 본인의 증언에 따르면, 1170년 남송의 빈곤층으로 태어나 10세 무렵 낭인들의 대화를 훔쳐 들으며 무공을 독학했다. 뛰어난 재능으로 25세에 이미 마력 A--- 등급을 달성했다.
+    </p>
+    <p>
+        30세 무렵 무림인들에게 핍박받던 사람들을 규합해 하나의 집단을 형성하고 무공을 가르쳤으나, 주류 무림 세력으로부터 <strong>'마교(魔敎)'</strong>라 지칭되며 공격받았다. 이에 분노한 그녀는 스스로 집단을 마교라 칭하고, 본인을 <strong>'천마'</strong>라 자칭하며 무림맹과 전면전을 벌였다.
+    </p>
+    <p>
+        40세 때 무림맹과의 전쟁에서 패배한 후, 남은 교도들과 함께 천산(天山)으로 은거하였다. 이후 80세 무렵 교주에게 교단을 맡기고 깊은 동굴에 들어가 오랜 세월 '폐관 수련' 상태에 돌입했다.
+    </p>
+    <p>
+        그녀가 다시 세상에 모습을 드러낸 것은 현대인 <strong>1995년</strong>이다. 천산에서 스키장 개발 공사가 진행되던 중 우연히 폐관 중이던 그녀가 발견되었고, 이 사건은 전 세계 마법 학계와 언론을 발칵 뒤집어 놓았다. 이후 2000년 한라 국제 마법 아카데미에 합류하여 실전 전투 정교수로 취임했다.
+    </p>
+
+    <h2>4. 마법 능력 및 허구세계</h2>
+    <p>
+        <a href="강호무림(허구세계).html" class="wiki-link">강호무림</a> 공유 허구세계를 기반으로 하지만, 수백 년간의 폐관 수련을 거치며 기존의 공유 한계를 초월하여 규모를 <strong>행성+++</strong> 단계까지 발전시켰다. 
+    </p>
+    <h2>5. 성향 및 여담</h2>
+    <p>
+        과거 무림을 떨게 한 '천마'라는 거창한 수식어와 달리, 현대 문물과 서브컬처에 매우 개방적이고 유쾌한 성격을 지니고 있다.
+    </p>
+    <ul>
+        <li><strong>밈(Meme) 선호</strong>: 현대 인터넷에서 유행하는 무협 장르의 밈, 특히 자신과 관련된 '천마데스빔' 같은 장난스러운 인터넷 밈을 매우 좋아하고 즐긴다.</li>
+        <li><strong>아카데미 생활</strong>: 수업 외의 시간에도 '재미'를 추구하는 성향이 강하며, 같은 아카데미에서 근무하는 도교 계열 무공의 고수인 <a href="청암.html" class="wiki-link">청암</a> 교수를 두고 딱딱하고 재미 없다며 가볍게 디스하기도 한다.</li>
+    </ul>
+
+    <h2>6. 관련 문서</h2>
+    <ul>
+        <li><a href="한라국제마법아카데미.html" class="wiki-link">한라 국제 마법 아카데미</a></li>
+        <li><a href="강호무림(허구세계).html" class="wiki-link">강호무림(허구세계)</a></li>
+        <li><a href="청암.html" class="wiki-link">청암</a></li>
+    </ul>
+
+</div>
+
+</body>
+</html>
