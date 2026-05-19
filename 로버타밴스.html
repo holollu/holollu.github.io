@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로버타 밴스 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;
+            --main-color: #f8faff;
+            --point-color: #1a237e;
+            --bg-grey: #eeeeee;
+            --border-color: #ced4da;
+            --link-color: #0275d8;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid #bbb;
+            margin-bottom: 5px;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 300px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid #eee;
+            padding: 8px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 35%;
+            color: var(--point-color);
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #000;
+            font-weight: 800;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        .wiki-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+/* 인포박스 이미지 스타일 */
+        .infobox-image {
+            width: 100%;
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .infobox-image img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/halla.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">로버타 밴스</div>
+    <div class="wiki-date">최근 수정 시각: 2020-01-20 10:15:44</div>
+
+    <!-- 인포박스 -->
+    <div class="infobox">
+        <div class="infobox-title">로버타 밴스</div>
+        <!-- 사진 칸 추가 -->
+        <div class="infobox-image">
+            <img src="https://itimg.kr/2574/1.webp" alt="로버타 밴스 사진">
+        </div>
+        <table class="infobox-table">
+            <tr><th>국적</th><td>미국</td></tr>
+            <tr><th>출생</th><td>1916년 12월 7일</td></tr>
+            <tr><th>마력 등급</th><td><strong>S--</strong></td></tr>
+            <tr><th>직책</th><td><a href="한라국제마법아카데미.html" class="wiki-link">한라 국제 마법 아카데미</a> 총장</td></tr>
+            <tr><th>주요 속성</th><td>빛 (Light)</td></tr>
+        </table>
+    </div>
+
+    <p>
+        <strong>로버타 밴스</strong>는 현대 마법사들 중 유일하게 <strong>S급</strong> 마력 등급에 도달한 것으로 공인된 인물이자, <a href="한라국제마법아카데미.html" class="wiki-link">한라 국제 마법 아카데미</a>의 설립자 겸 현직 총장이다. 인류 역사상 가장 강력한 마법사로 칭송받으며, 현대 마법학의 살아있는 전설로 불린다.
+    </p>
+
+    <!-- 목차 -->
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li>1. 개요</li>
+            <li>2. 생애 및 역사적 행보</li>
+            <li>3. 능력 및 특징</li>
+            <li>4. 인물상</li>
+            <li>5. 관련 문서</li>
+        </ul>
+    </div>
+
+    <h2>1. 개요</h2>
+    <p>
+        현대 마법 체계의 최정점에 서 있는 인물이다. 마력량 등급 체계에서 유일하게 S등급을 차지하고 있으며, 그녀의 존재 자체가 국제적인 전략 자산이자 평화의 억제력으로 작용하고 있다. 현재는 교육자로서 대한민국 제주도에 거주하며 후학 양성에 힘쓰고 있다.
+    </p>
+
+    <h2>2. 생애 및 역사적 행보</h2>
+    <p>
+        1916년 미국 내 중산층 가정에서 태어났다. 어린 시절부터 압도적인 마법적 재능을 보였으며, 1944년 인류 최초로 마력량 S등급에 도달하였다.
+    </p>
+    <p>
+        제2차 세계 대전 당시 미국 정부의 요청에 따라 전쟁 종결을 위한 작전에 투입되었다. 1945년 8월, 강력한 마법을 통해 일본에 타격을 입힘으로써 전쟁을 사실상 종결시키는 데 결정적인 역할을 하였다. 
+    </p>
+    <p>
+        종전 직후, 그녀는 전쟁의 참혹함을 되풀이하지 않겠다는 평화의 의지를 담아 대한민국 제주도에 <a href="한라국제마법아카데미.html" class="wiki-link">한라 국제 마법 아카데미</a>를 건립하였다. 이후 미국 정부의 영향력에서 벗어나 독자적인 중립 교육 기관을 운영하며 전 세계 마법 교육의 표준을 제시하고 있다.
+    </p>
+
+    <h2>3. 능력 및 특징</h2>
+    <ul>
+        <li><strong>마력 등급 S--</strong>: 공식 기록상 전 세계에 단 한 명뿐인 S급 마법사이다. 대륙 하나를 파괴할 수 있는 수준의 물리력을 보유한 것으로 평가받는다.</li>
+        <li><strong>빛의 마법</strong>: 그녀의 허구세계는 '빛'과 깊은 연관이 있으며, 신체 전체를 빛의 형태로 변환하거나 빛을 활용한 초고출력의 마법을 자유자재로 구사한다.</li>
+        <li><strong>노화 정지</strong>: 고등급 마력의 영향으로 신체 노화가 완전히 정지된 상태이다. 100세가 넘은 고령임에도 불구하고 외견상으로는 청년의 모습을 유지하고 있다.</li>
+        <li><strong>미국 단위계 사용</strong>: 평상시 미국식 단위계(야드파운드법)를 사용하는 습관이 있는 것으로 알려져 있다.</li>
+    </ul>
+
+    <h2>4. 인물상</h2>
+    <p>
+        대외적으로는 세계 최강자의 위엄에 걸맞게 매우 냉정하고 엄격한 이미지를 유지한다. 그러나 아카데미 내의 학생들과 교직원들에게는 매우 자애롭고 따뜻한 태도로 대하는 것으로 유명하며, 학생들 사이에서는 경외와 존경의 대상이다. 
+    </p>
+
+    <h2>5. 관련 문서</h2>
+    <ul>
+        <li><a href="한라국제마법아카데미.html" class="wiki-link">한라 국제 마법 아카데미</a></li>
+        <li><a href="마법.html" class="wiki-link">마법</a></li>
+    </ul>
+
+</div>
+
+</body>
+</html>
