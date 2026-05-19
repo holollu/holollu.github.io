@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>용강혁 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;
+            --main-color: #f8faff;
+            --point-color: #1a237e;
+            --bg-grey: #eeeeee;
+            --border-color: #ced4da;
+            --link-color: #0275d8;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid #bbb;
+            margin-bottom: 5px;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 300px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-image {
+            width: 100%;
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
+            padding-top: 10px;
+        }
+
+        .infobox-image img {
+            max-width: 90%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .infobox-caption {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            padding: 0 10px;
+            word-break: keep-all;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid #eee;
+            padding: 8px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 35%;
+            color: var(--point-color);
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #000;
+            font-weight: 800;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        .wiki-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/halla.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">용강혁</div>
+    <div class="wiki-date">최근 수정 시각: 2020-02-28 22:15:33</div>
+
+    <!-- 인포박스 -->
+    <div class="infobox">
+        <div class="infobox-title">용강혁</div>
+        <div class="infobox-image">
+            <img src="https://itimg.kr/2574/4.webp" alt="용강혁 사진">
+            <div class="infobox-caption">전투 발생 지역의 원거리 CCTV 녹화본에서 대상을 확대 및 보정하여 발췌한 자료</div>
+        </div>
+        <table class="infobox-table">
+            <tr><th>국적</th><td>무국적 (과거 청나라 출신으로 추정)</td></tr>
+            <tr><th>출생</th><td>1885년 6월 20일</td></tr>
+            <tr><th>마력 등급</th><td><strong>A</strong></td></tr>
+            <tr><th>주요 특징</th><td>거구, 검은 공막, 비정상적 신체 능력</td></tr>
+            <tr><th>위험도</th><td>극비 수배 요망 (행동 패턴 예측 불가)</td></tr>
+        </table>
+    </div>
+
+    <p>
+        <strong>용강혁</strong>은 19세기 말에 출생하여 현재까지 생존해 있는 것으로 파악된 무국적의 A급 마법사 범죄자이다. 상식을 벗어난 거대한 체구와 극단적으로 강화된 육체 능력을 바탕으로 활동하며, 국제 수사 기관의 감시망을 번번이 벗어나는 위험인물로 분류되어 있다.
+    </p>
+
+    <!-- 목차 -->
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li>1. 개요</li>
+            <li>2. 외형적 특징</li>
+            <li>3. 마법 능력 및 허구세계 (추측)</li>
+            <li>4. 기행 및 위협성</li>
+        </ul>
+    </div>
+
+    <h2>1. 개요</h2>
+    <p>
+        신원 조회에 따르면 청나라 시기인 1885년에 태어난 것으로 파악되며, A급 마력 소유자의 특징인 '노화 정지' 덕분에 외견상 장년의 모습을 유지하고 있다. 현대 사회와 동떨어진 복장과 기이한 말투를 구사하며, 예고 없이 나타나 파괴 행위를 일삼는 예측 불가의 범죄자이다.
+    </p>
+
+    <h2>2. 외형적 특징</h2>
+    <p>
+        신장 2m, 체중 130kg에 달하는 압도적인 근육질의 거구이다. 언제나 낡고 심하게 찢어진 검은 무복(武服)을 걸치고 다니며, 긴 수염과 흑장발을 유지하고 있다. 온몸은 수많은 흉터로 뒤덮여 있어 그가 겪어온 수많은 전투를 짐작게 한다.
+    </p>
+    <p>
+        가장 기괴한 특징은 안구 전체의 공막(흰자위)이 완전히 검은색으로 물들어 있다는 점이다. 이는 마력에 의한 신체 변이로 추정된다. 타인을 향해 하대하는 어투를 쓰거나 자신을 '본좌'라 칭하는 등 구시대적인 언어 습관을 가지고 있다.
+    </p>
+
+    <h2>3. 마법 능력 및 허구세계 (추측)</h2>
+    <p>
+        용강혁의 정확한 허구세계의 명칭이나 구조는 마법 학계나 수사 기관에 명확히 보고된 바가 없다.
+    </p>
+    <ul>
+        <li><strong>미확인 비전 무공</strong>: 그와 조우한 뒤 발견된 희생자들의 시신은 마치 미라처럼 수분과 에너지가 바싹 말라 비틀어진 기괴한 상태로 발견된다. 현장 전문가들은 이를 두고 생명력이나 마력을 강제로 빼앗는 특수한 흑마법, 혹은 동양의 공유 허구세계에 기반한 이질적인 무공(내공)의 일종일 것이라 추측하고 있다. 그가 입고 있는 무복이나 언행을 고려할 때, '강호무림' 허구세계를 극단적으로 왜곡시켜 사용하고 있을 가능성이 제기된다.</li>
+        <li><strong>초월적인 신체 능력</strong>: 일반적인 마법 방어를 무시할 정도로 근력, 방어력, 재생력이 극단적으로 상승해 있다. 화려한 기교 없이 오직 압도적인 물리력과 무식한 마력 운용만으로 주변을 파괴한다.</li>
+    </ul>
+
+    <h2>4. 기행 및 위협성</h2>
+    <p>
+        용강혁은 국제적으로 수배를 받고 있으나, 그가 어떤 기준으로 범죄 대상을 선정하는지는 아직 수사 기관에서도 명확한 패턴을 파악하지 못했다. 무작위로 피해자가 발생하는 듯 보이지만, 종종 일정 수준 이상의 실력을 갖춘 마법사들이 그에게 끔찍한 형태로 당하는 사건이 보고되기도 한다.
+    </p>
+    <p>
+        특히 그의 행동 양식 중 가장 이해하기 힘든 부분은 <strong>비정상적인 도주 행각</strong>이다. 전투를 벌이다가도 알 수 없는 이유로 갑자기 전의를 상실하면, 주변의 건물이나 장애물을 전혀 신경 쓰지 않고 자신의 내구성만 믿은 채 일직선으로 모조리 박살 내며 무식하게 도주해 버린다. 이러한 극한의 도주 능력 때문에 포위망을 구축하더라도 번번이 검거에 실패하고 있다.
+    </p>
+
+</div>
+
+</body>
+</html>
+
