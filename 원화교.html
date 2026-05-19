@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>원화교 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;
+            --main-color: #f8faff;
+            --point-color: #1a237e;
+            --bg-grey: #eeeeee;
+            --border-color: #ced4da;
+            --link-color: #0275d8;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid #bbb;
+            margin-bottom: 5px;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 300px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid #eee;
+            padding: 8px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 35%;
+            color: var(--point-color);
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #000;
+            font-weight: 800;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        .wiki-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/halla.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">원화교</div>
+    <div class="wiki-date">최근 수정 시각: 2020-01-18 14:22:05</div>
+
+    <!-- 인포박스 -->
+    <div class="infobox">
+        <div class="infobox-title">원화교 (آذرپاک)</div>
+        <table class="infobox-table">
+            <tr><th>이칭</th><td>آذرپاک (아자르팍), 源火敎</td></tr>
+            <tr><th>분류</th><td>사이비 종교, 국제 테러 조직</td></tr>
+            <tr><th>창설 연도</th><td>1875년</td></tr>
+            <tr><th>기반 사상</th><td>조로아스터교 기반 극단주의</td></tr>
+            <tr><th>본부</th><td>이란</td></tr>
+            <tr><th>수괴 (교주)</th><td><a href="메흐디.html" class="wiki-link">메흐디</a></td></tr>
+        </table>
+    </div>
+
+    <p>
+        <strong>원화교</strong>(آذرپاک, 源火敎)는 이란에 본부를 두고 있는 조로아스터교 기반의 사이비 종교이자, 전 세계를 무대로 파괴 공작을 일삼는 극단주의 국제 테러리스트 집단이다.
+    </p>
+
+    <!-- 목차 -->
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li>1. 개요</li>
+            <li>2. 역사</li>
+            <li>3. 교리 및 사상</li>
+            <li>4. 무력 및 위협 수준</li>
+            <li>5. 관련 인물</li>
+        </ul>
+    </div>
+
+    <h2>1. 개요</h2>
+    <p>
+        조로아스터교의 교리를 극단적으로 왜곡하여 형성된 종교 집단으로, 외부 사회의 시점에서는 명백한 사이비 종교이자 테러 조직으로 분류된다. 특정 복장 규정이나 교리는 확인되지 않았으나, 교주인 메흐디가 거주하는 이란을 본부로 삼아 전 세계 각지에서 끔찍한 테러를 자행하고 있는 것으로 널리 알려져 있다.
+    </p>
+
+    <h2>2. 역사</h2>
+    <ul>
+        <li><strong>1875년</strong>: 원화교 창시.</li>
+        <li><strong>1890년</strong>: 이들은 소위 '정화 행위'라는 명목하에 본격적으로 외부 세계를 향한 무차별적인 테러를 시작하였다.</li>
+    </ul>
+
+    <h2>3. 교리 및 사상</h2>
+    <p>
+        이들의 사상은 파괴적이고 극단적인 망상에 기반하고 있다. 원화교는 <strong>'원천의 성화'</strong>라는 행성급 규모의 공유 허구세계를 맹신하며, 자신들의 테러 행위를 신성한 의식으로 포장한다.
+    </p>
+    <ul>
+        <li><strong>근원과 이상향</strong>: '성화(성스러운 불꽃)'를 세계의 근원이자 절대적인 진리로 여기며, 순수한 불꽃만이 존재하는 '원천'을 이상향으로 삼는다.</li>
+        <li><strong>극단적 배타주의</strong>: 자신들이 사용하는 마력만을 '성스러운 불꽃의 현현'으로 인정하며, 타인이 가진 허구세계는 모두 '불순한 환영'으로 규정한다.</li>
+        <li><strong>테러의 정당화</strong>: 위와 같은 논리를 바탕으로, 불순한 허구세계(타인의 세계관 및 현실 사회)는 성화로 정화되어야 한다고 믿으며, 자신들의 <strong>테러 행위를 '성스러운 정화'로 정당화</strong>한다.</li>
+    </ul>
+
+    <h2>4. 무력 및 위협 수준</h2>
+    <p>
+        국제 사회에 심각한 위협이 되는 이유는 이들이 보유한 무력의 규모가 방대하기 때문이다. 현재 파악된 전력은 다음과 같다.
+    </p>
+    <ul>
+        <li><strong>A급 마법사</strong>: 교주를 포함하여 총 2명 존재.</li>
+        <li><strong>B급 마법사</strong>: 10명.</li>
+        <li><strong>B급 미만</strong>: 정확한 추산이 불가능할 정도로 수많은 광신도들이 점조직 형태로 활동 중.</li>
+    </ul>
+
+    <h2>5. 관련 인물</h2>
+    <ul>
+        <li><a href="메흐디.html" class="wiki-link">메흐디</a> - 원화교의 창시자이자 교주.</li>
+        <li>로샨 모라디 - 원화교 소속의 A급 마법사.</li>
+    </ul>
+
+</div>
+
+</body>
+</html>
+
