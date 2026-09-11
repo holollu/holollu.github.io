@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사회 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <!-- 문서 제목 및 날짜 -->
+    <div class="wiki-title">사회</div>
+    <div class="wiki-date">최근 수정 시각: 999-02-10 01:23:10</div>
+
+    <!-- 인포박스 -->
+    <div class="infobox">
+        <div class="infobox-title">사회 기초 정보</div>
+        <table class="infobox-table">
+            <tr>
+                <th>공용어</th>
+                <td>대륙 공용어</td>
+            </tr>
+            <tr>
+                <th>공통 기년법</th>
+                <td><a href="aether_calendar_era.html" class="wiki-link">제국력</a></td>
+            </tr>
+            <tr>
+                <th>연령 계산법</th>
+                <td>세는나이</td>
+            </tr>
+            <tr>
+                <th>성인 연령</th>
+                <td>20세</td>
+            </tr>
+            <tr>
+                <th>기준 통화</th>
+                <td>프랫</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- 개요 문단 -->
+    <p>
+        대륙 전역의 <a href="aether_pan-human_species.html" class="wiki-link">범인류종</a> 문명 사회를 지탱하는 가장 기초적인 규범과 제도, 기술적 토대를 포괄하는 문서이다.
+    </p>
+
+    <!-- 목차 -->
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 언어 체계</a>
+                <ul>
+                    <li><a href="#s-2-1">2.1. 대륙 공용어의 보편성</a></li>
+                    <li><a href="#s-2-2">2.2. 지역별 방언과 어투</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-3">3. 연령 체계 및 성인 기준</a>
+                <ul>
+                    <li><a href="#s-3-1">3.1. 세는나이 체계</a></li>
+                    <li><a href="#s-3-2">3.2. 성인 기준 및 사회적 대우</a></li>
+                    <li><a href="#s-3-3">3.3. 장생종의 연령 적용</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-4">4. 기술</a></li>
+            <li><a href="#s-5">5. 시간 체계와 신년 관례</a></li>
+        </ul>
+    </div>
+
+    <!-- 본문 내용 -->
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        대륙 전역의 <a href="aether_pan-human_species.html" class="wiki-link">범인류종</a> 문명 사회를 지탱하는 가장 기초적인 규범과 제도, 기술적 토대를 포괄하는 문서이다.
+    </p>
+
+    <h2 id="s-2">2. 언어 체계</h2>
+    <h3 id="s-2-1">2.1. 대륙 공용어의 보편성</h3>
+    <p>
+        대륙의 문명권에서는 국가나 종족의 경계를 불문하고 사실상 동일한 하나의 언어가 사용된다. 서북부의 <a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a>, 동쪽의 여러 왕국과 공국, 동북부의 신성교국, 심지어 거친 초원에서 살아가는 카르샨 카간국의 유목민들에 이르기까지 모두 같은 어휘와 문장 구조로 소통한다.
+    </p>
+    <ul>
+        <li><strong>상호 이해도:</strong> 국경을 넘나드는 상인, 각지에서 모여든 모험가, 다른 영지로 이주한 이주민 사이에 통역이 필요한 경우는 전무하며, 일상적인 대화와 상업 거래, 조약 체결에 이르기까지 거의 동일한 언어로 차질 없이 소통이 이루어진다.</li>
+        <li><strong>문자의 통일:</strong> 대륙 전역에서 기록에 쓰이는 문자 체계 역시 단일하며, 공문서, 상단의 거래 장부, 학술 서적, 모험가 길드의 의뢰서 등은 모두 동일한 문자로 작성된다.</li>
+    </ul>
+
+    <h3 id="s-2-2">2.2. 지역별 방언과 어투</h3>
+    <p>
+        공통의 언어를 사용하지만, 지리적 격차와 생활환경에 따른 지역별 억양 및 어투의 차이는 존재한다.
+    </p>
+
+    <h2 id="s-3">3. 연령 체계 및 성인 기준</h2>
+    <h3 id="s-3-1">3.1. 세는나이 체계</h3>
+    <p>
+        <a href="aether_pan-human_species.html" class="wiki-link">범인류종</a> 문명권에서는 출생과 동시에 1살이 되고, 매년 1월 1일이 도래할 때마다 온 대륙의 모든 사람이 동시에 1살을 더하는 세는나이 방식을 사용한다.
+    </p>
+    <ul>
+        <li><strong>기준일:</strong> 나이가 증가하는 기준점은 오직 1월 1일 자정이다. 개인의 출생일은 가족이나 친지끼리 탄생을 기리는 날로 기념될 뿐, 나이의 셈법을 바꾸는 척도로는 사용되지 않는다.</li>
+    </ul>
+
+    <h3 id="s-3-2">3.2. 성인 기준 및 사회적 대우</h3>
+    <p>
+        <a href="aether_pan-human_species.html" class="wiki-link">범인류종</a> 사회에서 법적·관습적 성인 연령은 남녀와 계급을 불문하고 20세로 정립되어 있다.
+    </p>
+    <ul>
+        <li>20세가 되는 해의 1월 1일을 맞이한 자는 비로소 온전한 성인으로 공인된다.</li>
+        <li><strong>혼인:</strong> 사회적 관행상 정식 혼인은 성인이 된 이후에 치르는 것이 주류이다.</li>
+    </ul>
+
+    <h3 id="s-3-3">3.3. 장생종의 연령 적용</h3>
+    <p>
+        <a href="aether_pan-human_species.html" class="wiki-link">엘프</a>나 <a href="aether_pan-human_species.html" class="wiki-link">드워프</a>처럼 인간에 비해 수명이 긴 장생종이라 할지라도, 사회적·법적 성인 기준은 예외 없이 20세를 적용받는다.
+    </p>
+
+    <h2 id="s-4">4. 기술 및 물질문명</h2>
+    <p>
+        대륙의 기술 문명은 비정제 에테르나 마법 같은 힘에만 의존하지 않으며, 단단한 기계 공학과 토목, 역학적 물리 법칙에 기초하여 체계적인 발전을 이루어 왔다.
+    </p>
+
+    <h2 id="s-5">5. 시간 체계와 신년 관례</h2>
+    <ul>
+        <li><strong>공통 기년법:</strong> <a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a>의 건국 원년을 시작으로 삼는 <a href="aether_calendar_era.html" class="wiki-link">제국력</a>이 대륙 전역에서 공통으로 통용된다. 과거에는 국가나 영지마다 제각기 독자적인 연호를 사용했으나, 상업 교역과 외교 문서의 혼선을 막기 위해 끊김 없이 이어져 온 <a href="aether_calendar_era.html" class="wiki-link">제국력</a>을 단일 기년법으로 채용하여 사용하고 있다.</li>
+        <li><strong>달력과 신년:</strong> 1년은 12개월로 구성되며, 1월 1일은 온 대륙의 신년이다.</li>
+    </ul>
+
+</div>
+
+</body>
+</html>
