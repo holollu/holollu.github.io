@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>파르마 공작령 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        h4 {
+            margin-top: 20px;
+            color: #444;
+            font-weight: 700;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 테이블 */
+        .wiki-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0 20px 0;
+            font-size: 0.92rem;
+        }
+
+        .wiki-table th, .wiki-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        .wiki-table th {
+            background-color: var(--main-color);
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">파르마 공작령</div>
+    <div class="wiki-date">최근 수정 시각: 999-11-23 09:42:08</div>
+
+    <div class="infobox">
+        <div class="infobox-title">파르마 공작령</div>
+        <table class="infobox-table">
+            <tr>
+                <th>상징</th>
+                <td>방패</td>
+            </tr>
+            <tr>
+                <th>소속</th>
+                <td><a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a></td>
+            </tr>
+            <tr>
+                <th>위치</th>
+                <td>제국 동남부 (<a href="aether_ramus_river.html" class="wiki-link">라무스 강</a> 접경)</td>
+            </tr>
+            <tr>
+                <th>영주</th>
+                <td>공작 발터 파르마</td>
+            </tr>
+            <tr>
+                <th>지배 가문</th>
+                <td>파르마 가문</td>
+            </tr>
+            <tr>
+                <th>소속 기사단</th>
+                <td>방패 기사단</td>
+            </tr>
+            <tr>
+                <th>기후</th>
+                <td>엔테라 해성 기후</td>
+            </tr>
+            <tr>
+                <th>주요 종족</th>
+                <td>인간 50%, 드워프 35%, 기타 15%</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 지리 및 환경</a>
+                <ul>
+                    <li><a href="#s-2-1">2.1. 위치 및 기후</a></li>
+                    <li><a href="#s-2-2">2.2. 에테르 및 마경</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-3">3. 주민 구성 및 산업</a>
+                <ul>
+                    <li><a href="#s-3-1">3.1. 종족 분포</a></li>
+                    <li><a href="#s-3-2">3.2. 주요 산업</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-4">4. 파르마 가문</a>
+                <ul>
+                    <li><a href="#s-4-1">4.1. 개요 및 계보 특성</a></li>
+                    <li><a href="#s-4-2">4.2. 가문 기예</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-5">5. 방패 기사단</a>
+                <ul>
+                    <li><a href="#s-5-1">5.1. 개요 및 운용 특성</a></li>
+                    <li><a href="#s-5-2">5.2. 편제 및 계급</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-6">6. 주요 도시 및 거점</a>
+                <ul>
+                    <li><a href="#s-6-1">6.1. 센티넬라</a></li>
+                    <li><a href="#s-6-2">6.2. 기타 직할지</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-7">7. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        <a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a>의 동남쪽에 위치한 공작령이다. 개국 일등 공신 세 가문 중 하나인 파르마 가문이 통치하고 있으며, 영주인 공작은 제국 황제의 직속 봉신이다.
+    </p>
+    <p>
+        <a href="aether_ramus_river.html" class="wiki-link">라무스 강</a>을 사이에 두고 건너편의 유목 국가인 <a href="aether_karshan_khaganate.html" class="wiki-link">카르샨 카간국</a>을 경계하면서도 대외 무역을 수행하는 국경 방위 및 교역의 핵심 거점이다. 변경 최전선 특유의 거칠고 팽팽한 긴장감이 영지 전반에 감돈다.
+    </p>
+
+    <h2 id="s-2">2. 지리 및 환경</h2>
+
+    <h3 id="s-2-1">2.1. 위치 및 기후</h3>
+    <p>
+        여름에는 기온이 높고 건조하며 겨울에는 날씨가 온화하고 강수량이 많은 엔테라 해성 기후를 띤다.
+    </p>
+    <p>
+        다만 국경선인 <a href="aether_ramus_river.html" class="wiki-link">라무스 강</a>에서 뿜어져 나오는 극음 성질 에테르의 영향으로 인해, 강과 맞닿은 수변 및 성벽 인근 지역은 한여름에도 서늘한 한기가 유지된다.
+    </p>
+
+    <h3 id="s-2-2">2.2. 에테르 및 마경</h3>
+    <p>
+        마경 인근을 제외한 영지 대부분의 지역에는 평범한 밀도와 성질의 에테르가 흐른다.
+    </p>
+    <ul>
+        <li><strong>국경 수변:</strong> <a href="aether_ramus_river.html" class="wiki-link">라무스 강</a> 인근은 일반인이 거주 가능한 한도 내에서 에테르 밀도가 높고 극음 성질을 띠어 식생의 생장이 억제된다.</li>
+        <li><strong>마경 분포:</strong> 마경의 전체적인 숫자와 면적은 타 영지와 유사하나, 영지 동북부에 위치한 소형 마경인 <a href="aether_fissura.html" class="wiki-link">피수라</a>처럼 대지 성질 에테르를 품은 마경의 비율이 타 지역에 비해 뚜렷하게 높다.</li>
+    </ul>
+
+    <h2 id="s-3">3. 주민 구성 및 산업</h2>
+
+    <h3 id="s-3-1">3.1. 종족 분포</h3>
+    <p>
+        거주 주민의 종족 비율은 인간 50%, <a href="aether_pan-human_species.html" class="wiki-link">드워프</a> 35%, 기타 범인류종 15%로 구성된다. 대지 성질 마경과 광산이 밀집해 있어 타 영지에 비해 드워프의 인구 비중이 매우 높게 나타난다.
+    </p>
+
+    <h3 id="s-3-2">3.2. 주요 산업</h3>
+    <p>
+        공작령의 경제는 광업, 제조업, 국경 무역에 크게 의존한다.
+    </p>
+    <ul>
+        <li><strong>광산업:</strong> 대지 성질 마경과 인근 광산에서 특수한 성질을 지닌 변질 광물을 채굴한다.</li>
+        <li><strong>제조업:</strong> 드워프 기술자들을 중심으로 대규모 대장간 화로가 구축되어 있으며, 명품 무기와 단단한 판금 갑주를 전문적으로 생산한다.</li>
+        <li><strong>국경 교역:</strong> <a href="aether_ramus_river.html" class="wiki-link">라무스 강</a> 건너편의 <a href="aether_karshan_khaganate.html" class="wiki-link">카르샨 카간국</a> 유목민들과 가축, 말, 가공품 등을 교환하는 시장 무역이 활성화되어 있다.</li>
+    </ul>
+
+    <h2 id="s-4">4. 파르마 가문</h2>
+
+    <h3 id="s-4-1">4.1. 개요 및 계보 특성</h3>
+    <p>
+        파르마 공작령을 세습 통치하는 공작 가문이다. 가문원의 종족은 혼혈이 섞여 있으나 대부분 인간으로 이루어져 있다. 본거지인 공작성은 최전방 거점 도시인 센티넬라에 자리 잡고 있다.
+    </p>
+    <p>
+        초대 공작인 바르카스 파르마가 8성의 무력으로 287년간 재임하였고, 뒤를 이은 2대 공작 발터 파르마가 9성에 도달하여 수명의 한계를 벗어남에 따라 건국 이래 1000년에 달하는 세월 동안 단 두 명의 공작만이 가문과 영지를 통치해 온 유례없는 계보를 지니고 있다.
+    </p>
+
+    <h3 id="s-4-2">4.2. 가문 기예</h3>
+    <p>
+        파르마 가문은 수비와 방어에 특화된 네 가지 기예를 보유하고 있다. 가문의 일원과 기사뿐만 아니라 일반 경비병이 요청할 경우에도 배움을 허용한다.
+    </p>
+    <ul>
+        <li><strong>매토 오러단련법:</strong> 땅속에 생매장된 상태에서 육체를 움직여 에테르를 흡수하는 <a href="aether_aura.html" class="wiki-link">오러단련법</a>이다. 반드시 외부 보조자가 있어야 하며, 경지가 상승할수록 더 깊은 지하에 매장되어야 한다. 근육과 골격의 밀도가 극도로 치밀해지고 신체 자체의 방어력이 대폭 상승하며, 대지의 미세한 진동을 감지하는 능력을 얻는다.</li>
+        <li><strong>테라 피르마:</strong> 어떠한 폭풍과 충격 앞에서도 흔들리지 않는 대륙의 심상을 품고 수련하는 <a href="aether_qi.html" class="wiki-link">심법</a>이다.</li>
+        <li><strong>센티널 스피어:</strong> 타워실드와 창을 조합하여 방어의 안정성을 극대화한 무술이다. 언더핸드 기법을 중심으로 운용된다.</li>
+        <li><strong>성벽 마도체계:</strong> <a href="aether_spire_imperial.html" class="wiki-link">프로미스 황실 마탑</a>에 의뢰하여 구매한 흙과 바위 조작 특화 <a href="aether_magic_system.html" class="wiki-link">마도체계</a>이다. 흙과 바위를 들어 올려 장애물을 구축하거나 성벽 균열을 신속히 보수하는 용도에 국한된다. 최고 도달점은 6서클이며, 시전 속도가 빠르고 난이도가 낮다.</li>
+    </ul>
+
+    <h2 id="s-5">5. 방패 기사단</h2>
+
+    <h3 id="s-5-1">5.1. 개요 및 운용 특성</h3>
+    <p>
+        파르마 가문이 설립하여 운용하는 영지 방위 기사단이다. 본부는 센티넬라 중심구획 내 동쪽에 위치하며, 공작인 발터 파르마가 직접 기사단장을 겸임하고 있다.
+    </p>
+    <ul>
+        <li><strong>규모 및 장비:</strong> 소속 기사는 300명 내외이다. 주요 무장으로 육중한 중갑, 거대한 타워실드, 장창을 사용한다. 의장용 정복은 별도로 두지 않는다.</li>
+        <li><strong>에너지 구성:</strong> 소속 기사의 정제 에너지 비율은 오러 70%, 기 55%, 마나 8%이다. 100%를 초과하는 수치는 복수의 에너지를 병행 수련하는 인원의 비율이다.</li>
+    </ul>
+
+    <h3 id="s-5-2">5.2. 편제 및 계급</h3>
+    <p>
+        타 기사단에 비해 정규기사의 비율이 압도적으로 높다.
+    </p>
+    <table class="wiki-table">
+        <tr>
+            <th>계급</th>
+            <th>해당 경지</th>
+            <th>인원 및 비고</th>
+        </tr>
+        <tr>
+            <td>견습기사</td>
+            <td>1성 ~ 3성</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>정규기사</td>
+            <td>4성 ~ 5성</td>
+            <td>230명</td>
+        </tr>
+        <tr>
+            <td>상급기사</td>
+            <td>6성 ~ 7성</td>
+            <td>31명</td>
+        </tr>
+        <tr>
+            <td>부단장</td>
+            <td>8성 입문, 8성 중기</td>
+            <td>2명</td>
+        </tr>
+        <tr>
+            <td>기사단장</td>
+            <td>9성 후반</td>
+            <td>1명 (발터 파르마)</td>
+        </tr>
+    </table>
+
+    <h2 id="s-6">6. 주요 도시 및 거점</h2>
+
+    <h3 id="s-6-1">6.1. 센티넬라</h3>
+    <p>
+        파르마 공작성이 위치한 성곽도시이자 국경 방어의 최전선이다. <a href="aether_ramus_river.html" class="wiki-link">라무스 강</a> 인근에 위치하며 <a href="aether_karshan_khaganate.html" class="wiki-link">카르샨 카간국</a>과의 무역 창구 역할을 병행한다.
+    </p>
+    <ul>
+        <li><strong>성벽 구조:</strong> 서북쪽에 1개, 동남쪽에 두껍고 거대한 1개로 총 2개의 외성문이 설치되어 있다. 내부에는 2중 내성이 존재하며, 적의 침투를 지연시키기 위해 첫 번째 내성문은 북쪽, 두 번째 내성문은 남쪽으로 지그재그 배치되어 있다. 모든 성벽은 이음새 없는 단일 암석의 형태를 띤다.</li>
+        <li><strong>구획 배치:</strong> 내성 중심구획에는 파르마 공작성과 방패 기사단 핵심 지휘부가 자리하며, 제1 확장구획에는 병영과 대장간 화로거리, 제2 확장구획에는 서민 주거지와 상단용 여관이 밀집해 있다. 성외 동남쪽 성문 앞에는 유목민과의 교역 시장이 형성되어 있다.</li>
+        <li><strong>파르마 통신용 마탑:</strong> 일상 시에는 일반적인 급행 통신 업무를 수행하고 전시에는 황도와 인근 영지에 전황을 긴급 전파하는 통신 전용 마탑이다. 성벽 마도체계를 이수한 방패 기사단 소속 마법사가 교대로 24시간 상주한다.</li>
+        <li><strong>모험가 길드:</strong> 제2 확장구획 서북쪽 성문 인근에 소형 요새 형태의 튼튼한 석조 2층 건물로 센티넬라 지부가 운영된다.</li>
+    </ul>
+
+    <h3 id="s-6-2">6.2. 기타 직할지</h3>
+    <ul>
+        <li><strong>발루아르테:</strong> 센티넬라 북동쪽에 인접한 국경 방어 요새이다.</li>
+        <li><strong>페룸:</strong> 발루아르테 북쪽에 위치한 광업 도시로, 소형 마경인 <a href="aether_fissura.html" class="wiki-link">피수라</a>와 맞닿아 있다. 변질 광물뿐만 아니라 마경이 아닌 일반 광산도 다수 존재한다.</li>
+        <li><strong>아르도르:</strong> 페룸 남서쪽에 위치한 공업 거점이다. 대형 화로와 공방이 밀집해 상시 열기를 내뿜으며, 대장장이들이 센티넬라보다 선호하는 작업처이다. 명품 갑옷과 무기 생산지로 유명하다.</li>
+        <li><strong>스쿠타:</strong> 센티넬라 남서쪽에 인접하여 국경을 수비하는 군사 요새이다.</li>
+    </ul>
+
+    <h2 id="s-7">7. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a></li>
+        <li><a href="aether_ramus_river.html" class="wiki-link">라무스 강</a></li>
+        <li><a href="aether_fissura.html" class="wiki-link">피수라</a></li>
+        <li><a href="aether_karshan_khaganate.html" class="wiki-link">카르샨 카간국</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
