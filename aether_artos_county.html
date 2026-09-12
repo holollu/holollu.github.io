@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아르토스 백작령 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 테이블 */
+        .wiki-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0 20px 0;
+            font-size: 0.92rem;
+        }
+
+        .wiki-table th, .wiki-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        .wiki-table th {
+            background-color: var(--main-color);
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">아르토스 백작령</div>
+    <div class="wiki-date">최근 수정 시각: 999-12-28 16:45:12</div>
+
+    <div class="infobox">
+        <div class="infobox-title">아르토스 백작령</div>
+        <table class="infobox-table">
+            <tr>
+                <th>상징</th>
+                <td>포효하는 곰</td>
+            </tr>
+            <tr>
+                <th>소속</th>
+                <td><a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a></td>
+            </tr>
+            <tr>
+                <th>위치</th>
+                <td>제국 정북쪽 최북단</td>
+            </tr>
+            <tr>
+                <th>영주</th>
+                <td>백작 카를 프로미스-아르토스</td>
+            </tr>
+            <tr>
+                <th>지배 가문</th>
+                <td>프로미스-아르토스 가문</td>
+            </tr>
+            <tr>
+                <th>소속 기사단</th>
+                <td>북설 기사단</td>
+            </tr>
+            <tr>
+                <th>기후</th>
+                <td>냉대 습윤 기후 (타이가 지대)</td>
+            </tr>
+            <tr>
+                <th>주요 종족</th>
+                <td><a href="aether_pan-human_species.html" class="wiki-link">수인</a> (토박이), 인간 (이주민)</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 지리 및 환경</a>
+                <ul>
+                    <li><a href="#s-2-1">2.1. 위치 및 기후</a></li>
+                    <li><a href="#s-2-2">2.2. 에테르 및 마경</a></li>
+                    <li><a href="#s-2-3">2.3. 치안 환경</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-3">3. 주민 구성 및 산업</a>
+                <ul>
+                    <li><a href="#s-3-1">3.1. 종족 분포</a></li>
+                    <li><a href="#s-3-2">3.2. 주요 산업</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-4">4. 프로미스-아르토스 가문</a>
+                <ul>
+                    <li><a href="#s-4-1">4.1. 개요 및 기원</a></li>
+                    <li><a href="#s-4-2">4.2. 가문 기예</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-5">5. 북설 기사단</a>
+                <ul>
+                    <li><a href="#s-5-1">5.1. 개요 및 기풍</a></li>
+                    <li><a href="#s-5-2">5.2. 무장 및 편제</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-6">6. 주요 직할지</a></li>
+            <li><a href="#s-7">7. 최근 정세</a></li>
+            <li><a href="#s-8">8. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        <a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a>의 정북쪽 최북단에 위치한 백작령이다. 영주인 백작은 제국 황제의 직속 봉신이다.
+    </p>
+    <p>
+        북쪽으로 광활한 툰드라인 <a href="aether_frost_fields.html" class="wiki-link">서리벌판</a>과 맞닿아 있으며, 서리벌판과 접경한 제국의 영지들 중 가장 고도로 개발되어 있다. 북방 유목민들과 교역을 진행하는 상업 거점이자 변경을 방비하는 전초기지 역할을 수행한다. 혹독한 추위와 간헐적인 약탈 위협 속에서 생존과 무력을 숭상하는 거칠고 실용적인 분위기를 띤다.
+    </p>
+
+    <h2 id="s-2">2. 지리 및 환경</h2>
+
+    <h3 id="s-2-1">2.1. 위치 및 기후</h3>
+    <p>
+        타이가 지대에 속하며 냉대 습윤 기후를 띤다. 사계절 내내 서늘하고 혹독한 추위가 이어지며, 광활한 침엽수림이 영지 전역을 뒤덮고 있다.
+    </p>
+
+    <h3 id="s-2-2">2.2. 에테르 및 마경</h3>
+    <p>
+        일반인 범인류종이 생활할 수 있는 안전 한도 내에서 <a href="aether_aether.html" class="wiki-link">에테르</a>의 밀도가 높게 유지된다.
+    </p>
+    <ul>
+        <li><strong>야생 성질 에테르:</strong> 영지 북동부에 자리 잡은 중형 마경인 <a href="aether_feralis.html" class="wiki-link">페랄리스</a>의 영향으로 영지 전반에 야생 성질의 에테르가 짙게 흐른다.</li>
+        <li><strong>괴수 생태적 특성:</strong> 넓은 영토 면적에 비해 상주 인구가 적어, 출몰한 <a href="aether_monster.html" class="wiki-link">괴수</a>가 초기에 토벌되지 않고 숲속에서 강력한 <a href="aether_level.html" class="wiki-link">경지</a>까지 성장하기 쉬운 환경적 특성을 지닌다.</li>
+    </ul>
+
+    <h3 id="s-2-3">2.3. 치안 환경</h3>
+    <p>
+        거점 도시와 성벽 내부는 기사단의 철저한 군사적 통제 덕분에 치안이 매우 안정적이다.
+    </p>
+    <p>
+        반면 성벽 바깥의 개활지나 삼림 지대는 강력한 괴수와 맹수, 유목민의 산발적 습격으로 인해 위험도가 극히 높다. 이로 인해 영지민들 스스로도 자신을 지키기 위한 최소한의 실전 무력을 갖추고 살아가는 경우가 많다.
+    </p>
+
+    <h2 id="s-3">3. 주민 구성 및 산업</h2>
+
+    <h3 id="s-3-1">3.1. 종족 분포</h3>
+    <ul>
+        <li><strong>토박이 주민:</strong> 최소 500세대 이전부터 터를 잡고 살아온 토박이들의 대다수는 <a href="aether_pan-human_species.html" class="wiki-link">수인</a>이다. 늑대, 곰, 호랑이, 사슴, 수리, 눈표범 등 추운 기후에 서식하는 동물 특성을 지닌 수인들이 주류를 이룬다.</li>
+        <li><strong>이주민:</strong> 외지에서 유입된 이주민들은 대부분 인간으로 구성되어 있다.</li>
+    </ul>
+
+    <h3 id="s-3-2">3.2. 주요 산업</h3>
+    <ul>
+        <li><strong>모피 무역:</strong> <a href="aether_frost_fields.html" class="wiki-link">서리벌판</a>의 순록 유목민들과의 교역을 통해 양질의 방한용 모피를 대량으로 확보하여 제국 내륙으로 유통한다.</li>
+        <li><strong>괴수 부산물:</strong> <a href="aether_feralis.html" class="wiki-link">페랄리스</a> 및 영지 삼림에서 사냥꾼들이 포획한 변질형 괴수의 부산물을 가공 및 판매한다.</li>
+        <li><strong>벌목업:</strong> 광활한 타이가 침엽수림을 바탕으로 한 목재 생산이 활발히 이루어진다.</li>
+    </ul>
+
+    <h2 id="s-4">4. 프로미스-아르토스 가문</h2>
+
+    <h3 id="s-4-1">4.1. 개요 및 기원</h3>
+    <p>
+        아르토스 백작령을 지배하는 황실 방계 가문이다. 가문원의 종족은 혼혈이 섞여 있으나 대부분 인간이다. 공문서나 정식 외교 석상에서는 프로미스-아르토스라는 성씨를 사용하며, 민간과 일상에서는 주로 아르토스 가문으로 불린다. 백작성은 거점 도시인 보레아스에 위치한다.
+    </p>
+    <p>
+        제19대 황제 루크 프로미스의 차남이자 제20대 황제 이그니스 프로미스의 동생인 발테르가 상속받아 개척한 영지이다. 제국력 653년 제1대 백작으로 취임한 발테르에 이어, 제국력 711년 장남인 카를 프로미스-아르토스가 제2대 백작위에 올라 장기간 통치해 오고 있다.
+    </p>
+
+    <h3 id="s-4-2">4.2. 가문 기예</h3>
+    <ul>
+        <li><strong>만민서약의 반석:</strong> 황실 본가로부터 온전히 물려받아 수련하는 <a href="aether_qi.html" class="wiki-link">심법</a>이다. 영주와 기사 모두 각자의 위치에서 스스로를 서약의 반석 중 일부로 여기는 심상을 품고 <a href="aether_qi.html" class="wiki-link">기</a>를 정제한다.</li>
+        <li><strong>제국수호투법 - 북방망치판:</strong> 혹한 속에서 검을 사용할 경우 칼날이 얼어 깨져버리는 문제가 발생하자, 황실의 고유 무술인 제국수호투법을 거대한 망치에 맞게 개량한 무술이다. 원본 무술이 지닌 극쾌의 방법론 중 '무게중심 통제'와 '완급 조절'을 극대화하였다.</li>
+        <li><strong>사경압련결:</strong> 가문의 고유 <a href="aether_aura.html" class="wiki-link">오러단련법</a>이다. 체력과 오러가 완전히 고갈된 수련자를 강제로 생명이 위협받는 극한의 사경으로 내몬다. 삶과 죽음의 경계에서 본능적인 생존 욕구를 극대화하여 주변 에테르를 파괴된 근육 속으로 강제 흡수·동화시키는 방식이다. 수인이나 야생 성질 에테르가 흐르는 곳에서 수련할 때 성과가 높으며, 사고를 방지하기 위해 한 개 대경지 이상 높은 상급자의 통제와 보조가 반쯤 필수적으로 요구된다.</li>
+    </ul>
+
+    <h2 id="s-5">5. 북설 기사단</h2>
+
+    <h3 id="s-5-1">5.1. 개요 및 기풍</h3>
+    <p>
+        프로미스-아르토스 가문이 설립하고 운용하는 영지 기사단이다. 본부는 보레아스 중심구획 내 백작성에 인접해 있다.
+    </p>
+    <p>
+        혹독한 북방 환경에서의 실전과 생존을 절대적으로 중시하는 거칠고 살벌한 기풍을 지닌다. 실력 지상주의가 철저히 정착되어 있어 인간과 수인 간의 차별이 전무하며 오직 무력과 전공에 의해서만 서열이 결정된다. 의장용 정복은 별도로 마련되어 있지 않다.
+    </p>
+
+    <h3 id="s-5-2">5.2. 무장 및 편제</h3>
+    <ul>
+        <li><strong>무장:</strong> 손잡이를 늘리고 머리를 키운 거대한 양손 강철 망치와, 짐승의 두꺼운 가죽을 덧댄 흉갑 및 투구를 주요 장비로 사용한다.</li>
+    </ul>
+    <table class="wiki-table">
+        <tr>
+            <th>계급</th>
+            <th>해당 경지</th>
+            <th>인원 및 비고</th>
+        </tr>
+        <tr>
+            <td>견습기사</td>
+            <td>1성 ~ 3성</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>정규기사</td>
+            <td>4성 ~ 5성</td>
+            <td>81명</td>
+        </tr>
+        <tr>
+            <td>상급기사</td>
+            <td>6성 ~ 7성</td>
+            <td>18명</td>
+        </tr>
+        <tr>
+            <td>기사단장</td>
+            <td>8성 입문</td>
+            <td>1명 (겔루 카르사)</td>
+        </tr>
+    </table>
+
+    <h2 id="s-6">6. 주요 직할지</h2>
+    <ul>
+        <li><strong>보레아스:</strong> 거대 성곽 도시이자 백작성이 자리 잡은 요새이다. 높은 방벽과 두꺼운 성문으로 둘러싸여 있으며, 남부에서 올라온 내륙 상단과 북방 유목민 상단이 조우하여 모피와 식량을 거래하는 최대 교역 중심지이다.</li>
+        <li><strong>발카:</strong> 보레아스 정북쪽에 위치하며, <a href="aether_frost_fields.html" class="wiki-link">서리벌판</a>과 직접 접경하는 최북단 전초 요새이자 마을이다. 국경 경비와 유목민 동향 감시를 수행하며, 소규모 유목 무리와의 현장 직거래가 이루어진다.</li>
+        <li><strong>페르나:</strong> 보레아스 북동쪽에 위치한 사냥 전진 기지이다. 마경 <a href="aether_feralis.html" class="wiki-link">페랄리스</a>와 인접해 야생 에테르가 매우 짙으며, 괴수 사냥꾼들이 주로 주둔한다. 괴수의 위협에 대비해 촌락 전체가 목조 방책과 해자로 둘러싸여 있다.</li>
+        <li><strong>메리디에스:</strong> 보레아스 남쪽에 위치한 물류 집결 소도시이다. 제국 남부에서 북상하는 식량, 무기, 방한용품 등 군수·생활 물자가 일차적으로 하역되며, 북방의 모피와 괴수 부산물이 제국 내륙으로 향하기 전 집적되는 병참 거점이다.</li>
+    </ul>
+
+    <h2 id="s-7">7. 최근 정세</h2>
+    <p>
+        제2대 백작 카를 프로미스-아르토스는 8성 입문의 무력으로 290년 가까이 영지를 통치해 왔으나, 제국력 990년대 후반 수명의 한계에 도달하며 급격한 노쇠화를 겪었다.
+    </p>
+    <p>
+        제국력 999년 10월 12일 카를 백작이 병석에 누워 일어나지 못하면서 영지 내외로 동요가 확산되었다. 공식 후계자가 확정되지 않은 상태에서 가문 내 유력 후손들과 북설 기사단의 상급 기사들이 파벌을 형성하여 대립하기 시작했다. 기사단장 겔루 카르사 역시 백작가의 혈통을 이은 자신의 외손자를 지지하며 독자적인 세력을 구축하였다.
+    </p>
+    <p>
+        영지의 통제력이 약화되자 국경 너머 <a href="aether_frost_fields.html" class="wiki-link">서리벌판</a> 유목민들의 산발적인 약탈 시도가 증가하였고, <a href="aether_feralis.html" class="wiki-link">페랄리스</a>에 대한 관리 소홀로 인해 변질형 괴수들의 출몰 빈도가 늘어나면서 영지 내부의 치안과 물류 수송이 불안정한 상태에 놓여 있다.
+    </p>
+
+    <h2 id="s-8">8. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a></li>
+        <li><a href="aether_frost_fields.html" class="wiki-link">서리벌판</a></li>
+        <li><a href="aether_feralis.html" class="wiki-link">페랄리스</a></li>
+        <li><a href="aether_pan-human_species.html" class="wiki-link">범인류종</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
