@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>차원미아 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">차원미아</div>
+    <div class="wiki-date">최근 수정 시각: 999-11-20 14:02:19</div>
+
+    <div class="infobox">
+        <div class="infobox-title">차원미아</div>
+        <table class="infobox-table">
+            <tr>
+                <th>정의</th>
+                <td>타 차원에서 이탈하여 불시착한 존재</td>
+            </tr>
+            <tr>
+                <th>발생 빈도</th>
+                <td>세기당 약 0명 ~ 10명 안팎</td>
+            </tr>
+            <tr>
+                <th>전이 형태</th>
+                <td>차원 균열, 전생, 빙의, 전이 등</td>
+            </tr>
+            <tr>
+                <th>초자연적 특성</th>
+                <td>원 차원 능력의 비호환성, 높은 이능 각성률</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 전이 방식과 발생 빈도</a></li>
+            <li><a href="#s-3">3. 초자연적 특성</a>
+                <ul>
+                    <li><a href="#s-3-1">3.1. 본래 힘의 비호환성</a></li>
+                    <li><a href="#s-3-2">3.2. 이능의 각성과 정체성 투영</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-4">4. 출신 차원의 다양성</a></li>
+            <li><a href="#s-5">5. 사회적 인식과 활동</a></li>
+            <li><a href="#s-6">6. 역사적 영향</a></li>
+            <li><a href="#s-7">7. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        본래 자신이 속해 있던 세계에서 이탈하여 이 차원에 불시착한 존재를 일컫는 명칭이다.
+    </p>
+
+    <h2 id="s-2">2. 전이 방식과 발생 빈도</h2>
+    <ul>
+        <li><strong>전이 형태:</strong> 차원 균열에 휘말려 넘어오는 현상부터 전생, 빙의, 육신 그대로의 공간 전이에 이르기까지 다양한 형태로 나타난다.</li>
+        <li><strong>발생 빈도:</strong> 세기당 대략 0명에서 10명 안팎으로, 발생 빈도는 극히 드물다.</li>
+    </ul>
+
+    <h2 id="s-3">3. 초자연적 특성</h2>
+
+    <h3 id="s-3-1">3.1. 본래 힘의 비호환성</h3>
+    <p>
+        본래 속해 있던 차원에서 특수한 힘을 가졌던 존재라 할지라도, 그 힘이 이 세계의 <a href="aether_aether.html" class="wiki-link">에테르</a>를 사용하는 방식과 호환되지 않는 경우가 많다.
+    </p>
+
+    <h3 id="s-3-2">3.2. 이능의 각성과 정체성 투영</h3>
+    <p>
+        원인은 명확히 밝혀지지 않았으나, 차원미아는 <a href="aether_special_ability.html" class="wiki-link">이능</a>을 각성하여 지니고 있는 경우가 많으며 그 능력 또한 특이하거나 강력한 경우가 많다.
+    </p>
+    <ul>
+        <li><strong>정체성 투영:</strong> 이능을 각성한 차원미아 중 상당수는 해당 능력이 이전 세계에서의 삶이나 본래의 정체성을 투영한 형태로 발현된다고 보고한다.</li>
+    </ul>
+
+    <h2 id="s-4">4. 출신 차원의 다양성</h2>
+    <p>
+        차원미아들이 넘어오는 차원은 매우 다양하여 집단적인 공통점을 찾기 어렵다. 설령 대화나 기록상 같은 차원에서 넘어온 것처럼 보이는 경우라 할지라도, 세부적인 역사를 비교하면 서로 다른 차원인 경우가 많다.
+    </p>
+
+    <h2 id="s-5">5. 사회적 인식과 활동</h2>
+    <ul>
+        <li><strong>인지도:</strong> 지식인층은 차원미아의 존재를 학문적으로 인지하고 있으며, 비지식인층 역시 동화나 민담 등을 통해 이름 정도는 들어본 경우가 많다.</li>
+        <li><strong>사회적 두각:</strong> 차원미아가 역사나 사회 전면에 나서서 두각을 드러내는 경우는 생각보다 드문 편이다.</li>
+    </ul>
+
+    <h2 id="s-6">6. 역사적 영향</h2>
+    <p>
+        극소수의 차원미아가 남긴 사상이나 기술 체계는 대륙의 문화와 무예에 중요한 자취를 남기기도 했다.
+    </p>
+    <ul>
+        <li><strong>심법 체계:</strong> 상고시대에 대륙으로 표류해 온 무림계 차원미아가 <a href="aether_qi.html" class="wiki-link">기</a>를 체계적으로 수련하는 방법인 심법을 최초로 전파했다고 전해진다.</li>
+        <li><strong>종교적 전파:</strong> 제국력 원년보다 1000년 이상 앞선 시기에 승려 차원미아가 대륙 서북부에서 선종을 가르쳤으며, 이것이 제자들에 의해 토착화되어 <a href="aether_musang_buddhism.html" class="wiki-link">무상종 불교</a>로 자리 잡았다.</li>
+    </ul>
+
+    <h2 id="s-7">7. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_aether.html" class="wiki-link">에테르</a></li>
+        <li><a href="aether_special_ability.html" class="wiki-link">이능</a></li>
+        <li><a href="aether_qi.html" class="wiki-link">기</a></li>
+        <li><a href="aether_musang_buddhism.html" class="wiki-link">무상종 불교</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
