@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>라무스 강 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">라무스 강</div>
+    <div class="wiki-date">최근 수정 시각: 999-08-15 14:10:02</div>
+
+    <div class="infobox">
+        <div class="infobox-title">라무스 강</div>
+        <table class="infobox-table">
+            <tr>
+                <th>분류</th>
+                <td>강, 지형</td>
+            </tr>
+            <tr>
+                <th>본류</th>
+                <td><a href="aether_rata_river.html" class="wiki-link">라타 강</a></td>
+            </tr>
+            <tr>
+                <th>유하 방향</th>
+                <td>서남쪽</td>
+            </tr>
+            <tr>
+                <th>유입 수역</th>
+                <td><a href="aether_entera_sea.html" class="wiki-link">엔테라 해</a></td>
+            </tr>
+            <tr>
+                <th>지배적 에테르</th>
+                <td>극음 성질</td>
+            </tr>
+            <tr>
+                <th>국경 역할</th>
+                <td><a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a> 동남쪽 국경</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 지리 및 유로</a>
+                <ul>
+                    <li><a href="#s-2-1">2.1. 분기 및 유하 경로</a></li>
+                    <li><a href="#s-2-2">2.2. 국경으로서의 역할</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-3">3. 에테르 환경 및 자연 생태</a></li>
+            <li><a href="#s-4">4. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        <a href="aether_entera_sea.html" class="wiki-link">엔테라 해</a>의 동북쪽에 자리 잡은 언덕 지형으로 인해 발생한 <a href="aether_rata_river.html" class="wiki-link">라타 강</a>의 분류이다.
+    </p>
+    <p>
+        본류인 라타 강에서 갈라져 서남쪽 방향으로 흘러가며, 종국에는 내해인 <a href="aether_entera_sea.html" class="wiki-link">엔테라 해</a>로 흘러들어간다.
+    </p>
+
+    <h2 id="s-2">2. 지리 및 유로</h2>
+
+    <h3 id="s-2-1">2.1. 분기 및 유하 경로</h3>
+    <p>
+        <a href="aether_rata_river.html" class="wiki-link">라타 강</a>의 전체 유하 경로 기준, <a href="aether_ezed_desert.html" class="wiki-link">에제드 대사막</a>의 북쪽과 <a href="aether_world_tree_forest.html" class="wiki-link">세계수림</a> 사이 구간에서 분기한다.
+    </p>
+    <ul>
+        <li><strong>원인 지형:</strong> 엔테라 해의 동북쪽에 솟아 있는 언덕 지형에 물길이 가로막히고 갈라지며 독자적인 지류를 형성한다.</li>
+        <li><strong>유출구:</strong> 서남쪽을 향해 유하하여 <a href="aether_entera_sea.html" class="wiki-link">엔테라 해</a>로 유입된다.</li>
+    </ul>
+
+    <h3 id="s-2-2">2.2. 국경으로서의 역할</h3>
+    <p>
+        대륙 서북부의 주요 세력권을 가르는 천연 국경선으로 기능한다.
+    </p>
+    <ul>
+        <li><strong>제국 동남부 국경:</strong> <a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a>의 동남쪽 국경선을 이루며, 제국의 최전방 방어 영지인 <a href="aether_parma_duchy.html" class="wiki-link">파르마 공작령</a>과 직접 맞닿아 있다.</li>
+        <li><strong>유목 세력과의 경계:</strong> 강 건너편의 유목 국가인 <a href="aether_karshan_khaganate.html" class="wiki-link">카르샨 카간국</a>의 북서쪽 국경과 마주한다. 파르마 공작령의 요새 도시인 센티넬라 등이 라무스 강 인근에서 국경 방어 및 유목민과의 교역을 수행하고 있다.</li>
+    </ul>
+
+    <h2 id="s-3">3. 에테르 환경 및 자연 생태</h2>
+    <p>
+        <a href="aether_pan-human_species.html" class="wiki-link">범인류종</a> 일반인이 거주할 수 있는 허용 한도 내에서 <a href="aether_aether.html" class="wiki-link">에테르</a>의 밀도가 높게 형성되어 있다.
+    </p>
+    <ul>
+        <li><strong>극음 성질:</strong> 본류인 라타 강의 중상류 구간과 마찬가지로 극음 성질의 에테르를 강하게 품고 있다.</li>
+        <li><strong>식생 및 기후 영향:</strong> 극음 성질 에테르의 영향으로 인해 하천 주변 일대는 식물의 생장이 극히 어렵다. </li>
+    </ul>
+
+    <h2 id="s-4">4. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_rata_river.html" class="wiki-link">라타 강</a></li>
+        <li><a href="aether_entera_sea.html" class="wiki-link">엔테라 해</a></li>
+        <li><a href="aether_parma_duchy.html" class="wiki-link">파르마 공작령</a></li>
+        <li><a href="aether_karshan_khaganate.html" class="wiki-link">카르샨 카간국</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
+
