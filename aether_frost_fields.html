@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>서리벌판 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">서리벌판</div>
+    <div class="wiki-date">최근 수정 시각: 999-10-18 17:05:44</div>
+
+    <div class="infobox">
+        <div class="infobox-title">서리벌판</div>
+        <table class="infobox-table">
+            <tr>
+                <th>분류</th>
+                <td>지형</td>
+            </tr>
+            <tr>
+                <th>위치</th>
+                <td>대륙 북부</td>
+            </tr>
+            <tr>
+                <th>포함 지형</th>
+                <td>툰드라 전체, 타이가 북부</td>
+            </tr>
+            <tr>
+                <th>생활 양식</th>
+                <td>순록 유목</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 지리 및 환경</a></li>
+            <li><a href="#s-3">3. 주민 및 사회</a></li>
+            <li><a href="#s-4">4. 대외 관계 및 역사</a></li>
+            <li><a href="#s-5">5. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        대륙 북부의 툰드라 지형 전체와 타이가의 북부를 포괄하여 지칭하는 지형 명칭이다.
+    </p>
+
+    <h2 id="s-2">2. 지리 및 환경</h2>
+    <p>
+        혹독한 추위가 상시 지속되는 냉대 및 한대 기후 지대이다.
+    </p>
+    <ul>
+        <li><strong>지형 구성:</strong> 대륙 최북단의 광활한 툰드라와 그 남쪽으로 이어지는 타이가 북부 삼림을 아우른다.</li>
+        <li><strong>마경과의 구분:</strong> 서리벌판 내부 곳곳에 국지적인 마경이 산재해 있기는 하지만, 서리벌판이라는 지형 그 자체가 마경을 뜻하는 것은 아니다.</li>
+    </ul>
+
+    <h2 id="s-3">3. 주민 및 사회</h2>
+    <p>
+        정주 문명보다는 가축을 이동 방목하는 유목 형태의 사회가 주를 이룬다.
+    </p>
+    <ul>
+        <li><strong>생계:</strong> 서리벌판의 민족들은 주로 순록을 사육하며 유목 생활을 영위해 왔다.</li>
+        <li><strong>국가 체제의 부재:</strong> 척박하고 거친 환경으로 인해 영토 내부에 단일한 대규모 국가가 세워진 적은 단 한 번도 없었으며, 독립적인 부족 단위의 집단으로 나뉘어 존속하고 있다.</li>
+    </ul>
+
+    <h2 id="s-4">4. 대외 관계 및 역사</h2>
+    <ul>
+        <li><strong>정복 가치:</strong> 혹한의 기후와 척박한 토양으로 인해 영토로서의 정복 가치가 전무하다.</li>
+        <li><strong>주변국과의 관계:</strong> 남쪽에 접한 <a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a>조차 서리벌판을 향한 군사적 영토 확장을 시도하지 않았다. 대신 <a href="aether_artos_county.html" class="wiki-link">아르토스 백작령</a>과 같은 북방 접경 지대를 통해 모피나 마경 부산물 등의 교역을 진행하며 간접적인 영향력만을 유지하고 있다.</li>
+        <li>동쪽 방면에서는 남부 경계가 <a href="aether_infernum_demon_nation.html" class="wiki-link">인페르눔 마족국</a>의 북부 경계와 접한다.</li>
+    </ul>
+
+    <h2 id="s-5">5. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a></li>
+        <li><a href="aether_artos_county.html" class="wiki-link">아르토스 백작령</a></li>
+        <li><a href="aether_infernum_demon_nation.html" class="wiki-link">인페르눔 마족국</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
