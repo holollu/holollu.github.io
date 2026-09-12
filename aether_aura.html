@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오러 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">오러</div>
+    <div class="wiki-date">최근 수정 시각: 982-12-28 14:05:22</div>
+
+    <div class="infobox">
+        <div class="infobox-title">오러</div>
+        <table class="infobox-table">
+            <tr>
+                <th>분류</th>
+                <td>정제형 에테르계 에너지</td>
+            </tr>
+            <tr>
+                <th>정제 매개</th>
+                <td>신체 (근육, 호흡)</td>
+            </tr>
+            <tr>
+                <th>경지 단위</th>
+                <td>1성 ~ 10성</td>
+            </tr>
+            <tr>
+                <th>보유 위험성</th>
+                <td>전무</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 정제 및 흡수 메커니즘</a></li>
+            <li><a href="#s-3">3. 운용 및 특성</a>
+                <ul>
+                    <li><a href="#s-3-1">3.1. 기본 효과</a></li>
+                    <li><a href="#s-3-2">3.2. 단련법에 따른 특성화</a></li>
+                    <li><a href="#s-3-3">3.3. 방출의 제약</a></li>
+                    <li><a href="#s-3-4">3.4. 마도구와의 적성</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-4">4. 오러단련법의 교체 및 개조</a>
+                <ul>
+                    <li><a href="#s-4-1">4.1. 변경 원칙과 충돌 부작용</a></li>
+                    <li><a href="#s-4-2">4.2. 교체 허용 예외</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-5">5. 수련 및 경지상의 특징</a></li>
+            <li><a href="#s-6">6. 사회적 위상 및 분포</a></li>
+            <li><a href="#s-7">7. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        지성체의 근육과 골격을 직접 통과시키며 정제해 낸 에테르이다. 심상에 의존하는 <a href="aether_qi.html" class="wiki-link">기</a>나 복잡한 패턴을 유지해야 하는 <a href="aether_mana.html" class="wiki-link">마나</a>와 달리, 육체 그 자체를 바탕으로 삼기 때문에 체내에 갈무리된 이후 변질화를 유발할 위험이 존재하지 않는다.
+    </p>
+
+    <h2 id="s-2">2. 정제 및 흡수 메커니즘</h2>
+    <p>
+        오러를 체내에 획득하고 축적하는 과정은 육체의 활동과 결합하여 네 단계의 순서로 진행된다.
+    </p>
+    <ol>
+        <li><strong>호흡:</strong> 육체 운동과 함께 주변의 에테르를 체내로 호흡한다.</li>
+        <li><strong>결합:</strong> 고강도 운동으로 인해 미세하게 손상된 근육 섬유에 유입된 에테르가 결합한다.</li>
+        <li><strong>동화:</strong> 근육이 회복되는 과정에서 결합해 있던 에테르가 신체 조직에 온전히 동화된다.</li>
+        <li><strong>변질:</strong> 동화된 에테르가 비로소 오러로 기능하며 사용자의 신체 구조를 오러에 적합한 형태로 변질 및 강화한다.</li>
+    </ol>
+
+    <h2 id="s-3">3. 운용 및 특성</h2>
+
+    <h3 id="s-3-1">3.1. 기본 효과</h3>
+    <p>
+        오러는 육체의 물리적 능력을 직접적으로 끌어올리는 데 집중되어 있다.
+    </p>
+    <ul>
+        <li><strong>신체 강화:</strong> 체내에 갈무리된 오러는 상시 전반적인 신체 능력을 지탱하고 강화한다.</li>
+        <li><strong>순간 강화:</strong> 축적된 오러를 순간적으로 폭발시키듯 소모하여 육체의 속도, 완력, 도약력 등을 비약적으로 증폭시킬 수 있다.</li>
+        <li><strong>피격 경화:</strong> 외부로부터 타격을 받는 찰나에 피격 부위로 오러를 집중 소모하여, 해당 부위의 부상을 방지할 수 있다.</li>
+    </ul>
+
+    <h3 id="s-3-2">3.2. 단련법에 따른 특성화</h3>
+    <p>
+        오러는 어떤 방식으로 육체를 혹사하고 에테르를 동화시켰는가에 따라 신체가 강화되는 구체적인 형태와 부가 성질이 완전히 달라진다.
+    </p>
+    <ul>
+        <li><strong>단련 환경의 영향:</strong> 평범한 운동으로 얻은 오러는 아무런 독자 성질이 없는 순수한 신체 강화에 머무른다. 반면 특정한 극단적 환경이나 매개체를 사용하여 단련할 경우 신체 자체가 그에 맞추어 변질된다.</li>
+        <li><strong>사례:</strong> 한계치의 독극물을 주기적으로 섭취하며 단련하는 오러단련법을 거칠 경우, 감각의 상승과 더불어 체내 혈액에 독성이 깃들고 극히 강력한 독 저항력을 영구히 획득하게 된다.</li>
+    </ul>
+
+    <h3 id="s-3-3">3.3. 방출의 제약</h3>
+    <p>
+        오러는 본질적으로 육체 조직에 결속된 에너지이기 때문에, 방출에 극심한 한계를 지닌다.
+    </p>
+    <ul>
+        <li><strong>중·저경지:</strong> 오러의 체외로 독립된 형태의 방출은 불가능하다.</li>
+        <li><strong>6성:</strong> 신체 인근에 국한된 형태로만 오러의 체외 방출이 허용되기 시작한다.</li>
+        <li><strong>9성:</strong> 오직 '직선 궤적'에 한하여 원거리로 오러를 투사하고 방출하는 것이 가능해진다.</li>
+    </ul>
+
+    <h3 id="s-3-4">3.4. 마도구와의 적성</h3>
+    <p>
+        사용자의 에너지를 직접 주입하여 발동하는 <a href="aether_magic_tool.html" class="wiki-link">마도구</a>를 다룰 때, 오러 사용자는 기나 마나 사용자에 비해 에너지의 주입 자체를 다소 어려워하는 경향을 보인다.
+    </p>
+
+    <h2 id="s-4">4. 오러단련법의 교체 및 개조</h2>
+
+    <h3 id="s-4-1">4.1. 변경 원칙과 충돌 부작용</h3>
+    <p>
+        기존에 익힌 오러단련법을 버리고 새로운 단련법으로 갈아타는 것은 극도로 위험한 행위로 간주된다.
+    </p>
+    <ul>
+        <li><strong>충돌 위험:</strong> 오러는 근육과 골격에 물리적인 변질을 일으킨 상태이므로, 기존에 자리 잡은 에테르의 성질과 새로 주입되는 성질이 상호 충돌할 경우 신체와 신경계에 치명적인 이상이 발생한다.</li>
+    </ul>
+
+    <h3 id="s-4-2">4.2. 예외</h3>
+    <p>
+        일반적인 위험성과 달리, 다음의 세 가지 조건에 부합할 경우에는 최소한의 위험이나 부작용 없이 단련법의 교체 및 개조가 성립한다.
+    </p>
+    <ul>
+        <li><strong>보유한 성질이 약한 경우:</strong> 기존에 익힌 오러에 특정한 성질이 짙게 배어있지 않은 경우이다. 평범한 운동을 통해 자연스럽게 얻은 기초 오러나, 처음부터 입문 및 기초용으로 고안된 무색무취의 오러단련법을 익혔다면 약간의 시간만 들이면 부작용 없이 새로운 단련법으로 덮어씌울 수 있다.</li>
+        <li><strong>점진적 변형 및 개조:</strong> 기존에 익힌 단련법의 근간과 뼈대를 온전히 유지한 상태에서, 단계적으로 발전시키거나 미세한 변형을 누적해 나가는 방식이다.</li>
+        <li><strong>성질의 유사성:</strong> 새롭게 익히려는 단련법이 기존에 다져둔 오러의 물리적 성질, 작용 묘리와 매우 흡사하거나 상호 호환되는 경우이다.</li>
+    </ul>
+
+    <h2 id="s-5">5. 수련 및 경지상의 특징</h2>
+    <p>
+        오러의 성취 수준은 1성부터 10성까지의 <a href="aether_level.html" class="wiki-link">경지</a> 체계를 따른다.
+    </p>
+    <ul>
+        <li><strong>초반 성장:</strong> 1성에서 3성까지는 기나 마나에 비해 돌파에 필요한 기간이 짧아, 단기간에 실전 무력을 구축하기에 가장 용이하다.</li>
+        <li><strong>4성 이후의 난관:</strong> 4성부터는 범재 기준으로 한 경지를 돌파하는 데 10년에서 20년 이상이 소모되며, 5성 입문에서 6성으로 나아가는 구간은 오러를 다루는 범재의 명확한 한계선으로 평가받는다.</li>
+        <li><strong>6성의 희소성:</strong> 6성에 도달한 오러 사용자는 동급인 6서클의 마법사 이상으로 대륙 전체에서 찾아보기 드문 존재로 대우받는다.</li>
+    </ul>
+
+    <h2 id="s-6">6. 사회적 위상 및 분포</h2>
+    <ul>
+        <li><strong>무력 집단의 근간:</strong> 체계적인 학식이나 엄격한 종교적 규율 없이 육체 노동과 훈련만으로 습득할 수 있기에, 각 도시를 수호하는 도시 경비대와 <a href="aether_adventurers_guild.html" class="wiki-link">모험가 길드</a> 소속 인원의 절대다수가 오러 사용자로 구성되어 있다.</li>
+        <li><strong>기사단:</strong> 영지를 방위하는 기사단 내부에서도 중추적인 전투 인력으로 폭넓게 활약한다.</li>
+    </ul>
+
+    <h2 id="s-7">7. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_aether.html" class="wiki-link">에테르</a></li>
+        <li><a href="aether_level.html" class="wiki-link">경지</a></li>
+        <li><a href="aether_qi.html" class="wiki-link">기</a></li>
+        <li><a href="aether_mana.html" class="wiki-link">마나</a></li>
+        <li><a href="aether_magic_tool.html" class="wiki-link">마도구</a></li>
+        <li><a href="aether_monster.html" class="wiki-link">괴수</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
