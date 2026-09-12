@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>에제드 대사막 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">에제드 대사막</div>
+    <div class="wiki-date">최근 수정 시각: 979-09-12 18:20:05</div>
+
+    <div class="infobox">
+        <div class="infobox-title">에제드 대사막</div>
+        <table class="infobox-table">
+            <tr>
+                <th>분류</th>
+                <td>지형</td>
+            </tr>
+            <tr>
+                <th>위치</th>
+                <td>대륙 남부</td>
+            </tr>
+            <tr>
+                <th>기후대</th>
+                <td>아열대고압대</td>
+            </tr>
+            <tr>
+                <th>생활 양식</th>
+                <td>오아시스 정착, 유목</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 지리 및 경계</a>
+                <ul>
+                    <li><a href="#s-2-1">2.1. 위치와 확장 범위</a></li>
+                    <li><a href="#s-2-2">2.2. 인접 수계 및 점이지대</a></li>
+                    <li><a href="#s-2-3">2.3. 마경과의 구분</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-3">3. 주민 및 생활 양식</a></li>
+            <li><a href="#s-4">4. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        대륙 남부의 아열대고압대 지역 전체에 걸쳐 광활하게 위치한 거대한 사막 지형이다.
+    </p>
+
+    <h2 id="s-2">2. 지리 및 경계</h2>
+
+    <h3 id="s-2-1">2.1. 위치와 확장 범위</h3>
+    <p>
+        대륙 남부 전역에 펼쳐져 있으며, 산맥 지형의 영향으로 동서 간의 사막 형성 양상이 상이하다.
+    </p>
+    <ul>
+        <li><strong>산맥과의 관계:</strong> <a href="aether_sutra_mountains.html" class="wiki-link">수트라 산맥</a>의 서편에서는 사막이 더 북쪽까지 확장되어 펼쳐지며, <a href="aether_karshan_khaganate.html" class="wiki-link">카르샨 카간국</a>의 고원 스텝 지대 남측과 맞닿아 있다. 반면 <a href="aether_sutra_mountains.html" class="wiki-link">수트라 산맥</a>의 동편에는 사막이 존재하지 않는다.</li>
+    </ul>
+
+    <h3 id="s-2-2">2.2. 인접 수계 및 점이지대</h3>
+    <ul>
+        <li><strong>북쪽 경계:</strong> 북쪽 경계의 일부는 내해인 <a href="aether_entera_sea.html" class="wiki-link">엔테라 해</a>와 접하며, 극히 일부 구역은 <a href="aether_sutra_mountains.html" class="wiki-link">수트라 산맥</a>에서 유하하는 <a href="aether_rata_river.html" class="wiki-link">라타 강</a> 상류와 접한다. 북부 오아시스 밀집 지대는 <a href="aether_karshan_khaganate.html" class="wiki-link">카르샨 카간국</a>의 영토에 포함된다.</li>
+        <li><strong>남쪽 경계:</strong> 사막의 남단은 대륙 극남부의 대형 마경인 <a href="aether_tropical_rainforest.html" class="wiki-link">열대우림</a>으로 이어진다.</li>
+    </ul>
+
+    <h3 id="s-2-3">2.3. 마경과의 구분</h3>
+    <p>
+        에제드 대사막 내부 곳곳에 국지적인 마경이 산재해 있기는 하지만, 사막 지형 전체가 마경을 뜻하는 것은 아니다.
+    </p>
+
+    <h2 id="s-3">3. 주민 및 생활 양식</h2>
+    <p>
+        건조한 기후 환경으로 인해 거주 민족들은 수자원의 접근성을 중심으로 삶의 터전을 마련해 왔다.
+    </p>
+    <ul>
+        <li><strong>정착과 유목:</strong> 사막에 거주하는 민족들은 주로 오아시스 인근에 터를 잡고 정착하거나, 가축을 이끌고 이동하는 유목 생활을 영위한다.</li>
+        <li><strong>운송 수단:</strong> 말뿐만 아니라, 건조 지대에 적응한 낙타를 주요 이동 수단으로 활용하기도 한다.</li>
+    </ul>
+
+    <h2 id="s-4">4. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_entera_sea.html" class="wiki-link">엔테라 해</a></li>
+        <li><a href="aether_rata_river.html" class="wiki-link">라타 강</a></li>
+        <li><a href="aether_sutra_mountains.html" class="wiki-link">수트라 산맥</a></li>
+        <li><a href="aether_tropical_rainforest.html" class="wiki-link">열대우림</a></li>
+        <li><a href="aether_karshan_khaganate.html" class="wiki-link">카르샨 카간국</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
