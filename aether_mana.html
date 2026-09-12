@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마나 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">마나</div>
+    <div class="wiki-date">최근 수정 시각: 999-7-7 15:42:08</div>
+
+    <div class="infobox">
+        <div class="infobox-title">마나</div>
+        <table class="infobox-table">
+            <tr>
+                <th>분류</th>
+                <td>정제형 에테르계 에너지</td>
+            </tr>
+            <tr>
+                <th>정제 형태</th>
+                <td>순환 구조 패턴</td>
+            </tr>
+            <tr>
+                <th>경지 단위</th>
+                <td>1서클 ~ 10서클</td>
+            </tr>
+            <tr>
+                <th>보유 위험성</th>
+                <td>흡수 시 및 보유 중 변질화 위험 상존</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 정제 및 흡수 메커니즘</a></li>
+            <li><a href="#s-3">3. 순환 구조의 필수성</a></li>
+            <li><a href="#s-4">4. 운용 및 수련 특성</a>
+                <ul>
+                    <li><a href="#s-4-1">4.1. 동시 수련의 배제</a></li>
+                    <li><a href="#s-4-2">4.2. 마도체계 교체 시 마나 처리</a></li>
+                    <li><a href="#s-4-3">4.3. 서클 해체 후 재축적 속도</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-5">5. 사회적 분포</a></li>
+            <li><a href="#s-6">6. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        순환 구조로 패턴화시킨 <a href="aether_aether.html" class="wiki-link">에테르</a>이다. 정제형 에테르계 에너지 중 가장 엘리트적인 성격을 띠며, 고도의 의지력과 정밀한 제어력을 요구한다.
+    </p>
+    <p>
+        신체에 결속되어 변질화 위험이 전무한 <a href="aether_aura.html" class="wiki-link">오러</a>나 흡수 이후에는 안전한 <a href="aether_qi.html" class="wiki-link">기</a>와 달리, 마나는 외부 에테르를 흡수하는 순간부터 흡수한 이후 체내에 보관하는 전 과정에 걸쳐 변질화의 위험성이 지속해서 상존한다.
+    </p>
+
+    <h2 id="s-2">2. 정제 및 흡수 메커니즘</h2>
+    <p>
+        마나를 흡수하여 체내에 갈무리하는 과정은 세 단계의 순서로 진행된다.
+    </p>
+    <ol>
+        <li><strong>에테르 흡수:</strong> 주변에 존재하는 에테르를 체내로 끌어들인다.</li>
+        <li><strong>변질화 억제:</strong> 유입된 비정제 에테르에 의지를 부여하여 급격한 변질화를 억제한다.</li>
+        <li><strong>순환 패턴화:</strong> 변질화 억제를 유지한 상태 그대로 에테르를 순환 구조의 패턴으로 엮어낸다.</li>
+    </ol>
+    <p>
+        주변 에테르를 흡수하는 행위 자체는 어렵지 않으나, 시전자 본인의 의지력이나 에테르 제어력의 한계를 초과하여 흡수할 경우 통제를 잃고 결국 체내에서 변질화를 일으키게 된다.
+    </p>
+
+    <h2 id="s-3">3. 순환 구조의 필수성</h2>
+    <p>
+        마나를 형성할 때 순환이 배제된 고정 패턴으로 에테르를 구성하더라도 마나와 유사하게 마법을 발현하는 도구로 사용하는 것 자체는 가능하다.
+    </p>
+    <p>
+        그러나 순환하지 않는 패턴은 수면이나 기절 등으로 인해 시전자의 의지가 끊어지거나, 중병 혹은 심각한 부상 등으로 의지가 약화되는 순간 형태가 무너지며 체내에서 급격한 변질화를 초래한다. 따라서 의지의 공백이 발생하더라도 스스로 형태를 유지할 수 있도록 순환 구조를 구축하는 것은 마나를 다루는 데 있어 절대적인 필수 요건이다.
+    </p>
+
+    <h2 id="s-4">4. 운용 및 수련 특성</h2>
+
+    <h3 id="s-4-1">4.1. 동시 수련의 배제</h3>
+    <p>
+        오러와 기를 병행 수련하는 무인은 간혹 찾아볼 수 있으나, 마나는 다른 정제형 에테르계 에너지와의 동시 수련이 거의 존재하지 않는다.
+    </p>
+
+    <h3 id="s-4-2">4.2. 마도체계 교체 시 마나 처리</h3>
+    <p>
+        새로운 <a href="aether_magic_system.html" class="wiki-link">마도체계</a>로 전환하고자 할 때, 체내에 축적된 마나는 정해진 절차를 거쳐 안전하게 배출되어야 한다.
+    </p>
+    <ol>
+        <li>서클을 유지할 최소한의 마나만 남겨두고 나머지 마나를 모두 체외로 배출한다.</li>
+        <li>잔류한 마나에 변질화를 억제하기 위한 명확한 의지를 직접 부여한다.</li>
+        <li>의지가 부여된 상태에서 마나의 순환 패턴화를 풀고 모두 체외로 배출한다.</li>
+        <li>비워진 자리에 새로운 마도체계를 새긴다.</li>
+    </ol>
+    <p>
+        이 과정 자체는 난이도가 낮고 위험성도 거의 없으나, 이전에 익혔던 마도체계의 감각과 노하우를 상실한 채 새로운 체계를 처음부터 다시 익혀야 하므로 통상 4서클 이상의 마법사는 마도체계를 거의 갈아타지 않는다.
+    </p>
+
+    <h3 id="s-4-3">4.3. 서클 해체 후 재축적 속도</h3>
+    <p>
+        마나의 경지인 <a href="aether_circle.html" class="wiki-link">서클</a>을 상승시키는 과정에서 가장 핵심적인 장벽은 에테르 제어력의 연마와 마도체계에 대한 이론적 지식의 습득이며, 단순히 마나를 체내에 채워 넣는 속도 자체는 큰 문제가 되지 않는다.
+    </p>
+    <p>
+        따라서 어떠한 이유로 기존의 서클을 완전히 해체했다 하더라도, 이전과 동일한 마도체계로 다시 마나를 축적할 경우에는 최초에 서클을 올리는 데 걸렸던 기간과 비교할 때 사실상 없는 수준에 가까운 속도로 서클을 복구할 수 있다.
+    </p>
+
+    <h2 id="s-5">5. 사회적 분포</h2>
+    <p>
+        학문적 이해와 연산 능력, 마나의 패턴을 안정적으로 유지할 수 있는 지적 소양을 요구하므로 대륙 전체에서 사용자의 비율이 가장 희귀하다.
+    </p>
+
+    <h2 id="s-6">6. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_aether.html" class="wiki-link">에테르</a></li>
+        <li><a href="aether_level.html" class="wiki-link">경지</a></li>
+        <li><a href="aether_circle.html" class="wiki-link">서클</a></li>
+        <li><a href="aether_magic.html" class="wiki-link">마법</a></li>
+        <li><a href="aether_magic_system.html" class="wiki-link">마도체계</a></li>
+        <li><a href="aether_mana_pattern_collapse.html" class="wiki-link">마나 패턴 붕괴 유도</a></li>
+        <li><a href="aether_magic_spire.html" class="wiki-link">마탑</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
