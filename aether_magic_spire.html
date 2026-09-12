@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마탑 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">마탑</div>
+    <div class="wiki-date">최근 수정 시각: 999-11-03 14:02:19</div>
+
+    <div class="infobox">
+        <div class="infobox-title">마탑</div>
+        <table class="infobox-table">
+            <tr>
+                <th>분류</th>
+                <td>학술 집단, 연구 기관</td>
+            </tr>
+            <tr>
+                <th>형성 시기</th>
+                <td><a href="aether_calendar_era.html" class="wiki-link">제국력</a> 140년 ~ 142년</td>
+            </tr>
+            <tr>
+                <th>주요 사업</th>
+                <td>연구, 교육, 통신, 마도구 제작 및 판매, 인력 파견</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 조직 및 운영 특성</a>
+                <ul>
+                    <li><a href="#s-2-1">2.1. 지부의 부재</a></li>
+                    <li><a href="#s-2-2">2.2. 복식 규범</a></li>
+                    <li><a href="#s-2-3">2.3. 마탑 간 통신망</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-3">3. 입탑 시험</a>
+                <ul>
+                    <li><a href="#s-3-1">3.1. 시험 과목 및 방식</a></li>
+                    <li><a href="#s-3-2">3.2. 선발 및 과락 기준</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-4">4. 주요 업무 및 대외 활동</a>
+                <ul>
+                    <li><a href="#s-4-1">4.1. 연구 및 마도체계 유지보수</a></li>
+                    <li><a href="#s-4-2">4.2. 마도구 제작 및 수리</a></li>
+                    <li><a href="#s-4-3">4.3. 상업 및 대외 용역</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-5">5. 역사</a></li>
+            <li><a href="#s-6">6. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        <a href="aether_magic_system.html" class="wiki-link">마도체계</a>와 <a href="aether_magic.html" class="wiki-link">마법</a> 등을 공유하는 학맥이자 연구 장소를 일컫는 말이다.
+    </p>
+    <p>
+        각 마탑은 독립된 학술 집단으로 존재하며, 다양한 종류와 학풍의 마탑이 대륙 각지에 설립되어 있다. 중규모 이상의 도시라면 규모가 작을지언정 최소 하나 이상의 마탑이 위치해 있다.
+    </p>
+
+    <h2 id="s-2">2. 조직 및 운영 특성</h2>
+
+    <h3 id="s-2-1">2.1. 지부의 부재</h3>
+    <p>
+        모든 마탑에는 지부가 존재하지 않는다. 이는 행정 및 마법 연구 차원에서 분산 운용하는 것이 극히 비효율적이기 때문이다.
+    </p>
+
+    <h3 id="s-2-2">2.2. 복식 규범</h3>
+    <p>
+        대부분의 마탑에는 공식적으로 규정된 정복이 없다. 이는 마탑의 기원 자체가 엄격한 군사 조직이나 관료 집단이 아닌, 개인 연구자들의 자율적인 연합체에서 출발했기 때문이다.
+    </p>
+
+    <h3 id="s-2-3">2.3. 마탑 간 통신망</h3>
+    <p>
+        마탑 사이에는 원거리 통신 체계가 구축되어 있다. 서로 다른 마도체계를 채택하고 연구하는 타 마탑이라 할지라도 상호 간의 통신이 보편적으로 지원된다.
+    </p>
+
+    <h2 id="s-3">3. 입탑 시험</h2>
+    <p>
+        외부 인원이 마탑에 입탑하여 견습 마법사로 수련을 시작하기 위해서는 입탑 시험을 거쳐야 한다.
+    </p>
+
+    <h3 id="s-3-1">3.1. 시험 과목 및 방식</h3>
+    <ul>
+        <li><strong>필기시험:</strong> 응시자의 지적 소양을 검증하기 위해 논리력, 과학, 수학 과목을 평가한다. 각 마탑의 연구 분야에 따라 필요하다고 판단하는 과목이 추가되기도 한다.</li>
+        <li><strong>실기시험:</strong> 시험용 발광 마도구를 작동시키는 방식으로 치러진다. 응시자는 도면을 확인하고 마도구 내의 정확한 길을 통과시켜 작동시켜야 하며, 작동의 신속성과 정확도에 따라 발광 강도가 달라진다. 이를 통해 에테르를 다루는 의지력과 제어력 등을 확인한다.</li>
+        <li><strong>면접:</strong> 필기시험과 실기시험의 총점을 기준으로 면접 대상자를 선발하며, 면접과 총점 결과를 종합하여 최종 합격 여부가 결정된다.</li>
+    </ul>
+
+    <h3 id="s-3-2">3.2. 선발 및 과락 기준</h3>
+    <p>
+        대부분의 마탑 입탑 시험에는 과락 제도가 존재한다. 특정 과목에서 과락 기준 미달이 발생할 경우 다른 과목의 성적과 무관하게 불합격 처리된다.
+    </p>
+
+    <h2 id="s-4">4. 주요 업무 및 대외 활동</h2>
+
+    <h3 id="s-4-1">4.1. 연구 및 마도체계 유지보수</h3>
+    <ul>
+        <li><strong>체계 개정:</strong> 마탑의 고위 마법사들은 마도체계의 오류를 방지하고 최적화하기 위해 체계의 개편과 갱신 작업을 지속적으로 진행한다. 이에 따라 소속 마법사들은 개정된 체계를 심장에 반영하기 위해 주기적으로 마탑을 방문한다.</li>
+        <li><strong>마법 교육</strong></li>
+    </ul>
+
+    <h3 id="s-4-2">4.2. 마도구 제작 및 수리</h3>
+    <p>
+        마법적 기능을 지닌 <a href="aether_magic_tool.html" class="wiki-link">마도구</a>를 직접 연구 및 제작하여 판매한다.
+    </p>
+
+    <h3 id="s-4-3">4.3. 상업 및 대외 용역</h3>
+    <ul>
+        <li><strong>급행통신업:</strong> 마탑이 보유한 통신 설비를 이용한 급행 통신 업무를 시행한다. 이용 비용은 2,000프랫이다.</li>
+        <li><strong>마법사 고용:</strong> 외부 의뢰인의 요청에 따라 소속 마법사를 파견하는 고용 중개를 지원한다.</li>
+    </ul>
+
+    <h2 id="s-5">5. 역사</h2>
+    <p>
+        과거 개인 연구자 단위로 환경 변수를 분석하던 마법사 사회에서, 마도체계의 정착 이후 집단적인 연구와 학맥 공유의 필요성이 대두되었다. <a href="aether_calendar_era.html" class="wiki-link">제국력</a> 140년에서 142년경 마탑이라는 개념이 정립되었으며, 성공적인 마도체계를 완성한 마법사 집단들이 대륙 각지에 독자적인 마탑을 건립하기 시작하였다.
+    </p>
+
+    <h2 id="s-6">6. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_magic.html" class="wiki-link">마법</a></li>
+        <li><a href="aether_magic_system.html" class="wiki-link">마도체계</a></li>
+        <li><a href="aether_magic_tool.html" class="wiki-link">마도구</a></li>
+        <li><a href="aether_spire_imperial.html" class="wiki-link">프로미스 황실 마탑</a></li>
+        <li><a href="aether_spire_circumference.html" class="wiki-link">환결 마탑</a></li>
+        <li><a href="aether_spire_astre.html" class="wiki-link">아스트레 마탑</a></li>
+        <li><a href="aether_spire_incendium.html" class="wiki-link">인켄디움 마탑</a></li>
+        <li><a href="aether_spire_transmuto.html" class="wiki-link">트란스무토 마탑</a></li>
+        <li><a href="aether_spire_life.html" class="wiki-link">생명 마탑</a></li>
+        <li><a href="aether_spire_radian.html" class="wiki-link">라디안 마탑</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
