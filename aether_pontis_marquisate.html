@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>폰티스 후작령 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 테이블 */
+        .wiki-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0 20px 0;
+            font-size: 0.92rem;
+        }
+
+        .wiki-table th, .wiki-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        .wiki-table th {
+            background-color: var(--main-color);
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">폰티스 후작령</div>
+    <div class="wiki-date">최근 수정 시각: 999-09-17 18:20:11</div>
+
+    <div class="infobox">
+        <div class="infobox-title">폰티스 후작령</div>
+        <table class="infobox-table">
+            <tr>
+                <th>상징</th>
+                <td>칼끝이 아래를 향해 교차된 검</td>
+            </tr>
+            <tr>
+                <th>소속</th>
+                <td><a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a></td>
+            </tr>
+            <tr>
+                <th>위치</th>
+                <td>제국 동부 (<a href="aether_elle_river.html" class="wiki-link">엘르 강</a> 서안)</td>
+            </tr>
+            <tr>
+                <th>영주</th>
+                <td>후작 줄리안 폰티스</td>
+            </tr>
+            <tr>
+                <th>지배 가문</th>
+                <td>폰티스 가문</td>
+            </tr>
+            <tr>
+                <th>소속 기사단</th>
+                <td>불쇄검 기사단</td>
+            </tr>
+            <tr>
+                <th>기후</th>
+                <td>서안 해양성 기후</td>
+            </tr>
+            <tr>
+                <th>거주 종족</th>
+                <td>마족 제외 범인류종 전반</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 지리 및 환경</a>
+                <ul>
+                    <li><a href="#s-2-1">2.1. 위치 및 기후</a></li>
+                    <li><a href="#s-2-2">2.2. 방어 시설의 변모</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-3">3. 사회 및 산업</a></li>
+            <li><a href="#s-4">4. 폰티스 가문</a>
+                <ul>
+                    <li><a href="#s-4-1">4.1. 개요</a></li>
+                    <li><a href="#s-4-2">4.2. 가문 기예</a></li>
+                    <li><a href="#s-4-3">4.3. 가문 이능: 사선의 눈</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-5">5. 불쇄검 기사단</a>
+                <ul>
+                    <li><a href="#s-5-1">5.1. 개요 및 성격</a></li>
+                    <li><a href="#s-5-2">5.2. 무장 및 정복</a></li>
+                    <li><a href="#s-5-3">5.3. 편제 및 계급</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-6">6. 주요 직할지</a>
+                <ul>
+                    <li><a href="#s-6-1">6.1. 바스티오</a></li>
+                    <li><a href="#s-6-2">6.2. 폰티나</a></li>
+                    <li><a href="#s-6-3">6.3. 포뭄</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-7">7. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        <a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a>의 동쪽 국경에 위치한 후작령이다. 영주인 후작은 황제의 직속 봉신이다.
+    </p>
+    <p>
+        영지의 동쪽 경계선은 <a href="aether_rata_river.html" class="wiki-link">라타 강</a>과 합류하기 직전인 <a href="aether_elle_river.html" class="wiki-link">엘르 강</a>의 서안과 맞닿아 있으며, 강 건너편에 자리 잡은 여러 공국 및 왕국들과 활발한 교역을 진행한다.
+    </p>
+    <p>
+        본래 건국 초기에는 <a href="aether_infernum_demon_nation.html" class="wiki-link">인페르눔 마족국</a>의 침략을 저지하기 위한 거대한 군사 요새로서 설계된 영지였다. 그러나 인접한 동부 완충국들이 마족국의 위협을 전방에서 일차적으로 마주하고 있어, 폰티스 후작령 자체는 수백 년 동안 마족의 침공을 직접 체감하지 못한 채 장기간의 평화를 누려왔다.
+    </p>
+
+    <h2 id="s-2">2. 지리 및 환경</h2>
+
+    <h3 id="s-2-1">2.1. 위치 및 기후</h3>
+    <p>
+        온화한 서안 해양성 기후를 띤다. 마경 인근을 제외한 영지 대부분의 지역에서는 평범한 밀도와 성질의 에테르가 흐른다.
+    </p>
+
+    <h3 id="s-2-2">2.2. 방어 시설의 변모</h3>
+    <p>
+        과거 마족의 침략에 대비하여 견고하게 축조되었던 석조 방벽과 요새 시설들은 오랜 평화가 이어지면서 유지보수가 소홀해졌다.
+    </p>
+    <p>
+        현재에 이르러서는 군사 시설로서의 기능이 사실상 상실되었으며, 과거의 성벽과 보루들은 민간 상가나 주거지로 개조되거나 화려한 외관을 뽐내는 장식물처럼 변모하였다.
+    </p>
+
+    <h2 id="s-3">3. 사회 및 산업</h2>
+    <p>
+        마족을 제외한 다양한 <a href="aether_pan-human_species.html" class="wiki-link">범인류종</a>이 평범한 비율로 거주하고 있다.
+    </p>
+    <p>
+        영지의 주된 수익원은 강 건너 완충국들과 이어지는 대규모 하천 무역, 발달한 유흥가와 연회를 통한 향락 산업, 그리고 특산품인 양조업이다. 특히 사과를 원료로 한 시드르와 포도를 활용한 스파클링 와인 생산이 크게 발달해 있다.
+    </p>
+
+    <h2 id="s-4">4. 폰티스 가문</h2>
+
+    <h3 id="s-4-1">4.1. 개요</h3>
+    <p>
+        폰티스 후작령을 다스리는 제국의 후작 가문이다. 가문 구성원의 종족은 혼혈이 혼재하나 대부분 인간으로 구성되어 있다. 후작성은 영지 내 거점 도시인 폰티나에 자리 잡고 있으며, 현재 가주는 제24대 후작인 줄리안 폰티스이다.
+    </p>
+
+    <h3 id="s-4-2">4.2. 가문 기예</h3>
+    <p>
+        폰티스 가문의 가문 기예는 건국 초창기에 정립된 형태에서 개선도 개악도 없이 원형 그대로 보존되어 있다. 이는 기예의 완벽성 때문이라기보다는 후손들의 개편 의지가 결여된 결과에 가깝다.
+    </p>
+    <ul>
+        <li><strong>용사지검 심법:</strong> 가문의 고유 <a href="aether_qi.html" class="wiki-link">심법</a>이다. 제국 건국기 당시 초대 황제로 추존된 용사 프로미스가 인페르눔 마족국의 마왕을 베어 넘겼던 결정적인 일검을 심상으로 삼아 <a href="aether_qi.html" class="wiki-link">기</a>를 정제한다.</li>
+        <li><strong>무결검법:</strong> 롱소드를 다루는 극도로 정석적인 검술이다. 변칙이나 기교, 속임수를 철저히 배제하고 무기 본연의 구조적 특성을 극대화하였다. 두드러지는 특출난 장점은 없으나 뚜렷한 결점 또한 존재하지 않는 안정적인 검술 체계이다.</li>
+    </ul>
+
+    <h3 id="s-4-3">4.3. 가문 이능: 사선의 눈</h3>
+    <p>
+        초대 폰티스 후작 알릭스 폰티스의 혈통을 이은 후손에게 선천적으로 발현하는 고유 <a href="aether_special_ability.html" class="wiki-link">이능</a>이다. 폰티스 가문의 고유 능력이라는 사실과 대략적인 정보는 대외적으로도 널리 알려져 있다.
+    </p>
+    <ul>
+        <li><strong>발현 빈도:</strong> 현재는 직계와 방계를 통틀어 세대당 1명 정도의 극히 드문 빈도로만 나타난다.</li>
+        <li><strong>발동 조건:</strong> 시전자 본인의 내면에서 솟구치는 <em>"살고 싶다"</em>라는 절박한 의지를 기폭제로 삼아 발동한다. 능력이 가동되는 동안에는 동공이 선명한 붉은빛으로 발광한다.</li>
+        <li><strong>효과:</strong> 발동 순간 주변 존재들이 전개할 다음 공격 궤적과 치명적인 약점이 시각 정보로 관측된다. 또한 자신을 향하거나 주변에 머무는 타인들의 시선이 물리적인 궤적으로 가시화된다.</li>
+    </ul>
+
+    <h2 id="s-5">5. 불쇄검 기사단</h2>
+
+    <h3 id="s-5-1">5.1. 개요 및 성격</h3>
+    <p>
+        폰티스 가문이 설립하여 운용하는 기사단이다. 본부는 폰티나 중심구획 내 후작성의 화려한 정원과 맞닿은 자리에 위치한다. 과거 군사 요새 도시였던 바스티오에 두었던 거친 요새 본부는 버려진 지 오래다.
+    </p>
+    <p>
+        수백 년간 이어진 평화와 국경 방어의 해이로 인해, 현재는 최전방의 실전 전투 부대라기보다는 영주 일가의 신변 호위와 사교 연회 의장대의 성격이 강하게 굳어졌다. 단장은 로만 베일, 부단장은 바코 엑스가 맡고 있다.
+    </p>
+
+    <h3 id="s-5-2">5.2. 무장 및 정복</h3>
+    <ul>
+        <li><strong>주요 무장:</strong> 롱소드와 함께, 실전성보다는 화려한 외관 장식에 치중하여 경량화된 은빛 판금 갑옷을 착용한다.</li>
+        <li><strong>정복:</strong> 금실로 폰티스 후작령의 상징 문양이 수놓아진 순백색 제복, 붉은색 실크 망토, 장식용 보석이 박힌 검집과 허리띠로 치장된다.</li>
+    </ul>
+
+    <h3 id="s-5-3">5.3. 편제 및 계급</h3>
+    <p>
+        소속 기사의 수는 100명 내외로 타 기사단에 비해 규모가 작다. 대다수 기사가 5성의 벽을 넘지 못하고 하위 경지에 머물러 있으며, 기사단장조차 7성 입문에 간신히 도달한 수준이다.
+    </p>
+    <table class="wiki-table">
+        <tr>
+            <th>계급</th>
+            <th>해당 경지</th>
+            <th>인원 및 비고</th>
+        </tr>
+        <tr>
+            <td>견습기사</td>
+            <td>1성 ~ 3성</td>
+            <td>65명</td>
+        </tr>
+        <tr>
+            <td>정규기사</td>
+            <td>4성 ~ 5성</td>
+            <td>33명</td>
+        </tr>
+        <tr>
+            <td>부단장</td>
+            <td>6성 초입</td>
+            <td>1명 (바코 엑스)</td>
+        </tr>
+        <tr>
+            <td>기사단장</td>
+            <td>7성 입문</td>
+            <td>1명 (로만 베일)</td>
+        </tr>
+    </table>
+
+    <h2 id="s-6">6. 주요 직할지</h2>
+
+    <h3 id="s-6-1">6.1. 바스티오</h3>
+    <p>
+        영지의 중심부에서 <a href="aether_elle_river.html" class="wiki-link">엘르 강</a> 변에 인접해 있는 도시이다. 과거에는 동부 국경을 수호하던 육중한 군사 요새였으나, 현재는 성벽 내외로 대규모 시장과 유흥가가 결합된 거대 상업 도시로 탈바꿈하였다.
+    </p>
+    <ul>
+        <li><strong>수운 시설:</strong> 강변을 따라 대규모 하역장이 발달하여 타국과의 물류 교역을 도맡는다.</li>
+        <li><strong>마탑:</strong> 물질 변환과 연금학을 다루는 <a href="aether_spire_transmuto.html" class="wiki-link">트란스무토 마탑</a>이 위치해 있다. 과거에는 불쇄검 기사단의 본부 역시 이곳에 주둔했었다.</li>
+    </ul>
+
+    <h3 id="s-6-2">6.2. 폰티나</h3>
+    <p>
+        바스티오 북쪽에 인접하여, <a href="aether_elle_river.html" class="wiki-link">엘르 강</a>을 내려다보는 높은 절벽 위에 세워진 도시이다. 폰티스 후작성과 불쇄검 기사단 본부가 위치한다.
+    </p>
+    <ul>
+        <li><strong>외교 중심지:</strong> 과거 전쟁 지휘 사령부로 쓰이던 성채는 화려한 연회장과 대형 유리창, 정원으로 개조되어 타국 사절과 거상들을 접대하는 사교 및 외교의 중심 거점으로 기능한다.</li>
+        <li><strong>마탑:</strong> 생체 조직 배양 및 의료 기술을 연구하는 <a href="aether_spire_life.html" class="wiki-link">생명 마탑</a>이 도시 외곽에 위치해 있다.</li>
+    </ul>
+
+    <h3 id="s-6-3">6.3. 포뭄</h3>
+    <p>
+        바스티오 서쪽에 위치한 전원형 소도시이다. 시드르 제조용 사과와 양조용 포도를 대규모로 재배하며, 스파클링 와인과 시드르를 생산하는 전문 양조장 및 숙성용 지하 저장고가 밀집해 있다.
+    </p>
+
+    <h2 id="s-7">7. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a></li>
+        <li><a href="aether_spire_transmuto.html" class="wiki-link">트란스무토 마탑</a></li>
+        <li><a href="aether_spire_life.html" class="wiki-link">생명 마탑</a></li>
+        <li><a href="aether_infernum_demon_nation.html" class="wiki-link">인페르눔 마족국</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
