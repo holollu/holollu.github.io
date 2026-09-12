@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>황도 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">황도</div>
+    <div class="wiki-date">최근 수정 시각: 1000-01-01 10:12:30</div>
+
+    <div class="infobox">
+        <div class="infobox-title">황도</div>
+        <table class="infobox-table">
+            <tr>
+                <th>분류</th>
+                <td>제국 수도, 직할지</td>
+            </tr>
+            <tr>
+                <th>소속</th>
+                <td><a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a></td>
+            </tr>
+            <tr>
+                <th>위치</th>
+                <td>프로미스 제국 북서부</td>
+            </tr>
+            <tr>
+                <th>기후</th>
+                <td>서안 해양성 기후</td>
+            </tr>
+            <tr>
+                <th>거주 종족</th>
+                <td>마족 제외 <a href="aether_pan-human_species.html" class="wiki-link">범인류종</a> 전반</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 지리 및 환경</a></li>
+            <li><a href="#s-3">3. 성벽과 성문 체계</a></li>
+            <li><a href="#s-4">4. 도시 구획</a>
+                <ul>
+                    <li><a href="#s-4-1">4.1. 중심구획</a></li>
+                    <li><a href="#s-4-2">4.2. 제1 확장구획</a></li>
+                    <li><a href="#s-4-3">4.3. 제2 확장구획</a></li>
+                    <li><a href="#s-4-4">4.4. 제3 확장구획</a></li>
+                    <li><a href="#s-4-5">4.5. 성외구획</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-5">5. 주요 시설 및 명소</a></li>
+            <li><a href="#s-6">6. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        <a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a>의 북서쪽에 위치한 최대 규모의 중심 도시이자 제국의 수도이다.
+    </p>
+    <p>
+        도로망과 <a href="aether_underground_waterway.html" class="wiki-link">지하수로</a>를 비롯한 기반시설이 체계적으로 구축되어 있어 비교적 쾌적한 위생 상태를 갖추고 있다. 제국 정부 차원에서 치안 유지를 위해 많은 투자를 이어오고 있으나, 막대한 상주 인구와 유동 인구가 상시 밀집해 있어 실제 치안 수준은 일반적인 도시보다 약간 나은 편에 머무른다. 또한 지방에 비해 전반적인 물가가 다소 높게 형성되어 있다.
+    </p>
+
+    <h2 id="s-2">2. 지리 및 환경</h2>
+    <ul>
+        <li><strong>기후:</strong> 온화한 서안 해양성 기후를 띤다.</li>
+        <li><strong>수계:</strong> 북동부 언덕에서 발원한 하천인 <a href="aether_arba_river.html" class="wiki-link">아르바 강</a>이 중심구획을 포함한 황도 내부를 북동쪽에서 남서쪽으로 관통하여 흐른다. 강 폭은 다소 좁은 편이나 정비가 완비되어 범람 위험이 낮으며, 도시 상하수도 체계와 생활용수 공급의 핵심 역할을 담당한다.</li>
+        <li><strong>인구 구성:</strong> 마족을 제외한 다양한 범인류종이 평범한 비율로 거주한다.</li>
+    </ul>
+
+    <h2 id="s-3">3. 성벽과 성문 체계</h2>
+    <p>
+        도시의 방어선과 경계는 과거로부터 시가지가 외곽으로 확장되는 과정에서 축조된 다중 성벽으로 나뉜다.
+    </p>
+    <ul>
+        <li><strong>외성:</strong> 도시 최외곽을 감싸는 성벽이다. 성문은 동쪽에 2개, 남쪽에 2개, 북쪽에 1개, 서쪽에 1개로 총 6개가 설치되어 있다.</li>
+        <li><strong>내성:</strong> 중심부 시가지 확장에 따라 자연스럽게 보존된 3겹의 내성이 남아 있다. 각 내성마다 사방 방위별로 4개씩, 총 12개의 내성문이 유지되고 있다.</li>
+    </ul>
+
+    <h2 id="s-4">4. 도시 구획</h2>
+    <p>
+        황도의 구획은 겹겹이 배치된 성벽을 경계선으로 삼아 나뉜다.
+    </p>
+
+    <h3 id="s-4-1">4.1. 중심구획</h3>
+    <p>
+        가장 중심지에 자리 잡은 핵심 구역이다. 제국의 정치 중심인 황궁이 위치하며, 귀족 계층과 부유한 대형 상인들이 주로 거주하고 고급 상가를 운영한다.
+    </p>
+
+    <h3 id="s-4-2">4.2. 제1 확장구획</h3>
+    <p>
+        첫 번째 내성과 두 번째 내성 사이에 형성된 구역이다. 귀족과 기사, 의사, 약사, 마법사 등 전문직 종사자들이 주로 거주하며 상인들의 주거지와 상가가 자리 잡고 있다.
+    </p>
+
+    <h3 id="s-4-3">4.3. 제2 확장구획</h3>
+    <p>
+        두 번째 내성과 세 번째 내성 사이에 형성된 구역이다. 서민과 중산층이 주로 생활하는 생활 구역으로, 시장과 소비재 점포, 선술집 등이 밀집해 있다.
+    </p>
+
+    <h3 id="s-4-4">4.4. 제3 확장구획</h3>
+    <p>
+        세 번째 내성과 도시 최외곽 외성 사이에 위치한 구역이다. 도시 빈민과 단순 노동자들이 주로 거주하며 대장간, 저가 여관, 유흥가 등이 집중되어 있다.
+    </p>
+
+    <h3 id="s-4-5">4.5. 성외구획</h3>
+    <p>
+        외성 성벽 바깥에 형성된 구역이다. 성외 농민, 극빈층, 부랑자들이 머물며, 벽돌 공장과 초대형 가축 시장 등이 운영된다.
+    </p>
+
+    <h2 id="s-5">5. 주요 시설 및 명소</h2>
+    <ul>
+        <li><strong>황궁:</strong> 중심구획의 중심부에 위치하며 정문은 동쪽을 향하고 있다.</li>
+        <li><strong>프로미스 수호 공원:</strong> 중심구획 내부, 첫 번째 내성의 남문 앞에 조성된 역사적인 공원이다. 건국기부터 유지되어 온 유서 깊은 장소이다.</li>
+        <li><strong>용사상:</strong> 프로미스 수호 공원 중앙에 건립된 동상이다. 제국의 초대 황제로 추존된 용사 프로미스를 기리는 4미터 크기의 전신상으로, 두 발을 어깨너비로 벌리고 곧게 서서 양손으로 검 자루를 잡고 검끝을 기단에 깊숙이 박아 넣은 자세를 취하고 있다.</li>
+        <li><strong><a href="aether_spire_imperial.html" class="wiki-link">프로미스 황실 마탑</a>:</strong> 중심구획 내 황궁의 동남쪽에 인접해 있다.</li>
+        <li><strong>황실기사단 본부:</strong> 중심구획 내 황궁의 동북쪽에 인접해 있다. 황궁 경비와 감찰, 수도 방위를 총괄하는 황실기사단의 지휘부이다.</li>
+        <li><strong><a href="aether_spire_incendium.html" class="wiki-link">인켄디움 마탑</a>:</strong> 제1 확장구획의 북서쪽 외곽에 위치한 화염 계열 특화 마탑이다.</li>
+        <li><strong>모험가 길드 황도 지부:</strong> 제3 확장구획 내부, 남쪽 외성 성문과 동쪽 외성 성문으로 통하는 도로가 만나는 교차로에서 운영된다. 3층 규모의 건물로, 1층은 접수 창구와 의뢰 게시판이 위치하며 2층과 3층은 숙소로 운영된다.</li>
+    </ul>
+
+    <h2 id="s-6">6. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a></li>
+        <li><a href="aether_arba_river.html" class="wiki-link">아르바 강</a></li>
+        <li><a href="aether_spire_imperial.html" class="wiki-link">프로미스 황실 마탑</a></li>
+        <li><a href="aether_spire_incendium.html" class="wiki-link">인켄디움 마탑</a></li>
+        <li><a href="aether_foundation_festival.html" class="wiki-link">건국제</a></li>
+        <li><a href="aether_underground_waterway.html" class="wiki-link">지하수로</a></li>
+        <li><a href="aether_adventurers_guild.html" class="wiki-link">모험가 길드</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
