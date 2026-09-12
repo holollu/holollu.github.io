@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수트라 산맥 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">수트라 산맥</div>
+    <div class="wiki-date">최근 수정 시각: 998-11-04 13:22:40</div>
+
+    <div class="infobox">
+        <div class="infobox-title">수트라 산맥</div>
+        <table class="infobox-table">
+            <tr>
+                <th>분류</th>
+                <td>대형 마경, 산맥</td>
+            </tr>
+            <tr>
+                <th>위치</th>
+                <td>대륙 중남부 ~ 북동부</td>
+            </tr>
+            <tr>
+                <th>지배적 에테르</th>
+                <td>고산 성질 (눈, 바위, 바람 등)</td>
+            </tr>
+            <tr>
+                <th>최고봉</th>
+                <td>수트라 산</td>
+            </tr>
+            <tr>
+                <th>군주격 괴수</th>
+                <td>만겁호</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 지리 및 환경</a>
+                <ul>
+                    <li><a href="#s-2-1">2.1. 지형 및 위치</a></li>
+                    <li><a href="#s-2-2">2.2. 고도별 변질화 위험선</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-3">3. 생태 및 괴수</a></li>
+            <li><a href="#s-4">4. 군주격 괴수: 만겁호</a>
+                <ul>
+                    <li><a href="#s-4-1">4.1. 외형 및 규격</a></li>
+                    <li><a href="#s-4-2">4.2. 무력 및 특수 능력</a></li>
+                    <li><a href="#s-4-3">4.3. 성향</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-5">5. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        대륙에서 가장 높고 넓은 산맥이자 대형 마경을 일컫는 말이다. 눈, 바위, 바람 등을 포괄하는 고산 성질의 <a href="aether_aether.html" class="wiki-link">에테르</a>가 짙게 밀집해 있으며, 수트라 산맥에서 가장 높은 산은 수트라 산이다.
+    </p>
+
+    <h2 id="s-2">2. 지리 및 환경</h2>
+
+    <h3 id="s-2-1">2.1. 지형 및 위치</h3>
+    <p>
+        대륙 중남쪽에서 북동쪽으로 길게 이어져 있다. 고도가 높은 구역에는 상시 만년설이 쌓여 있다.
+    </p>
+    <ul>
+        <li><strong>수계:</strong> 거대한 강인 <a href="aether_rata_river.html" class="wiki-link">라타 강</a>이 수트라 산맥에서 발원하여 서쪽의 외해로 흘러간다.</li>
+        <li><strong>기후 경계:</strong> <a href="aether_ezed_desert.html" class="wiki-link">에제드 대사막</a>의 경우, 수트라 산맥의 서쪽에서는 사막이 더 북쪽까지 확장되어 펼쳐지나 수트라 산맥의 동쪽에는 사막이 존재하지 않는다.</li>
+    </ul>
+
+    <h3 id="s-2-2">2.2. 고도별 변질화 위험선</h3>
+    <p>
+        수트라 산맥은 외곽의 에테르 밀도가 낮고 고도가 높아질수록 에테르 밀도가 점진적으로 높아지는 구조를 띤다. 이에 따라 고도에 따라 요구되는 <a href="aether_level.html" class="wiki-link">경지</a>의 변질화 위험 기준이 상이하다.
+    </p>
+    <ul>
+        <li><strong>외곽:</strong> 에테르 밀도가 낮아 <a href="aether_pan-human_species.html" class="wiki-link">범인류종</a> 일반인조차 변질화 위험성이 낮다.</li>
+        <li><strong>중턱:</strong> 3성 미만의 무인 혹은 3서클 미만의 마법사는 변질화 위험성이 크다.</li>
+        <li><strong>봉우리 인근:</strong> 6성 미만 혹은 6서클 미만 경지의 인물은 변질화 위험성이 크다.</li>
+        <li><strong>수트라 산 인근:</strong> 최고봉인 수트라 산 주변은 6성 극한 미만 혹은 6서클 극한 미만 경지의 인물에게 변질화 위험성이 크다.</li>
+    </ul>
+
+    <h2 id="s-3">3. 생태 및 괴수</h2>
+    <p>
+        산맥의 고도에 따라 서식 생태계의 구성이 뚜렷하게 나뉜다.
+    </p>
+    <ul>
+        <li><strong>외곽 생태:</strong> <a href="aether_monster.html" class="wiki-link">괴수</a>보다 평범한 야생 동물이 더 많이 서식하며, 출몰하는 괴수 중에서는 오러형 괴수의 비율이 더 높다.</li>
+        <li><strong>중턱 이상 생태:</strong> 중턱에 들어서면서부터는 변질형 괴수가 서식 개체의 대부분을 차지한다.</li>
+        <li><strong>무력 수준:</strong> 산맥 내 괴수들은 대부분 1성급에서 6성급 사이의 무력을 지닌다.</li>
+    </ul>
+
+    <h2 id="s-4">4. 군주격 괴수: 만겁호</h2>
+    <p>
+        수트라 산맥의 군주격 괴수이다. 다만 산맥 내부의 다른 괴수들을 통솔하거나 관리하지는 않는다. 분류상 변질형 괴수에 속한다.
+    </p>
+
+    <h3 id="s-4-1">4.1. 외형 및 규격</h3>
+    <ul>
+        <li><strong>외형:</strong> 푸른 눈을 지닌 거대한 백호의 형상을 띤다.</li>
+        <li><strong>어깨 높이:</strong> 11m</li>
+        <li><strong>몸길이:</strong> 꼬리를 제외하고 28m</li>
+    </ul>
+
+    <h3 id="s-4-2">4.2. 무력 및 특수 능력</h3>
+    <p>
+        10성 후반의 <a href="aether_aura.html" class="wiki-link">오러</a>를 보유하고 있다. 축적된 오러와 변질화로 획득한 특수 능력을 합산한 최종 무력은 10성 극한급에 달한다.
+    </p>
+    <ul>
+        <li><strong>지능:</strong> 높은 지능과 이성을 갖추고 있다.</li>
+        <li><strong>신출귀몰:</strong> 시선을 놓치는 즉시 완전한 은신 상태로 전환할 수 있다.</li>
+        <li><strong>귀왕:</strong> 만겁호가 지배하는 영역 내에서 사망한 혼은 즉시 자동으로 복속된다. 복속된 혼은 산맥 인근에서 <a href="aether_rest_religion.html" class="wiki-link">안식교</a> 사제가 발견될 경우 그 사제에게 넘겨준다.</li>
+    </ul>
+
+    <h3 id="s-4-3">4.3. 성향</h3>
+    <p>
+        대체로 세상만사에 무관심한 태도를 취한다. 종종 실수로 수트라 산맥에 잘못 들어온 사람을 안전한 길로 직접 안내하여 내보내기도 한다.
+    </p>
+
+    <h2 id="s-5">5. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_aether.html" class="wiki-link">에테르</a></li>
+        <li><a href="aether_monster.html" class="wiki-link">괴수</a></li>
+        <li><a href="aether_rata_river.html" class="wiki-link">라타 강</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
