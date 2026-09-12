@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>범인류종 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        h4 {
+            margin-top: 20px;
+            color: #444;
+            font-weight: 700;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">범인류종</div>
+    <div class="wiki-date">최근 수정 시각: 973-4-1 18:22:11</div>
+
+    <div class="infobox">
+        <div class="infobox-title">범인류종</div>
+        <table class="infobox-table">
+            <tr>
+                <th>분류</th>
+                <td>지성체 분류군</td>
+            </tr>
+            <tr>
+                <th>기원</th>
+                <td>비정제 에테르에 의한 세대적 변질</td>
+            </tr>
+            <tr>
+                <th>상호 교배</th>
+                <td>허용 (혼혈 가능)</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 분화 및 생물학적 특징</a></li>
+            <li><a href="#s-3">3. 대표 종족</a>
+                <ul>
+                    <li><a href="#s-3-1">3.1. 인간</a></li>
+                    <li><a href="#s-3-2">3.2. 엘프</a>
+                        <ul>
+                            <li><a href="#s-3-2-1">3.2.1. 빙하수 엘프</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#s-3-3">3.3. 수인</a></li>
+                    <li><a href="#s-3-4">3.4. 드워프</a></li>
+                    <li><a href="#s-3-5">3.5. 마족</a>
+                        <ul>
+                            <li><a href="#s-3-5-1">3.5.1. 악마</a></li>
+                            <li><a href="#s-3-5-2">3.5.2. 흡정족</a></li>
+                            <li><a href="#s-3-5-3">3.5.3. 흡혈족</a></li>
+                            <li><a href="#s-3-5-4">3.5.4. 타이탄</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="#s-4">4. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        언어와 문자, 고유한 사회 구조와 문명을 형성하고 향유할 수 있는 지성 종족의 총칭이다.
+    </p>
+    <p>
+        본래 단일했던 인간 집단이 다양한 성질을 지닌 비정제 <a href="aether_aether.html" class="wiki-link">에테르</a>의 영향을 받아 세대를 거쳐 변질되면서 분화된 결과물이다. 대륙의 주류 문명을 이루는 대표 종족들 외에도 각지에 소수 범인류종이 잔존해 있으며, 종족별로 정의되는 신체적·정신적 특징은 절대적인 것이 아니어서 개체마다 편차가 존재한다.
+    </p>
+
+    <h2 id="s-2">2. 분화 및 생물학적 특징</h2>
+    <ul>
+        <li><strong>상호 교배와 혼혈:</strong> 범인류종 범주에 속하는 종족 간에는 상호 교배가 가능하며 혼혈의 발생이 온전히 허용된다.</li>
+        <li><strong>분화의 메커니즘:</strong> 범인류종의 종족 분화는 <a href="aether_special_ability.html" class="wiki-link">이능</a>의 발현과 달리, 다수의 개체가 수 세대에 걸쳐 서서히 누적된 변질화를 겪으며 유전적으로 정착된 것이다.</li>
+    </ul>
+
+    <h2 id="s-3">3. 대표 종족</h2>
+
+    <h3 id="s-3-1">3.1. 인간</h3>
+    <p>
+        범인류종 전체 인구 중 과반수를 차지하며 가장 높은 비율을 점유하고 있는 종족이다.
+    </p>
+    <ul>
+        <li><strong>주요 특징:</strong> 끊임없는 욕망을 지니고 있다.</li>
+        <li><strong>수명:</strong> 70세에서 90세 내외이다.</li>
+    </ul>
+
+    <h3 id="s-3-2">3.2. 엘프</h3>
+    <p>
+        생명 성질의 에테르에 의해 변질되어 분화된 장생종이다.
+    </p>
+    <ul>
+        <li><strong>외형:</strong> 뾰족한 귀와 수려하고 빼어난 외모를 지닌다.</li>
+        <li><strong>주요 특징:</strong> 긴 수명과 미형의 외모가 두드러진다.</li>
+        <li><strong>수명:</strong> 160세에서 200세 내외이다.</li>
+    </ul>
+
+    <h4 id="s-3-2-1">3.2.1. 빙하수 엘프</h4>
+    <p>
+        엘프의 대표적인 아종이다. <a href="aether_world_tree_forest.html" class="wiki-link">세계수림</a>을 통과하여 흘러나온 <a href="aether_rata_river.html" class="wiki-link">라타 강</a> 하류 인근의 생음 성질 에테르에 노출되어 추가적인 변질을 겪으며 분화하였다.
+    </p>
+    <ul>
+        <li><strong>외형:</strong> 잡티 없이 맑은 피부와 우아하고 유연한 체형을 지닌다.</li>
+        <li><strong>주요 특징:</strong> 장생과 미형의 특성을 공유하며, 침착하고 차분한 성향을 보인다.</li>
+        <li><strong>수명:</strong> 일반 엘프와 동일하게 160세에서 200세 내외이다.</li>
+        <li><strong>주요 거주지:</strong> <a href="aether_seges_duchy.html" class="wiki-link">세제스 공작령</a>에 대대로 터를 잡고 살아온 토박이들의 주류 종족을 이룬다.</li>
+    </ul>
+
+    <h3 id="s-3-3">3.3. 수인</h3>
+    <p>
+        야생 성질의 에테르에 의해 변질되어 동물의 형질을 지니게 된 범인류종의 총칭이다. 늑대, 곰, 호랑이, 사슴, 쥐, 수리 등 다양한 동물의 특성을 지닌 계통이 존재한다.
+    </p>
+    <ul>
+        <li><strong>외형적 편차:</strong> 귀나 꼬리 정도만 동물적인 형태를 띠고 인간의 귀를 함께 지닌 온건한 외형부터, 전신이 털로 뒤덮이거나 짐승의 역관절 골격을 지닌 형태, 발정기를 겪는 형태에 이르기까지 개체별 외형 편차가 다양하다.</li>
+        <li><strong>주요 특징:</strong> 강한 생존욕을 보인다. 다만 이 생존에 대한 본능적 욕구가 충족되면 그 이상으로 거대한 야망이나 욕망을 품지 않는 성향을 보인다. 동물의 종류에 따른 신체 능력과 감각을 나타낸다.</li>
+        <li><strong>수명:</strong> 70세에서 90세 내외이다.</li>
+    </ul>
+
+    <h3 id="s-3-4">3.4. 드워프</h3>
+    <p>
+        대지 성질의 에테르에 의해 변질되어 형성된 단신의 종족이다.
+    </p>
+    <ul>
+        <li><strong>남성 외형:</strong> 풍성하고 길게 자라는 수염을 지니며 두꺼운 체형을 띤다. 성인 남성의 평균 신장은 145cm이다.</li>
+        <li><strong>여성 외형:</strong> 수염이 나지 않으며, 일반적인 인간 여성의 체형에서 키만 줄어든 형태를 띤다. 성인 여성의 평균 신장은 135cm이다.</li>
+        <li><strong>주요 특징:</strong> 체형 대비 극히 높은 신체 밀도와 근력을 보유하고 있으며, 정밀한 가공과 세공, 대장 기술 등 뛰어난 손재주를 발휘한다.</li>
+        <li><strong>수명:</strong> 90세에서 120세 내외이다.</li>
+    </ul>
+
+    <h3 id="s-3-5">3.5. 마족</h3>
+    <p>
+        다중 마경 <a href="aether_inferna.html" class="wiki-link">인페르나</a>에서 뿜어져 나오는 마귀 성질 등의 에테르에 영향을 받아 분화된 종족들의 총칭이다.
+    </p>
+    <ul>
+        <li><strong>사회적 성향:</strong> 마족이 아닌 타 범인류종에 대해 기본적으로 적대적인 태도를 취한다. 다만 이 적대감이 절대적인 것은 아니다.</li>
+        <li><strong>유대감:</strong> 마족은 동족 간, 심지어 혈육 사이에서도 연대 의식과 유대감이 지극히 희미하다.</li>
+        <li><strong>기타:</strong> 대표적인 네 갈래 외에도 소수 계통의 마족이 존재한다.</li>
+    </ul>
+
+    <h4 id="s-3-5-1">3.5.1. 악마</h4>
+    <p>
+        인페르나 최심부에 자리한 초거대 마경 말리티아의 마귀 성질 에테르에 직접적인 영향을 받아 형성된 종족이다.
+    </p>
+    <ul>
+        <li><strong>외형:</strong> 머리의 뿔, 검은 공막과 흰 홍채를 지닌 역안, 등 뒤의 피막 날개, 삼지창 형태의 꼬리, 뾰족한 귀를 지닌다.</li>
+        <li><strong>주요 특징:</strong> 무력과 힘에 대한 극단적인 욕망을 품고 있으며 오만한 성향을 띤다. <a href="aether_infernum_demon_nation.html" class="wiki-link">인페르눔 마족국</a>의 지배자인 마왕은 대부분 이 악마 종족에서 배출된다.</li>
+        <li><strong>수명:</strong> 80세에서 100세 내외이다.</li>
+    </ul>
+
+    <h4 id="s-3-5-2">3.5.2. 흡정족</h4>
+    <p>
+        번식 성질과 마귀 성질의 에테르에 의해 변질된 종족으로, 서큐버스나 인큐버스로도 불린다.
+    </p>
+    <ul>
+        <li><strong>외형:</strong> 뿔과 날개, 삼지창 모양의 꼬리를 지니며 빼어난 미형의 외모를 가진다.</li>
+        <li><strong>정기 흡수:</strong> 성관계를 통해 타인의 정기를 흡수하여 생존하고 무력의 힘을 획득한다. 일반적인 음식 섭취로 성관계를 대체하는 것도 가능은 하지만, 극히 비효율적이기에 대다수는 선택하지 않는다.</li>
+        <li><strong>생식 제어:</strong> 스스로 임신을 제어할 수 있다. 같은 흡정족이 아니라면 타 종족의 아이를 임신하거나 임신시키는 행위를 선호하지 않는다.</li>
+        <li><strong>외형적 노화 정지:</strong> 20대에 들어서는 순간 외형적인 노화가 완전히 정지한다. 다만 겉모습만 멈출 뿐 전반적인 신체 능력은 나이가 듦에 따라 서서히 감소한다. 예외적으로 자궁, 난소, 유방, 성기 등 잉태 및 생식과 관련된 기관의 신체 기능은 감소하지 않고 유지된다.</li>
+        <li><strong>수명:</strong> 70세에서 90세 내외이다.</li>
+    </ul>
+
+    <h4 id="s-3-5-3">3.5.3. 흡혈족</h4>
+    <p>
+        피 성질과 마귀 성질의 에테르에 의해 변질된 종족이다.
+    </p>
+    <ul>
+        <li><strong>외형:</strong> 창백한 피부와 뾰족한 송곳니, 날렵한 체형, 붉은 눈을 지닌다.</li>
+        <li><strong>주요 특징:</strong> 타인의 혈액을 흡수하여 생존하고 힘을 얻는 흡혈욕을 지닌다. 음식물 섭취로 혈액을 대신할 수 있으나 비효율적이어서 거의 쓰이지 않는다. 박쥐화 능력을 발휘한다.</li>
+        <li><strong>수명:</strong> 80세에서 100세 내외이다.</li>
+    </ul>
+
+    <h4 id="s-3-5-4">3.5.4. 타이탄</h4>
+    <p>
+        거대 성질과 마귀 성질의 에테르에 의해 변질된 거구의 마족이다.
+    </p>
+    <ul>
+        <li><strong>외형:</strong> 일반적인 인간의 3배에 달하는 거대한 체구를 지니며, 대머리에 육중한 근육질 외형을 띤다.</li>
+        <li><strong>주요 특징:</strong> 체구에 비례하는 압도적인 신체 능력과 막대한 음식 섭취량을 보인다. 반면 지능은 낮다.</li>
+        <li><strong>수명:</strong> 50세에서 60세 내외이다.</li>
+    </ul>
+
+    <h2 id="s-4">4. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_aether.html" class="wiki-link">에테르</a></li>
+        <li><a href="aether_society.html" class="wiki-link">사회</a></li>
+        <li><a href="aether_inferna.html" class="wiki-link">인페르나</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
