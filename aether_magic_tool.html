@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마도구 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 테이블 */
+        .wiki-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0 20px 0;
+            font-size: 0.92rem;
+        }
+
+        .wiki-table th, .wiki-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        .wiki-table th {
+            background-color: var(--main-color);
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">마도구</div>
+    <div class="wiki-date">최근 수정 시각: 999-10-14 11:20:04</div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 제작 및 구현 특성</a></li>
+            <li><a href="#s-3">3. 동력원 체계</a>
+                <ul>
+                    <li><a href="#s-3-1">3.1. 동력원의 인공 결정 배제</a></li>
+                    <li><a href="#s-3-2">3.2. 대표적인 동력원 분류</a></li>
+                    <li><a href="#s-3-3">3.3. 성질 변화를 통한 동력원 배제</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-4">4. 동력원별 상대 가격</a></li>
+            <li><a href="#s-5">5. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        물질이 <a href="aether_aether.html" class="wiki-link">에테르</a>로 인해 변질된 가공물 또는 자연물을 통칭한다.
+    </p>
+    <p>
+        고밀도의 에테르가 밀집한 마경에서 자연적으로 발생하기도 하며, 마법사나 숙련급 이상의 기술자가 인위적으로 제작하기도 한다. 모든 제작 공정이 수작업 방식으로 이루어지기 때문에 가격대가 높아 서민 계층은 접하기 힘들다.
+    </p>
+    <p>
+        형태나 분야에 따라 다양한 명칭으로 불린다. 일반적으로는 마도구나 아티팩트라 통칭되며, 검의 형태를 띠고 있을 때는 마검, 종교 계열의 교단이나 신앙과 결합했을 때는 성물로 불린다.
+    </p>
+
+    <h2 id="s-2">2. 제작 및 구현 특성</h2>
+    <p>
+        제작자의 역량과 설계에 따라 상상하는 대다수의 기능을 구현할 수 있으나, 현실의 물리적 법칙을 비틀어 왜곡할수록 제작 난이도가 급격히 상승한다.
+    </p>
+    <ul>
+        <li><strong>현실 왜곡의 한계:</strong> 순간 이동 장치와 같이 현실을 극단적으로 비틀어야 하는 물건은 구현이 사실상 불가능하다.</li>
+        <li><strong>가격 형성:</strong> 현실 법칙에서 멀어지고 이를 비트는 구조일수록 제작 비용과 거래 가격은 기하급수적으로 폭등한다.</li>
+        <li><strong>제작자 구분에 따른 차이:</strong> 마법사가 아닌 일반 마도구 제작자는 복잡한 효과나 다채로운 간섭을 일으키는 마도구를 만들 수 없으며, 물질의 물리적 성질 자체를 영구히 변화시키는 방식을 활용한다. 복잡한 술식이나 다단계 발현을 지닌 마도구의 설계는 마법사의 영역에 속한다.</li>
+        <li><strong>제작 기술 수준:</strong> 마도구를 제작하는 기술자들의 숙련도는 견습급부터 신장급에 이르는 단계로 구분된다. 세부 기준은 <a href="aether_level.html" class="wiki-link">경지</a> 문서를 참고한다.</li>
+    </ul>
+
+    <h2 id="s-3">3. 동력원 체계</h2>
+
+    <h3 id="s-3-1">3.1. 동력원의 인공 결정 배제</h3>
+    <p>
+        마도구를 지속적 혹은 순간적으로 가동하기 위해 에너지가 필요하더라도, 에테르를 인위적으로 고밀도 압축시킨 마석이나 에테르석과 같은 결정체는 사용되지 않는다. 이러한 결정화 물질은 자연 상태에서 존재하지 않을 뿐더러, 인위적으로 생성하더라도 폭발이나 급격한 변질화를 초래하여 과도하게 위험한 것으로 취급되기 때문이다.
+    </p>
+    <p>
+        이에 따라 마도구 제작자들은 네 가지 대표적인 동력 공급 방식 중 하나 또는 여럿을 채택하여 설계한다.
+    </p>
+
+    <h3 id="s-3-2">3.2. 대표적인 동력원 분류</h3>
+    <ul>
+        <li><strong>주변의 에테르로 즉시 발동:</strong> 사용할 때마다 사용자가 자신의 <a href="aether_aether.html" class="wiki-link">의지권역</a> 내에 존재하는 주변 에테르에게 <em>"해당 마도구에 주입한다"</em>는 의지를 전달하고, 그 에테르를 즉각 소모하여 효과를 발현시키는 방식이다. 에테르계 에너지를 다루지 못하는 비사용자도 의지 전달을 통해 행할 수는 있으나, 에테르계 에너지 사용자가 훨씬 쉽게 다루는 경향이 있다. 에테르를 기기 내부에 저장해 둘 수는 없으며, 수용 한계를 초과하는 에테르를 무리하게 주입할 경우 마도구가 파손되기도 한다. 가장 저렴하고 쉽게 제작할 수 있는 형태이다.</li>
+        <li><strong>사용자의 에테르계 에너지로 즉시 발동:</strong> 작동 순간 사용자가 체내에 갈무리해 둔 <a href="aether_mana.html" class="wiki-link">마나</a>, <a href="aether_aura.html" class="wiki-link">오러</a>, <a href="aether_qi.html" class="wiki-link">기</a> 등의 정제 에너지를 직접 마도구에 주입하여 현상을 일으키는 방식이다. 에너지를 체외로 방출하는 데 제약이 있는 오러 사용자는 에너지 주입 과정을 어려워하는 경향을 보인다. 에너지를 마도구에 사전에 저장할 수는 없으나, 주변 에테르를 즉석에서 모으는 방식에 비해 더 빠른 시전 속도와 강력한 위력을 낼 수 있다. 특정 정제 에너지에만 반응하도록 특화된 마도구도 존재한다.</li>
+        <li><strong>주변 에너지 흡수:</strong> 외부 환경으로부터 진동, 빛, 열기, 바람, 자연 에테르 등의 자연적 에너지를 상시 흡수하여 동력으로 치환하는 방식이다. 기기 자체의 에너지 효율이 뛰어나거나, 사용처 주변에 해당 환경 에너지가 풍부하게 유지되어야 온전한 작동이 보장된다.</li>
+        <li><strong>에테르 저장 장치 구현:</strong> 마도구 내부에 순환형 패턴 회로를 직접 구축하여 에테르를 안정적으로 담아두는 방식이다. 초고가의 마도구에 한하여 드물게 구현된다.
+            <ul>
+                <li><strong>안전장치 구축:</strong> 마도구가 파손될 때 내부의 순환 패턴을 천천히 해체하여 주변에 변질화를 일으키지 않도록 방지하는 안전장치가 기본으로 내장된다. 저장 장치 자체의 제작 단가가 워낙 높고 값비싼 소재를 필요로 하며 마법사 입장에서는 안전장치를 덧대는 공정 부담이 크지 않아 사실상 기본 사양으로 함께 제작된다.</li>
+                <li><strong>에테르 충전 방식:</strong> 저장 장치에 에테르를 채워 넣을 때는 사용자가 의지권역 내 에테르에게 마도구로 주입하라는 의지를 전달하는 방식을 사용한다. 비사용자도 수행할 수 있으나 에테르계 에너지 사용자가 더욱 수월하게 다룬다.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3 id="s-3-3">3.3. 성질 변화를 통한 동력원 배제</h3>
+    <p>
+        별도의 외부 에너지를 계속해서 공급받는 대신, 물질 자체의 원자 배열이나 물리적 특성을 영구히 개조하여 동력 공급의 필요성 자체를 없애는 방식이다.
+    </p>
+    <p>
+        일정한 충격을 분산하거나 자체 내구성을 상시 강화하는 등의 효과에서 주로 활용되며, 비마법사 출신의 숙련급 이상 제작자들도 널리 활용하는 형태이다.
+    </p>
+
+    <h2 id="s-4">4. 동력원별 상대 가격</h2>
+    <p>
+        동일한 외형과 동일한 마법적 효과를 지닌 마도구라 할지라도, 어떤 동력원 설계를 채택했는가에 따라 최종 가격에서 뚜렷한 격차가 발생한다.
+    </p>
+    <table class="wiki-table">
+        <tr>
+            <th>적용 동력원 방식</th>
+            <th>상대 가격 비율</th>
+            <th>비고</th>
+        </tr>
+        <tr>
+            <td>주변의 에테르</td>
+            <td>1.0</td>
+            <td>기준 가격. 가장 저렴하고 보편적인 방식</td>
+        </tr>
+        <tr>
+            <td>사용자의 에테르계 에너지</td>
+            <td>1.1</td>
+            <td>즉발 화력 및 반응성 향상</td>
+        </tr>
+        <tr>
+            <td>'사용자의 에테르계 에너지' 및 '주변의 에테르' 동시</td>
+            <td>1.15</td>
+            <td>두 방식의 복합 운용 가능</td>
+        </tr>
+        <tr>
+            <td>주변의 에너지 흡수</td>
+            <td>1.5</td>
+            <td>자연 환경 에너지 상시 치환</td>
+        </tr>
+        <tr>
+            <td>'주변의 에너지 흡수' 및 '주변의 에테르' 동시</td>
+            <td>1.6</td>
+            <td>환경 에너지 및 주변 에테르 병행 활용</td>
+        </tr>
+        <tr>
+            <td>에테르 저장 장치 구현</td>
+            <td>20.0</td>
+            <td>최소 가격 50,000프랫 이상. 초고가 마도구에 국한</td>
+        </tr>
+    </table>
+
+    <h2 id="s-5">5. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_aether.html" class="wiki-link">에테르</a></li>
+        <li><a href="aether_level.html" class="wiki-link">경지</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
