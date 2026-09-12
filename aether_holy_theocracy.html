@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>신성교국 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        h4 {
+            margin-top: 20px;
+            color: #444;
+            font-weight: 700;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 테이블 */
+        .wiki-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0 20px 0;
+            font-size: 0.92rem;
+        }
+
+        .wiki-table th, .wiki-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        .wiki-table th {
+            background-color: var(--main-color);
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">신성교국</div>
+    <div class="wiki-date">최근 수정 시각: 999-12-14 18:02:11</div>
+
+    <div class="infobox">
+        <div class="infobox-title">신성교국</div>
+        <table class="infobox-table">
+            <tr>
+                <th>국가 형태</th>
+                <td>신정제 중앙집권 국가</td>
+            </tr>
+            <tr>
+                <th>수도</th>
+                <td>디보티오</td>
+            </tr>
+            <tr>
+                <th>국가 원수</th>
+                <td>교황 디비니타</td>
+            </tr>
+            <tr>
+                <th>국교</th>
+                <td>진정한 신앙 (<a href="aether_main_god_religion.html" class="wiki-link">주신교</a>)</td>
+            </tr>
+            <tr>
+                <th>인구</th>
+                <td>370만 명 내외</td>
+            </tr>
+            <tr>
+                <th>건국 연도</th>
+                <td><a href="aether_calendar_era.html" class="wiki-link">제국력</a> 749년</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 지리 및 기후</a>
+                <ul>
+                    <li><a href="#s-2-1">2.1. 위치 및 영토 경계</a></li>
+                    <li><a href="#s-2-2">2.2. 기후 환경</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-3">3. 역사</a></li>
+            <li><a href="#s-4">4. 정치 및 행정 체제</a>
+                <ul>
+                    <li><a href="#s-4-1">4.1. 중앙집권 통치 구조</a></li>
+                    <li><a href="#s-4-2">4.2. 성직 계급과 관료제</a></li>
+                    <li><a href="#s-4-3">4.3. 성씨 규범</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-5">5. 법제 및 사법 체계</a>
+                <ul>
+                    <li><a href="#s-5-1">5.1. 재판관 자격</a></li>
+                    <li><a href="#s-5-2">5.2. 신성모독 처벌 규정</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-6">6. 국방 및 군사</a>
+                <ul>
+                    <li><a href="#s-6-1">6.1. 성휘 총기사단</a>
+                        <ul>
+                            <li><a href="#s-6-1-1">6.1.1. 개요 및 무장</a></li>
+                            <li><a href="#s-6-1-2">6.1.2. 편제 및 하위 기사단</a></li>
+                            <li><a href="#s-6-1-3">6.1.3. 수련 특성과 공통 기예</a></li>
+                            <li><a href="#s-6-1-4">6.1.4. 교단 직분 및 계급 체계</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#s-6-2">6.2. 민간 자경단</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-7">7. 마도 시설</a></li>
+            <li><a href="#s-8">8. 주요 거점</a></li>
+            <li><a href="#s-9">9. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        대륙 북서부 영역 내에 위치한 신정제 중앙집권 국가이다. 국교로 삼고 있는 진정한 신앙의 성좌국 역할을 수행한다.
+    </p>
+    <p>
+        동쪽의 <a href="aether_infernum_demon_nation.html" class="wiki-link">인페르눔 마족국</a>과 서쪽의 <a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a> 사이에 위치한 국가들 중에서 가장 강력한 군사력과 국력을 지니고 있다. 종교적 규율을 제외한 일반 문화적 영역에서는 자유롭고 개방적인 기풍을 지니며, 내부적인 복지와 치안 수준은 훌륭하게 유지된다.
+    </p>
+
+    <h2 id="s-2">2. 지리 및 기후</h2>
+
+    <h3 id="s-2-1">2.1. 위치 및 영토 경계</h3>
+    <p>
+        대륙을 중심선 기준으로 사분했을 때 북서부 영역에 속하며, <a href="aether_infernum_demon_nation.html" class="wiki-link">인페르눔 마족국</a>의 서북쪽에 자리 잡고 있다.
+    </p>
+    <ul>
+        <li><strong>서쪽 국경:</strong> <a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a>과 맞닿아 있으며, 양국의 자연 국경선으로 <a href="aether_elle_river.html" class="wiki-link">엘르 강</a>이 흐른다.</li>
+        <li><strong>동쪽 국경:</strong> <a href="aether_infernum_demon_nation.html" class="wiki-link">인페르눔 마족국</a>과 직접 접경한다.</li>
+    </ul>
+
+    <h3 id="s-2-2">2.2. 기후 환경</h3>
+    <ul>
+        <li><strong>냉대 습윤 기후:</strong> 영토 대부분이 최난월 평균 기온 22도 미만의 온화한 여름을 지닌 냉대 습윤 기후대에 속한다.</li>
+        <li><strong>냉대 습윤 아극 기후:</strong> 북부 중 극히 일부 지역은 10도 이상인 달이 1년에 3달 이하에 불과한 아극 기후의 특성을 보인다.</li>
+    </ul>
+
+    <h2 id="s-3">3. 역사</h2>
+    <p>
+        <a href="aether_calendar_era.html" class="wiki-link">제국력</a> 749년에 건국되었다.
+    </p>
+    <p>
+        과거 이 영토에는 블론데 왕국이라는 세속 왕조가 존재하였다. 당시 블론데 왕국은 극심하게 부패하여 동쪽에서 침범해 오는 <a href="aether_infernum_demon_nation.html" class="wiki-link">인페르눔 마족국</a>의 위협 속에 백성들을 방치하였으며, 심지어 마족에게 영지와 백성을 팔아넘기려는 시도까지 자행하였다.
+    </p>
+    <p>
+        이에 분노한 디비니타가 백성들과 함께 봉기하여 부패한 왕조를 무너뜨렸으며, 구 왕권을 몰아낸 자리에 신성교국을 개국하고 초대 교황으로 즉위하였다.
+    </p>
+
+    <h2 id="s-4">4. 정치 및 행정 체제</h2>
+
+    <h3 id="s-4-1">4.1. 중앙집권 통치 구조</h3>
+    <p>
+        신정제에 기반한 중앙집권 체제로 운영된다. 건국자이자 최고 통치자인 교황 디비니타가 국가 원수이자 종교의 유일한 정점으로서 통치권을 행사한다.
+    </p>
+    <p>
+        한 명의 교황이 국정 전체를 물리적으로 통솔할 수 없으므로, 추기경과 대주교를 각 지방의 관리자로 파견하여 행정과 종교를 감독하게 한다. 파견된 고위 성직자들은 행정 사무를 집행하는 관료에 해당하며, 타국의 영지 귀족들이 지니는 영구 세습권이나 영지에 대한 절대적인 사적 지배권은 인정받지 못한다.
+    </p>
+
+    <h3 id="s-4-2">4.2. 성직 계급과 관료제</h3>
+    <p>
+        국정 편제는 국교인 진정한 신앙의 교단 계급 체계를 그대로 따른다.
+    </p>
+    <ul>
+        <li><strong>계급 서열:</strong> 교황 - 추기경 - 대주교 - 주교 - 사제 - 신도 순으로 명확한 상하 관계를 구축한다.</li>
+    </ul>
+
+    <h3 id="s-4-3">4.3. 성씨 규범</h3>
+    <ul>
+        <li><strong>주교 이상:</strong> 사적 가문과 혈통의 세속적 영향력을 차단하기 위해, 주교 이상의 고위 성직자는 성씨 사용이 금지된다.</li>
+        <li><strong>사제 및 신도:</strong> 사제와 일반 신도의 성씨 사용은 허용되나, 교국의 사회적 관행상 거의 사용하지 않는다.</li>
+    </ul>
+
+    <h2 id="s-5">5. 법제 및 사법 체계</h2>
+
+    <h3 id="s-5-1">5.1. 재판관 자격</h3>
+    <p>
+        교국 내에서 법적 재판을 주관할 수 있는 권한은 주교 이상의 성직자에게만 부여된다.
+    </p>
+
+    <h3 id="s-5-2">5.2. 신성모독 처벌 규정</h3>
+    <p>
+        신성모독과 교리 부정 행위에 대해 단계별 처벌 규정을 시행한다.
+    </p>
+    <ul>
+        <li><strong>1회 적발:</strong> 공식 경고 조치 및 신앙적 계몽을 진행한다.</li>
+        <li><strong>2회 적발:</strong> 교리 계몽과 함께 징역형을 부과한다.</li>
+        <li><strong>3회 적발:</strong> 국외 추방 또는 사형에 처한다.</li>
+    </ul>
+
+    <h2 id="s-6">6. 국방 및 군사</h2>
+
+    <h3 id="s-6-1">6.1. 성휘 총기사단</h3>
+
+    <h4 id="s-6-1-1">6.1.1. 개요 및 무장</h4>
+    <p>
+        신성교국에서 직접 설립하여 운용하는 정규 군사 조직이다. 총기사단의 본부는 교국의 수도인 디보티오에 위치한다.
+    </p>
+    <ul>
+        <li><strong>규모:</strong> 총 1,500명 내외의 기사로 구성되며, 총기사단 직속 본대와 산하 4개 기사단에 각각 300명 내외의 기사가 균등하게 배정되어 운용된다.</li>
+        <li><strong>임무:</strong> 국경 방비, 고위 괴수 토벌, 요인 호위 등의 통상적인 군사 업무 외에도 필요시 민간 구호 및 대민 지원에 적극적으로 투입된다.</li>
+        <li><strong>주요 무장:</strong> 목까지 보호하는 투구, 두꺼운 흉갑, 체인메일 위주로 구성된 팔과 다리 갑옷을 착용하며, 주 무기로 바스타드 소드를 사용한다.</li>
+    </ul>
+
+    <h4 id="s-6-1-2">6.1.2. 편제 및 하위 기사단</h4>
+    <p>
+        총기사단 아래에 4개의 하위 기사단이 편제되어 있다. 하위 기사단 간의 구분과 경계는 엄격하게 단절되어 있지 않으며, 성휘 총기사단이라는 단일 조직 산하에 배치된 5개 부대와 같은 개념으로 유연하게 운용된다. 이에 따라 총기사단과 하위 기사단 사이, 또는 하위 기사단 상호 간의 기사 파견과 소속 이동이 일상적으로 이루어진다.
+    </p>
+    <ul>
+        <li><strong>자애 기사단:</strong> 교국 동남부 거점인 미세리코르디아에 본부를 둔다. 최전방에 배치된 다른 기사단들을 보조하고 후방을 구호하는 역할을 전담한다.</li>
+        <li><strong>광명 기사단:</strong> 미세리코르디아 동남쪽 최전방 요새인 뤼미에르에 본부를 둔다. 국경을 넘어 침범하는 마족을 저지하고 신도들을 보호한다.</li>
+        <li><strong>순수 기사단:</strong> 미세리코르디아 북동쪽 최전방 요새인 퓌르에 본부를 둔다. 광명 기사단과 함께 대마족 전선의 방어를 분담한다.</li>
+        <li><strong>헌신 기사단:</strong> 교국 서부 도시인 드봐르에 본부를 둔다. 교국 북부, 남부, 서부 방면의 치안 유지와 각종 위험 요소를 저지한다.</li>
+    </ul>
+
+    <h4 id="s-6-1-3">6.1.3. 수련 특성과 공통 기예</h4>
+    <p>
+        소속된 모든 기사는 예외 없이 신성력을 다룰 수 있다. 성휘 총기사단은 신성력과 오러를 동시에 병행하여 수련하는 방식을 기본 체계로 채택하고 있다.
+    </p>
+    <ul>
+        <li><strong>수련 속도:</strong> 두 종류의 정제 에너지를 함께 연마하므로 단일 에너지만을 연마하는 타국 기사들에 비해 전반적인 경지 돌파 속도는 느린 편이다. 다만 무작위적인 오러와 기를 병행 수련하는 일반적인 경우보다는 체계화되어 있어 비교적 빠른 성장세를 보인다. 오러와 신성력 사이에 약간의 경지 편차가 나타나는 경우는 있으나 완전히 벌어지는 경우는 드물다.</li>
+        <li><strong>신성력:</strong> 국교인 진정한 신앙의 교리를 바탕으로 정제한 <a href="aether_qi.html" class="wiki-link">신성력</a>을 사용한다.</li>
+        <li><strong>육신성화법:</strong> 기사단 고유의 <a href="aether_aura.html" class="wiki-link">오러단련법</a>이다. 신성력이 지닌 고유한 치유 능력으로 신체의 자가 회복력을 극대화한 상태에서, 휴식 없이 육체의 한계를 지속적으로 넘어서는 고강도 육체 운동을 거듭하여 <a href="aether_aura.html" class="wiki-link">오러</a>를 각성하고 단련한다.</li>
+        <li><strong>성휘수호검술:</strong> 육신성화법으로 구축한 강인한 신체 복원력과 전투 중 즉각적으로 시전하는 신성력 자가 치유를 전제로 설계된 무술이다. 상대와의 과감한 타격 교환과 지속적인 압박 공세가 가장 두드러지는 특징이다.</li>
+    </ul>
+
+    <h4 id="s-6-1-4">6.1.4. 교단 직분 및 계급 체계</h4>
+    <p>
+        성휘 총기사단에 입단한 모든 기사는 교단 체계상 최소 사제 이상의 성직자로 서품받는다. 지휘관 직무는 교단의 성직 직분과 직결된다.
+    </p>
+    <ul>
+        <li><strong>총기사단 지휘부 직분:</strong> 총기사단장은 추기경 직분을, 총기사단 부단장은 대주교 직분을 겸임한다.</li>
+        <li><strong>하위 기사단 지휘부 직분:</strong> 각 하위 기사단장은 대주교 직분을, 하위 기사단 부단장은 주교 직분을 겸임한다.</li>
+    </ul>
+    <p>
+        기사단의 군사 계급과 무력 <a href="aether_level.html" class="wiki-link">경지</a> 구성은 다음과 같다.
+    </p>
+    <table class="wiki-table">
+        <tr>
+            <th>계급</th>
+            <th>해당 경지</th>
+            <th>비율 및 편제</th>
+        </tr>
+        <tr>
+            <td>견습기사</td>
+            <td>1성 ~ 3성</td>
+            <td>전체 기사의 40%</td>
+        </tr>
+        <tr>
+            <td>정규기사</td>
+            <td>4성 ~ 5성</td>
+            <td>전체 기사의 50%</td>
+        </tr>
+        <tr>
+            <td>상급기사</td>
+            <td>6성 ~ 7성</td>
+            <td>전체 기사의 9%</td>
+        </tr>
+        <tr>
+            <td>하위 기사단 부단장</td>
+            <td>8성 입문 ~ 8성 초입</td>
+            <td>각 하위 기사단별 1명 ~ 2명</td>
+        </tr>
+        <tr>
+            <td>하위 기사단장</td>
+            <td>8성 중기 ~ 8성 극한</td>
+            <td>각 하위 기사단별 1명 (총 4명)</td>
+        </tr>
+        <tr>
+            <td>총기사단 부단장</td>
+            <td>8성 중기, 8성 후반</td>
+            <td>2명</td>
+        </tr>
+        <tr>
+            <td>총기사단장</td>
+            <td>9성 입문</td>
+            <td>1명</td>
+        </tr>
+    </table>
+
+    <h3 id="s-6-2">6.2. 민간 자경단</h3>
+    <p>
+        정규 기사단 외에도, 국경 너머 마족의 상시적인 약탈과 침입으로부터 이웃과 가족을 지키기 위해 교국 내 각 마을마다 주민들이 조직한 자경단이 설치되어 활동한다.
+    </p>
+
+    <h2 id="s-7">7. 마도 시설</h2>
+    <p>
+        영내 서부 도시인 드봐르에 <a href="aether_spire_radian.html" class="wiki-link">라디안 마탑</a>이 위치하고 있다. 신성교국 내에 존재하는 유일한 마탑으로, 교국의 방위 결계 시공과 성물 납품 등 마도 기술 전반을 전담한다.
+    </p>
+
+    <h2 id="s-8">8. 주요 거점</h2>
+    <ul>
+        <li><strong>디보티오:</strong> 신성교국의 수도이다. 지리적 중심부에 자리 잡고 있으며, 도시 내부로 맑은 개천이 흐른다. 성휘 총기사단 본부가 주둔한다.</li>
+        <li><strong>미세리코르디아:</strong> 교국 동남부에 위치한 군사 요새 겸 구호 도시이다. 성휘 총기사단 산하 자애 기사단 본부가 위치한다.</li>
+        <li><strong>뤼미에르:</strong> 미세리코르디아 동남쪽에 인접한 최전방 군사 요새이다. 광명 기사단 본부가 주둔하여 마족의 침입을 직접 차단한다.</li>
+        <li><strong>퓌르:</strong> 미세리코르디아 북동쪽에 인접한 최전방 군사 요새이다. 순수 기사단 본부가 위치하며 전방 방어를 분담한다.</li>
+        <li><strong>드봐르:</strong> 교국 서부에 위치한 도시이다. 헌신 기사단 본부와 함께 영내 유일한 마탑인 <a href="aether_spire_radian.html" class="wiki-link">라디안 마탑</a>이 자리 잡고 있다.</li>
+    </ul>
+
+    <h2 id="s-9">9. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_main_god_religion.html" class="wiki-link">주신교</a></li>
+        <li><a href="aether_spire_radian.html" class="wiki-link">라디안 마탑</a></li>
+        <li><a href="aether_elle_river.html" class="wiki-link">엘르 강</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
+
