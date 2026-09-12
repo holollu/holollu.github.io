@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아르바 강 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">아르바 강</div>
+    <div class="wiki-date">최근 수정 시각: 999-11-25 10:14:22</div>
+
+    <div class="infobox">
+        <div class="infobox-title">아르바 강</div>
+        <table class="infobox-table">
+            <tr>
+                <th>분류</th>
+                <td>강, 지형</td>
+            </tr>
+            <tr>
+                <th>발원지</th>
+                <td><a href="aether_imperial_capital.html" class="wiki-link">황도</a> 북동부 언덕</td>
+            </tr>
+            <tr>
+                <th>하구</th>
+                <td>서쪽 외해</td>
+            </tr>
+            <tr>
+                <th>유하 방향</th>
+                <td>북동쪽에서 남서쪽</td>
+            </tr>
+            <tr>
+                <th>주요 경유지</th>
+                <td>황도 북동부 언덕, 황도, 리파리아, 프루멘</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 지리 및 유로</a>
+                <ul>
+                    <li><a href="#s-2-1">2.1. 발원지 및 유하 경로</a></li>
+                    <li><a href="#s-2-2">2.2. 하천 규모 및 수문 특성</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-3">3. 역할 및 기능</a>
+                <ul>
+                    <li><a href="#s-3-1">3.1. 도시 용수 공급 및 치수</a></li>
+                    <li><a href="#s-3-2">3.2. 내륙 수운 통로</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-4">4. 에테르 환경</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        <a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a>의 <a href="aether_imperial_capital.html" class="wiki-link">황도</a>를 관통하여 서쪽 외해로 흘러드는 강이다.
+    </p>
+
+    <h2 id="s-2">2. 지리 및 유로</h2>
+
+    <h3 id="s-2-1">2.1. 발원지 및 유하 경로</h3>
+    <p>
+        북동쪽에서 남서쪽으로 흐르며, 제국 황실 직할지의 핵심 거점들을 차례로 통과한다.
+    </p>
+    <ul>
+        <li><strong>유하 경로:</strong> <a href="aether_imperial_capital.html" class="wiki-link">황도</a> 북동부 언덕에서 발원하여 황도를 관통한 뒤, 내륙 수운 물류 도시인 리파리아와 대규모 농경 거점 도시인 프루멘을 지나 서쪽 외해로 유입된다.</li>
+    </ul>
+
+    <h3 id="s-2-2">2.2. 하천 규모 및 수문 특성</h3>
+    <p>
+        전체적인 유로에 비해 강 폭은 다소 좁은 편이다.
+    </p>
+    <ul>
+        <li><strong>치수 사업:</strong> 제국 주도의 정비가 잘 되어 있어 범람 위험이 낮다.</li>
+    </ul>
+
+    <h2 id="s-3">3. 역할 및 기능</h2>
+
+    <h3 id="s-3-1">3.1. 도시 용수 공급 및 치수</h3>
+    <ul>
+        <li><strong><a href="aether_imperial_capital.html" class="wiki-link">황도</a>의 생활 기반:</strong> 황도 내부를 관통하며 생활용수를 공급하고, 상하수도 체계와 연계되어 배수 및 도시 위생을 지탱하는 핵심 역할을 맡는다.</li>
+        <li><strong>농업용수 공급:</strong> 성벽 밖으로 밀밭이 펼쳐진 대규모 농경 거점인 프루멘에 농업용수를 공급한다.</li>
+    </ul>
+
+    <h3 id="s-3-2">3.2. 내륙 수운 통로</h3>
+    <p>
+        황도 인근에서 생산된 물자를 수송하는 중단거리 수운 통로로 활용된다.
+    </p>
+
+    <h2 id="s-4">4. 에테르 환경</h2>
+    <p>
+        극음 성질이나 생음 성질 등 특수 성질이 집적된 하천들과 달리, 평범한 <a href="aether_aether.html" class="wiki-link">에테르</a>의 밀도와 성질을 가진다.
+    </p>
+</div>
+
+</body>
+</html>
+
