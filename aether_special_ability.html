@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이능 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">이능</div>
+    <div class="wiki-date">최근 수정 시각: 990-3-15 08:31:40</div>
+
+    <div class="infobox">
+        <div class="infobox-title">이능</div>
+        <table class="infobox-table">
+            <tr>
+                <th>발생 원인</th>
+                <td>비정제 에테르</td>
+            </tr>
+            <tr>
+                <th>발현 형태</th>
+                <td>선천적 혹은 후천적</td>
+            </tr>
+            <tr>
+                <th>발생 확률</th>
+                <td>마나 사용자보다 조금 더 드문 수준</td>
+            </tr>
+            <tr>
+                <th>유전 여부</th>
+                <td>유전 가능성 존재</td>
+            </tr>
+            <tr>
+                <th>변질화 저항</th>
+                <td>일반인과 거의 동일</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 특성</a>
+                <ul>
+                    <li><a href="#s-2-1">2.1. 발현 형태와 편차</a></li>
+                    <li><a href="#s-2-2">2.2. 변질화 저항력의 한계</a></li>
+                    <li><a href="#s-2-3">2.3. 유전성</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-3">3. 발생 빈도 및 환경</a></li>
+            <li><a href="#s-4">4. 범인류종 분화와의 차이</a></li>
+            <li><a href="#s-5">5. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        정제 과정을 거치지 않은 비정제 <a href="aether_aether.html" class="wiki-link">에테르</a>의 영향으로 인해 개체 단위에서 발현되는 특수한 초자연적 능력을 뜻한다.
+    </p>
+    <p>
+        신체나 심상, 일정한 순환 구조를 통해 에테르를 규격화하여 운용하는 정제형 에테르계 에너지 사용자와 달리, 비정제 에테르가 생명체에 초래한 변질화의 결과물 중 긍정적인 형태로 자리 잡은 것에 해당한다.
+    </p>
+
+    <h2 id="s-2">2. 특성</h2>
+
+    <h3 id="s-2-1">2.1. 발현 형태와 편차</h3>
+    <p>
+        이능은 태어날 때부터 지니고 태어나는 선천적인 형태일 수도 있고, 특정한 환경이나 자극에 노출되어 깨어나는 후천적인 형태일 수도 있다.
+    </p>
+    <ul>
+        <li><strong>불규칙한 위력과 잠재력:</strong> 체계화된 수련 기준을 따르는 정제형 에너지와 달리, 이능은 개별 능력마다 발휘할 수 있는 위력의 강함이나 향후 발전 가능성의 차이가 매우 크다. 미약하고 사소한 감각적 변화에 그치는 능력이 있는 반면, 단신으로 전황을 뒤흔들 만큼 강력한 능력이 발현되기도 한다.</li>
+    </ul>
+
+    <h3 id="s-2-2">2.2. 변질화 저항력의 한계</h3>
+    <p>
+        체내에 정형화된 규칙을 확립하여 외부 비정제 에테르의 침투를 편입 및 방어할 수 있는 정제형 에테르계 에너지 사용자와는 명확한 차이를 보인다.
+    </p>
+    <ul>
+        <li><strong>저항 수준:</strong> 순수한 이능 보유자의 에테르 변질화 저항력은 에테르를 전혀 다루지 못하는 일반인과 거의 동일하다. 따라서 강력한 이능을 보유하고 있더라도 고밀도의 에테르가 흐르는 구역에 노출될 경우 일반인과 마찬가지로 급격한 변질화 위험에 직면한다.</li>
+    </ul>
+
+    <h3 id="s-2-3">2.3. 유전성</h3>
+    <p>
+        특정 이능은 혈통을 통해 후대로 대물림될 수 있는 유전 가능성이 존재한다.
+    </p>
+
+    <h2 id="s-3">3. 발생 빈도 및 환경</h2>
+    <p>
+        발생 확률은 극히 드물다. 이는 습득 인구가 가장 희소한 <a href="aether_mana.html" class="wiki-link">마나</a> 사용자보다도 조금 더 드문 수준에 해당한다.
+    </p>
+    <ul>
+        <li><strong>환경적 영향:</strong> 통상적인 거주 구역에 비해 비정제 에테르의 농도가 짙게 형성되어 있는 마경 인근 지역에서는 이능의 발생 확률이 비교적 높게 나타난다.</li>
+    </ul>
+
+    <h2 id="s-4">4. 범인류종 분화와의 차이</h2>
+    <p>
+        에테르의 변질화로 인해 발생하는 현상이라는 점에서 <a href="aether_pan-human_species.html" class="wiki-link">범인류종</a>의 분화와 유사해 보일 수 있으나, 발생 장소와 진행 과정에서 명확한 차이점을 지닌다.
+    </p>
+    <ul>
+        <li><strong>범인류종의 분화:</strong> 마경 인근의 환경에서, 다수의 개체가 수 세대에 걸쳐 서서히 누적된 변질화를 겪으며 집단적인 종족 단위로 분화된 결과이다.</li>
+        <li><strong>이능의 발현:</strong> 주로 마경의 내부처럼 고밀도의 에테르가 작용하는 환경 속에서 발생하며, 세대를 거친 점진적 변화라기보다는 단일 개체에 일어난 긍정적인 변질화에 가깝다.</li>
+    </ul>
+
+    <h2 id="s-5">5. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_aether.html" class="wiki-link">에테르</a></li>
+        <li><a href="aether_mana_pattern_collapse.html" class="wiki-link">마나 패턴 붕괴 유도</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
