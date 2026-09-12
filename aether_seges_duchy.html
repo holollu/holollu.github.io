@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>세제스 공작령 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        h4 {
+            margin-top: 20px;
+            color: #444;
+            font-weight: 700;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 테이블 */
+        .wiki-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0 20px 0;
+            font-size: 0.92rem;
+        }
+
+        .wiki-table th, .wiki-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        .wiki-table th {
+            background-color: var(--main-color);
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">세제스 공작령</div>
+    <div class="wiki-date">최근 수정 시각: 999-12-29 11:24:18</div>
+
+    <div class="infobox">
+        <div class="infobox-title">세제스 공작령</div>
+        <table class="infobox-table">
+            <tr>
+                <th>상징</th>
+                <td>밀 이삭을 감싸는 강물</td>
+            </tr>
+            <tr>
+                <th>소속</th>
+                <td><a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a></td>
+            </tr>
+            <tr>
+                <th>위치</th>
+                <td>제국 서부 (<a href="aether_rata_river.html" class="wiki-link">라타 강</a> 하류)</td>
+            </tr>
+            <tr>
+                <th>영주</th>
+                <td>공작 미라 세제스</td>
+            </tr>
+            <tr>
+                <th>지배 가문</th>
+                <td>세제스 가문</td>
+            </tr>
+            <tr>
+                <th>소속 기사단</th>
+                <td>빙화 기사단</td>
+            </tr>
+            <tr>
+                <th>기후</th>
+                <td>서안 해양성 기후</td>
+            </tr>
+            <tr>
+                <th>주요 토박이 종족</th>
+                <td><a href="aether_pan-human_species.html" class="wiki-link">빙하수 엘프</a></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 자연환경 및 지리</a>
+                <ul>
+                    <li><a href="#s-2-1">2.1. 라타 강 하류와 삼각주</a></li>
+                    <li><a href="#s-2-2">2.2. 에테르 환경과 농업</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-3">3. 주민 구성</a></li>
+            <li><a href="#s-4">4. 세제스 가문</a>
+                <ul>
+                    <li><a href="#s-4-1">4.1. 개요 및 상속 문화</a></li>
+                    <li><a href="#s-4-2">4.2. 가문 기예</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-5">5. 빙화 기사단</a>
+                <ul>
+                    <li><a href="#s-5-1">5.1. 개요 및 운용 특성</a></li>
+                    <li><a href="#s-5-2">5.2. 편제 및 계급</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-6">6. 주요 도시 및 거점</a>
+                <ul>
+                    <li><a href="#s-6-1">6.1. 베르디아</a></li>
+                    <li><a href="#s-6-2">6.2. 기타 직할지</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-7">7. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        <a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a> 서부에 위치한 공작령이자 대륙 최대 규모의 곡창지대이다.
+    </p>
+    <p>
+        개국 일등 공신 가문 중 하나인 세제스 가문이 대대로 통치해 온 영지로, 공작은 제국 황제의 직속 봉신이다. 서안 해양성 기후의 온화한 환경 속에서 전반적으로 평온하고 목가적인 분위기를 띠며, 제국 내에서도 치안이 굉장히 뛰어난 영지로 손꼽힌다.
+    </p>
+
+    <h2 id="s-2">2. 자연환경 및 지리</h2>
+
+    <h3 id="s-2-1">2.1. 라타 강 하류와 삼각주</h3>
+    <p>
+        대륙 중남부에서 발원한 <a href="aether_rata_river.html" class="wiki-link">라타 강</a>이 서쪽 외해로 빠져나가기 직전 형성한 거대한 하류 삼각주 일대에 자리 잡고 있다. 풍부한 하천 수계와 퇴적 평야를 바탕으로 광활한 농경지가 형성되어 있다.
+    </p>
+
+    <h3 id="s-2-2">2.2. 에테르 환경과 농업</h3>
+    <p>
+        영지 전반에 흐르는 <a href="aether_aether.html" class="wiki-link">에테르</a>의 농도는 일반인 범인류종이 일상적으로 거주할 수 있는 안전 한도 내에서 밀도가 높게 형성되어 있다.
+    </p>
+    <ul>
+        <li><strong>생음 성질 에테르:</strong> 상류의 거대한 수림인 <a href="aether_world_tree_forest.html" class="wiki-link">세계수림</a>을 통과하여 흘러내려온 영향으로, 생명 성질과 음 성질이 어우러진 생음 성질의 에테르를 강하게 품고 있다.</li>
+        <li><strong>작물 생장:</strong> 생음 성질 에테르의 작용으로 식물이 비정상적으로 잘 자라며, 세제스 공작령에서 수확되는 농작물은 대개 담백하면서도 시원한 맛을 띠는 고유한 특징을 지닌다.</li>
+    </ul>
+
+    <h2 id="s-3">3. 주민 구성</h2>
+    <p>
+        타지에서 유입된 이주민의 경우 마족을 제외한 다양한 <a href="aether_pan-human_species.html" class="wiki-link">범인류종</a>이 고르게 섞여 살아가고 있다.
+    </p>
+    <p>
+        반면 최소 500세대 이전부터 영지에 정착해 온 토박이 주민들의 대다수는 <a href="aether_pan-human_species.html" class="wiki-link">빙하수 엘프</a>이다. 이들은 라타 강 하류의 생음 성질 에테르에 세대에 걸쳐 적응하며 분화된 장생종으로, 맑고 투명한 피부와 유연한 체형, 침착한 성향을 보인다.
+    </p>
+
+    <h2 id="s-4">4. 세제스 가문</h2>
+
+    <h3 id="s-4-1">4.1. 개요 및 상속 문화</h3>
+    <p>
+        세제스 공작령을 통할하는 지배 가문으로, 가문원의 종족은 빙하수 엘프이다. 가문의 본거지인 공작성은 중심 도시인 베르디아에 자리하고 있다.
+    </p>
+    <ul>
+        <li><strong>상속 전통:</strong> 수명이 긴 장생종 가문 특유의 관습에 따라, 가문의 장기적인 안정성을 도모하기 위해 직계 자녀 세대만을 고집하지 않는다. 세대 구분과 무관하게 50세 이하의 유망한 후손을 차기 공작위 후계자로 우선 선정하는 독특한 상속 문화를 지니고 있다.</li>
+    </ul>
+
+    <h3 id="s-4-2">4.2. 가문 기예</h3>
+    <p>
+        가문 내부와 영지 방위를 전담하는 기사단을 위해 세 가지 고유 기예를 정립하여 전수하고 있다.
+    </p>
+    <ul>
+        <li><strong>빙화결:</strong> 고유한 <a href="aether_aura.html" class="wiki-link">오러단련법</a>이다. 라타 강 하류의 차가운 강물 속에 머리까지 완전히 잠수한 상태에서 육체 운동을 수행한다. 호흡이 차단되는 한계 상황을 생음 에테르의 회복력으로 버텨내며 오러를 체내에 동화시키는 방식이다. 수련을 거듭할수록 심폐 기능과 자가 치유력, 지구력이 비약적으로 상승하며, 근육이 비대해지지 않고 가볍고 유연하면서도 밀도가 극히 높은 체질로 단련된다. 관절의 가동 범위 또한 매우 넓어진다.</li>
+        <li><strong>한담생화신공:</strong> 가문의 고유 <a href="aether_qi.html" class="wiki-link">심법</a>이다. 얼어붙을 듯 차갑고 깊은 심연 속에서 강인한 생명의 꽃을 피워 올리는 심상을 품고 <a href="aether_qi.html" class="wiki-link">기</a>를 정제한다.</li>
+        <li><strong>빙화유수연검술:</strong> 얇고 탄력 있는 연검을 주 무기로 다루는 무술 체계이다. 부드러움과 변화, 기이함, 그리고 신속함의 묘리를 복합적으로 응용하여 변칙적인 궤적을 만들어낸다.</li>
+    </ul>
+
+    <h2 id="s-5">5. 빙화 기사단</h2>
+
+    <h3 id="s-5-1">5.1. 개요 및 운용 특성</h3>
+    <p>
+        세제스 가문이 설립하고 운용하는 영지 수호 기사단이다. 본부는 중심 도시 베르디아의 내성 중심구획 내 공작성 남서쪽에 인접해 있다.
+    </p>
+    <ul>
+        <li><strong>규모:</strong> 소속 기사의 수는 200명 내외이다. 기사단장은 듀르 몰리스가 맡고 있다.</li>
+        <li><strong>무장 및 복식:</strong> 연검을 주력 무기로 채택하고 있다. 정복은 흰 튜닉과 검은색 바지, 가죽 벨트, 파란 롱코트로 단정하게 구성된다.</li>
+    </ul>
+
+    <h3 id="s-5-2">5.2. 편제 및 계급</h3>
+    <p>
+        소속 기사들의 직위와 <a href="aether_level.html" class="wiki-link">경지</a> 구성은 다음과 같다.
+    </p>
+    <table class="wiki-table">
+        <tr>
+            <th>계급</th>
+            <th>해당 경지</th>
+            <th>인원 및 비고</th>
+        </tr>
+        <tr>
+            <td>견습기사</td>
+            <td>1성 ~ 3성</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>정규기사</td>
+            <td>4성 ~ 5성</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>상급기사</td>
+            <td>6성 ~ 7성</td>
+            <td>27명</td>
+        </tr>
+        <tr>
+            <td>부단장</td>
+            <td>8성 입문</td>
+            <td>1명</td>
+        </tr>
+        <tr>
+            <td>기사단장</td>
+            <td>8성 극한</td>
+            <td>1명 (듀르 몰리스)</td>
+        </tr>
+    </table>
+
+    <h2 id="s-6">6. 주요 도시 및 거점</h2>
+
+    <h3 id="s-6-1">6.1. 베르디아</h3>
+    <p>
+        세제스 공작성이 위치한 성곽도시이자 공작령의 중심지이다. 사방으로 1개씩 총 4개의 외성문이 배치되어 있으며, 시가지 확장에 따라 보존된 1개의 내성과 4개의 내성문이 내부에 남아 있다. 치안이 매우 안정적이며 서안 해양성 기후 아래 목가적인 분위기를 풍긴다.
+    </p>
+    <ul>
+        <li><strong>중심구획:</strong> 내성 안쪽에 형성된 구역으로 공작성과 귀족 주거지, 빙화 기사단 본부가 자리 잡고 있다. 구획 동북쪽 외곽에는 <a href="aether_spire_astre.html" class="wiki-link">아스트레 마탑</a>이 위치한다.</li>
+        <li><strong>확장구획:</strong> 외성과 내성 사이에 위치하며, 서민과 중산층의 주거지와 소비재 상점, 시장, 선술집이 운영된다. 동문 인근에는 모험가 길드 베르디아 지부가 3층 석조 건물로 운영되고 있다.</li>
+    </ul>
+
+    <h3 id="s-6-2">6.2. 기타 직할지</h3>
+    <ul>
+        <li><strong>세레나:</strong> 베르디아의 동쪽에 인접한 전원형 중소도시이다.</li>
+        <li><strong>플로비아:</strong> 베르디아 북서쪽에 인접한 농경 촌락이다.</li>
+        <li><strong>릴리엔:</strong> 베르디아 북쪽에 인접해 있으며, 특산물인 찻잎 재배로 유명한 촌락이다.</li>
+    </ul>
+
+    <h2 id="s-7">7. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a></li>
+        <li><a href="aether_rata_river.html" class="wiki-link">라타 강</a></li>
+        <li><a href="aether_pan-human_species.html" class="wiki-link">범인류종</a></li>
+        <li><a href="aether_spire_astre.html" class="wiki-link">아스트레 마탑</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
