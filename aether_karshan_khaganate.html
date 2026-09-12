@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카르샨 카간국 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">카르샨 카간국</div>
+    <div class="wiki-date">최근 수정 시각: 999-10-10 16:20:15</div>
+
+    <div class="infobox">
+        <div class="infobox-title">카르샨 카간국</div>
+        <table class="infobox-table">
+            <tr>
+                <th>국가 형태</th>
+                <td>유목 국가</td>
+            </tr>
+            <tr>
+                <th>위치</th>
+                <td>대륙 북서부 영역 동남쪽</td>
+            </tr>
+            <tr>
+                <th>수도 거점</th>
+                <td>텡그리하라</td>
+            </tr>
+            <tr>
+                <th>국가 원수</th>
+                <td>카간 텡게르</td>
+            </tr>
+            <tr>
+                <th>인구</th>
+                <td>45만 명 내외</td>
+            </tr>
+            <tr>
+                <th>주요 종교</th>
+                <td>하늘 신앙</td>
+            </tr>
+            <tr>
+                <th>마탑 수</th>
+                <td>0개 (전무)</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 지리 및 기후</a>
+                <ul>
+                    <li><a href="#s-2-1">2.1. 영토 경계 및 인접국</a></li>
+                    <li><a href="#s-2-2">2.2. 기후대와 자연환경</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-3">3. 정치 및 사회</a>
+                <ul>
+                    <li><a href="#s-3-1">3.1. 계급과 선출 방식</a></li>
+                    <li><a href="#s-3-2">3.2. 호칭 및 조상 계보 관습</a></li>
+                    <li><a href="#s-3-3">3.3. 사회적 기풍과 주거</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-4">4. 군사 및 동원력</a></li>
+            <li><a href="#s-5">5. 수도 거점: 텡그리하라</a>
+                <ul>
+                    <li><a href="#s-5-1">5.1. 개요</a></li>
+                    <li><a href="#s-5-2">5.2. 도시 구획</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-6">6. 카르샨 카간국 공통 기예</a>
+                <ul>
+                    <li><a href="#s-6-1">6.1. 전승 특성</a></li>
+                    <li><a href="#s-6-2">6.2. 주요 기예 목록</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-7">7. 종교</a></li>
+            <li><a href="#s-8">8. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        대륙 북서부 영역의 동남쪽에 위치한 거대한 유목 국가이다.
+    </p>
+    <p>
+        직전 세대의 유목 국가였던 솔롱고 대연합이 <a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a>과의 전쟁에서 패배하여 체제가 완전히 해체된 이후, 그 영토 위에서 새로운 세력들이 규합하여 형성되었다.
+    </p>
+    <p>
+        능력을 철저히 숭상하며 성향이 직설적이다. 국가 내에 마탑은 단 하나도 존재하지 않는다.
+    </p>
+
+    <h2 id="s-2">2. 지리 및 기후</h2>
+
+    <h3 id="s-2-1">2.1. 영토 경계 및 인접국</h3>
+    <ul>
+        <li><strong>북서쪽 국경:</strong> <a href="aether_ramus_river.html" class="wiki-link">라무스 강</a>을 경계로 <a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a>의 <a href="aether_parma_duchy.html" class="wiki-link">파르마 공작령</a>과 접한다.</li>
+        <li><strong>북동쪽 국경:</strong> <a href="aether_rata_river.html" class="wiki-link">라타 강</a> 상류를 경계로 다수의 소·중규모 왕국 및 공국들과 접한다.</li>
+        <li><strong>남쪽 경계:</strong> 카간국의 영토 바깥으로 광활한 <a href="aether_ezed_desert.html" class="wiki-link">에제드 대사막</a>이 위치한다. 다만 에제드 대사막 북부의 오아시스가 밀집한 구역은 카르샨 카간국의 영토에 포함된다.</li>
+        <li><strong>극동쪽 경계:</strong> 고원 스텝 지대를 지나 극동쪽으로 나아가면 거대한 <a href="aether_sutra_mountains.html" class="wiki-link">수트라 산맥</a>이 나타나지만, 산맥 자체는 카간국의 영토에 속하지 않는다.</li>
+    </ul>
+
+    <h3 id="s-2-2">2.2. 기후대와 자연환경</h3>
+    <p>
+        영토의 위치에 따라 서쪽에서 동쪽, 남쪽으로 가면서 기후가 뚜렷하게 변화한다.
+    </p>
+    <ul>
+        <li><strong>서쪽 지역:</strong> 여름에는 고온 건조하고 겨울에는 온화하며 강수량이 있는 엔테라 해성 기후를 띤다.</li>
+        <li><strong>중앙 지역:</strong> 드넓은 스텝 기후 지대로, 북쪽은 한랭 스텝을 이루고 남쪽은 온난 스텝을 형성한다.</li>
+        <li><strong>동쪽 지역:</strong> 험준하고 서늘한 고원 스텝 지대가 펼쳐진다. 이 일대는 남쪽의 에제드 대사막이 다른 지역보다 더 북쪽으로 밀고 올라와 있다.</li>
+        <li><strong>남쪽 지역:</strong> 에제드 대사막과 맞닿은 건조 사막 및 오아시스 지대를 이룬다.</li>
+    </ul>
+
+    <h2 id="s-3">3. 정치 및 사회</h2>
+
+    <h3 id="s-3-1">3.1. 계급과 선출 방식</h3>
+    <p>
+        사회적 계급은 군주인 카간, 부족장인 칸, 그리고 일반 부족원으로 구성된다.
+    </p>
+    <ul>
+        <li><strong>선출 기준:</strong> 카간과 칸 모두 원칙상 선거를 통해 선출되는 종신직이다. 그러나 실질적인 선출의 절대 기준은 무력이다. 무력이 높은 자가 부족원들에게 선택받아 칸이 되며, 칸들 중에서도 가장 강력한 무력을 증명한 자가 카간으로 선출된다.</li>
+        <li><strong>무력 선언:</strong> 부족원들을 물리력으로 모두 제압하고 스스로 칸임을 선포하여 인정받는 사례도 빈번하다.</li>
+        <li><strong>분열과 내전:</strong> 유력한 칸들 사이에 무력의 격차가 뚜렷하지 않을 경우, 서로의 권위를 인정하지 않고 내전을 벌이거나 독자적인 분열 상태를 유지하기도 한다.</li>
+        <li><strong>선거 장소:</strong> 카간의 선출은 각 부족의 유력자들이 수도 거점인 텡그리하라에 모여 거행하며, 칸의 선출은 각 부족 내부에서 자체적으로 치러진다.</li>
+    </ul>
+
+    <h3 id="s-3-2">3.2. 호칭 및 조상 계보 관습</h3>
+    <p>
+        성씨라는 개념을 일절 사용하지 않는다.
+    </p>
+    <ul>
+        <li><strong>기본 호칭:</strong> 누군가의 가계와 출신을 밝힐 때는 <em>'아버지의 이름'의 아들 '자신의 이름'</em> 형태로 부른다.</li>
+        <li><strong>상세 계보 선언:</strong> 출신을 더욱 세부적이고 공식적으로 증명해야 할 자리에서는 <em>'할아버지의 이름'의 아들 '아버지의 이름'의 아들 '자신의 이름'</em>과 같이 윗대 조상의 이름을 차례대로 이어 붙여 낭독한다.</li>
+        <li><strong>조상 암기:</strong> 카간국의 유목민들은 자신의 직계 조상 7대에서 9대 안팎의 이름을 막힘없이 외우는 것을 기본적인 소양으로 삼기에, 이러한 긴 칭호 방식을 어렵거나 번거롭게 여기지 않는다.</li>
+    </ul>
+
+    <h3 id="s-3-3">3.3. 사회적 기풍과 주거</h3>
+    <p>
+        인구의 대부분은 이동식 천막인 게르를 기반으로 계절과 초지를 따라 이동하는 유목 생활을 영위한다.
+    </p>
+
+    <h2 id="s-4">4. 군사 및 동원력</h2>
+    <ul>
+        <li><strong>전민 개병:</strong> 척박한 환경 속에서 살아가는 유목민의 특성상 성별과 연령을 가리지 않고 거의 대부분이 말 위에서 활을 쏘고 무기를 다룰 수 있다.</li>
+        <li><strong>비정상적인 동원율:</strong> 국가 총인구수인 약 45만 명 중 군사로 즉각 소집할 수 있는 인구 비율이 매우 높다. 전체 인구의 30%에서 40% 이상을 기병 전력으로 신속하게 편제할 수 있다.</li>
+        <li><strong>주력 병종:</strong> 경기병과 궁기병이 군의 절대다수를 차지하며, 뛰어난 기동력과 빠른 진군 속도를 바탕으로 한 기동전에서 압도적인 우위를 점한다.</li>
+        <li><strong>승용 동물:</strong> 대다수가 말을 타고 다니나, 남부 에제드 대사막 인근의 오아시스에 거주하는 일부 정주민들은 낙타를 운용하기도 한다.</li>
+    </ul>
+
+    <h2 id="s-5">5. 수도 거점: 텡그리하라</h2>
+
+    <h3 id="s-5-1">5.1. 개요</h3>
+    <p>
+        카르샨 카간국의 수도 역할을 맡는 거점 도시이다. 명칭인 텡그리하라는 유목민의 언어로 '하늘이 바라보는 장소'라는 뜻을 지닌다.
+    </p>
+    <p>
+        카간국 중앙부, 한랭 스텝과 온난 스텝이 교차하는 내륙 대평원의 중심에 위치한다. 인구가 고정되어 밀집하는 일반적인 세속 도시와 달리, 계절의 변화, 카간 선거 등 상황에 따라 도시의 규모가 거대하게 팽창했다가 다시 수축하는 유동적인 양상을 보인다. 군주인 카간조차 도시에 상주하지 않고 평시에는 게르를 이끌며 영토 전역을 유목한다.
+    </p>
+
+    <h3 id="s-5-2">5.2. 도시 구획</h3>
+    <ul>
+        <li><strong>내부 정주 구역:</strong> 흙과 돌로 견고하게 축조한 성벽으로 둘러싸인 구역이다. 내부에는 이동할 수 없는 석조 건물들이 배치되어 있다. 대장간 화로를 다루는 기술자, 의사, 외부 유입 학자 등 한 장소에 고정되어야만 기술을 구현할 수 있는 필수 인력들이 정착하여 생활한다.</li>
+        <li><strong>외곽 유목 구역:</strong> 성벽 바깥으로 펼쳐진 평원이다. 평소에는 비어 있거나 소수 집단만 머무르지만, 대규모 집회나 겨울철 피항 시기가 도래하면 수만 동에 달하는 이동식 텐트가 지평선을 메우며 거대한 외곽 시가지를 형성한다.</li>
+    </ul>
+
+    <h2 id="s-6">6. 카르샨 카간국 공통 기예</h2>
+
+    <h3 id="s-6-1">6.1. 전승 특성</h3>
+    <p>
+        마탑의 마도체계나 귀족 가문의 비전 기예처럼 서책으로 정립된 것이 아니라, 세대와 세대를 거치며 입에서 입으로 구전되어 전해진 고유 기술이다. 거친 자연 속에서 살아남기 위한 필수 요소이기에 핏줄이나 신분에 상관없이 카간국의 유목민이라면 거의 모두가 익히고 있다.
+    </p>
+
+    <h3 id="s-6-2">6.2. 주요 기예 목록</h3>
+    <ul>
+        <li><strong>준마오러유도법:</strong> 사람이 아닌 말을 대상으로 고안된 동물 전용 <a href="aether_aura.html" class="wiki-link">오러</a> 각성 유도법이다. 말이 체내로 에테르를 흡수하여 오러형 괴수에 준하는 강인한 체력과 근력을 갖추도록 유도한다.</li>
+        <li><strong>마상전투총람:</strong> 질주하는 말 위에서 곡도와 활을 다루는 기마 전투의 정수를 집대성한 무술이다. 단순한 무기 조작을 넘어 기마술 자체가 극한으로 결합해 있다. 빠른 속도를 바탕으로 적의 기세를 찍어 누르고 압도하여 전장을 장악하는 '패의 묘리'가 핵심으로 작용한다.</li>
+        <li><strong>패풍도세법:</strong> 유목민의 가혹한 생존 방식 그 자체가 오러단련법으로 승화된 체계이다. 정형화된 특정 동작을 반복하기보다 자연과 맞서 싸우는 유목민의 거친 삶 속에서 에테르가 단련된다. 수백 년 전 솔롱고 대연합 이전의 고대 유목 시절, 북동쪽 소국에서 납치된 어느 학자가 이들의 생활상을 두고 '바람을 지배하고 세상을 헤쳐 나가는 방법'이라는 뜻으로 명명한 것이 부족 전체로 퍼졌다. 평범한 운동으로 얻는 오러와 달리, 유목 생활과 결합하여 고유하고 특색 있는 성질의 오러를 구축한다.</li>
+        <li><strong>질풍일체귀결:</strong> <em>"나와 말은 한 몸처럼 움직이며, 우리의 몸은 마침내 전장을 휩쓰는 바람이 된다"</em>라는 강렬한 일체감과 질주 속도를 심상으로 품는 <a href="aether_qi.html" class="wiki-link">심법</a>이다. 연마할수록 말과의 교감 능력이 극한으로 오르며, 정제되는 <a href="aether_qi.html" class="wiki-link">기</a>의 흐름이 날카롭고 거센 바람의 성질을 띠게 된다.</li>
+    </ul>
+
+    <h2 id="s-7">7. 종교</h2>
+    <p>
+        공식적인 경전이나 정형화된 교리가 존재하지 않는 다신교 신앙인 하늘 신앙을 믿는다. 최고신으로 섬기는 대상은 '하늘'이다.
+    </p>
+    <p>
+        신앙 체계가 명문화되지 않고 지극히 파편화되어 있어, 동일한 하늘 신앙을 공유하더라도 개개인에게서 발현되는 신성력의 외형과 성질이 제각각 다르게 나타나는 특성을 보인다.
+    </p>
+
+    <h2 id="s-8">8. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_ezed_desert.html" class="wiki-link">에제드 대사막</a></li>
+        <li><a href="aether_parma_duchy.html" class="wiki-link">파르마 공작령</a></li>
+        <li><a href="aether_promise_solongo_war.html" class="wiki-link">프로미스-솔롱고 전쟁</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
