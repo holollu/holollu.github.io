@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>엔테라 해 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">엔테라 해</div>
+    <div class="wiki-date">최근 수정 시각: 998-08-22 13:45:09</div>
+
+    <div class="infobox">
+        <div class="infobox-title">엔테라 해</div>
+        <table class="infobox-table">
+            <tr>
+                <th>분류</th>
+                <td>내해, 지형</td>
+            </tr>
+            <tr>
+                <th>위치</th>
+                <td>대륙 남북 축 중앙, 동서 축 서쪽</td>
+            </tr>
+            <tr>
+                <th>연결 수역</th>
+                <td>외해 (비안테라 해협)</td>
+            </tr>
+            <tr>
+                <th>북쪽 경계</th>
+                <td><a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a></td>
+            </tr>
+            <tr>
+                <th>남쪽 경계</th>
+                <td><a href="aether_ezed_desert.html" class="wiki-link">에제드 대사막</a></td>
+            </tr>
+            <tr>
+                <th>내부 마경</th>
+                <td><a href="aether_volca_island.html" class="wiki-link">볼카 섬</a></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 지리 및 경계</a>
+                <ul>
+                    <li><a href="#s-2-1">2.1. 위치 및 주변 형세</a></li>
+                    <li><a href="#s-2-2">2.2. 유입 하천</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-3">3. 비안테라 해협</a></li>
+            <li><a href="#s-4">4. 볼카 섬</a></li>
+            <li><a href="#s-5">5. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        비안테라 해협을 통해 다른 바다와 통하는 광활한 내해이다.
+    </p>
+
+    <h2 id="s-2">2. 지리 및 경계</h2>
+
+    <h3 id="s-2-1">2.1. 위치 및 주변 형세</h3>
+    <p>
+        대륙 남북 축으로는 중앙에, 동서 축으로는 서쪽에 자리 잡고 있다.
+    </p>
+    <ul>
+        <li><strong>북쪽 경계:</strong> <a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a>의 남부 영토와 맞닿아 있다. 제국의 서남단 해안선인 <a href="aether_pelagos_duchy.html" class="wiki-link">펠라고스 공작령</a> 등이 해역의 북서부 길목을 차지하고 있다.</li>
+        <li><strong>남쪽 경계:</strong> 광활한 아열대 건조 지대인 <a href="aether_ezed_desert.html" class="wiki-link">에제드 대사막</a>이 위치한다.</li>
+    </ul>
+
+    <h3 id="s-2-2">2.2. 유입 하천</h3>
+    <p>
+        엔테라 해의 동북쪽에 자리 잡은 언덕 지형으로 인해 발생하는 <a href="aether_rata_river.html" class="wiki-link">라타 강</a>의 분류인 <a href="aether_ramus_river.html" class="wiki-link">라무스 강</a>이 서남쪽 방향으로 흘러들어온다.
+    </p>
+
+    <h2 id="s-3">3. 비안테라 해협</h2>
+    <p>
+        엔테라 해와 외부의 외해를 연결하는 통로 역할을 하는 해협이다.
+    </p>
+    <ul>
+        <li><strong>위치:</strong> 대륙 남북 축으로는 중앙에, 동서 축으로는 극서쪽에 위치한다.</li>
+    </ul>
+
+    <h2 id="s-4">4. 볼카 섬</h2>
+    <p>
+        엔테라 해 중앙부에 상시 분출 중인 화산섬이자 대형 마경인 <a href="aether_volca_island.html" class="wiki-link">볼카 섬</a>이 자리 잡고 있다.
+    </p>
+    <p>
+        화산과 바다 성질의 <a href="aether_aether.html" class="wiki-link">에테르</a>가 높은 농도로 밀집해 있으며, 군주격 괴수인 아쉬가르가 서식한다. 상세한 환경 및 괴수 생태는 <a href="aether_volca_island.html" class="wiki-link">볼카 섬</a> 문서를 참고한다.
+    </p>
+
+    <h2 id="s-5">5. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_volca_island.html" class="wiki-link">볼카 섬</a></li>
+        <li><a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a></li>
+        <li><a href="aether_pelagos_duchy.html" class="wiki-link">펠라고스 공작령</a></li>
+        <li><a href="aether_ramus_river.html" class="wiki-link">라무스 강</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
