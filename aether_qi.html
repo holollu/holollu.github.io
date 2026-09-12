@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">기</div>
+    <div class="wiki-date">최근 수정 시각: 999-01-03 18:12:15</div>
+
+    <div class="infobox">
+        <div class="infobox-title">기</div>
+        <table class="infobox-table">
+            <tr>
+                <th>분류</th>
+                <td>정제형 에테르계 에너지</td>
+            </tr>
+            <tr>
+                <th>정제 매개</th>
+                <td>정신 (심상, 신앙)</td>
+            </tr>
+            <tr>
+                <th>경지 단위</th>
+                <td>1성 ~ 10성</td>
+            </tr>
+            <tr>
+                <th>보유 위험성</th>
+                <td>흡수 시 주의, 흡수 후 안전</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 정제 및 흡수 메커니즘</a></li>
+            <li><a href="#s-3">3. 운용 및 특성</a>
+                <ul>
+                    <li><a href="#s-3-1">3.1. 심신 변화</a></li>
+                    <li><a href="#s-3-2">3.2. 방출의 자유로움</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-4">4. 심법</a></li>
+            <li><a href="#s-5">5. 신성력</a></li>
+            <li><a href="#s-6">6. 심법의 교체 및 개조</a>
+                <ul>
+                    <li><a href="#s-6-1">6.1. 변경 원칙과 위험성</a></li>
+                    <li><a href="#s-6-2">6.2. 교체 허용 예외</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-7">7. 사회적 위상 및 분포</a></li>
+            <li><a href="#s-8">8. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        지성체의 정신과 심상을 매개로 정제한 <a href="aether_aether.html" class="wiki-link">에테르</a>이다.
+    </p>
+    <p>
+        순수한 육체 단련을 거치는 오러나 일정한 순환 패턴을 유지해야 하는 마나와 달리, 기는 수련자가 품은 내면의 관념과 심상에 에테르를 결속시키는 방식을 취한다. 흡수 시에만 엄밀한 통제를 거치면 체내에 안착한 이후에는 변질화를 일으키지 않고 안전하게 유지된다.
+    </p>
+
+    <h2 id="s-2">2. 정제 및 흡수 메커니즘</h2>
+    <p>
+        기를 정제하고 체내에 갈무리하는 과정은 다음 세 단계로 진행된다.
+    </p>
+    <ol>
+        <li><strong>심상 형성:</strong> 정신 속에서 확고한 심상을 구축한다.</li>
+        <li><strong>에테르 흡수:</strong> 의지권역 내에 존재하는 에테르를 체내로 끌어들인다.</li>
+        <li><strong>동화:</strong> 유입된 에테르를 미리 세워둔 심상에 맞추어 동화시켜 고유한 기로 정제한다.</li>
+    </ol>
+
+    <h2 id="s-3">3. 운용 및 특성</h2>
+
+    <h3 id="s-3-1">3.1. 심신 변화</h3>
+    <p>
+        기는 사용자가 축적한 심상의 본질과 성질에 감응하여, 사용자의 신체적 특성과 정신적 사고방식을 심상과 유사한 방향으로 점진적으로 변화시킨다.
+    </p>
+    <ul>
+        <li><strong>사례:</strong> 뜨겁고 순수한 양기를 품은 구양신공을 수련할 경우, 신체는 열기를 품은 양기의 체질로 변하고 사고는 명료하고 긍정적으로 흐르며 온화하고 따뜻한 성품을 형성하게 된다.</li>
+    </ul>
+
+    <h3 id="s-3-2">3.2. 방출의 자유로움</h3>
+    <p>
+        기는 사용자가 품은 심상의 묘리에 부합하기만 한다면 외부로의 투사와 방출이 비교적 자유롭다.
+    </p>
+
+    <h2 id="s-4">4. 심법</h2>
+    <p>
+        개인의 모호한 상상에만 의존하던 심상을 보다 체계적이고 고차원적인 구조로 확립하고, 이를 타인에게 전수 및 공유할 수 있도록 규격화한 기 수련 체계를 뜻한다.
+    </p>
+    <ul>
+        <li><strong>기원:</strong> 상고시대에 대륙으로 표류해 온 무림계 <a href="aether_dimensional_lost.html" class="wiki-link">차원미아</a>가 최초로 전파하여 체계화된 것으로 알려져 있다.</li>
+    </ul>
+
+    <h2 id="s-5">5. 신성력</h2>
+    <p>
+        종교적 신앙과 경전의 가르침으로 개인의 심상을 대체하여 정제한 기의 일종이다.
+    </p>
+    <ul>
+        <li><strong>사회적 인식:</strong> 본질적인 에너지의 메커니즘은 기와 동일하나, 신성력 사용자에게 신성력과 기가 같다고 발언하는 것은 모욕으로 받아들여진다.</li>
+    </ul>
+
+    <h2 id="s-6">6. 심법의 교체 및 개조</h2>
+
+    <h3 id="s-6-1">6.1. 변경 원칙과 위험성</h3>
+    <p>
+        기존에 익혀 체내에 자리 잡은 심법을 버리고 새로운 심법으로 변경하는 행위는 극히 위험하다. 기존 기의 성질과 새로운 심상의 성질이 충돌할 경우 신체와 정신에 치명적인 손상이 발생할 수 있으며, 이때 초래된 부작용은 영구적인 후유증을 남기거나 치료가 불가능할 수 있다.
+    </p>
+
+    <h3 id="s-6-2">6.2. 예외</h3>
+    <p>
+        다음 세 가지 경우에 한하여 최소한의 위험만으로 심법의 교체나 개조가 가능하다.
+    </p>
+    <ul>
+        <li><strong>보유한 성질이 약한 경우:</strong> 개인의 단순한 상상만으로 쌓아 올린 기초적인 기이거나, 처음부터 타 심법으로의 전환을 상정하고 만들어진 무색무취의 기초 심법을 익힌 상태라면 약간의 시간만 소모하여 큰 부작용 없이 새로운 심법을 덮어씌울 수 있다.</li>
+        <li><strong>점진적 변형 및 개조:</strong> 기존에 익힌 심법의 근간과 뼈대를 유지한 채, 이를 바탕으로 미세한 변화를 주거나 단계적으로 발전시켜 나가는 경우이다.</li>
+        <li><strong>성질의 유사성:</strong> 새롭게 수련하려는 심법이 기존 심법의 성질, 묘리, 심상과 매우 유사하거나 상호 호환되는 경우이다.</li>
+    </ul>
+
+    <h2 id="s-7">7. 사회적 위상 및 분포</h2>
+    <ul>
+        <li><strong>기사단과의 적성:</strong> 기사단에서 가장 널리 선호하는 정제 에너지이다.</li>
+    </ul>
+
+    <h2 id="s-8">8. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_aether.html" class="wiki-link">에테르</a></li>
+        <li><a href="aether_level.html" class="wiki-link">경지</a></li>
+        <li><a href="aether_aura.html" class="wiki-link">오러</a></li>
+        <li><a href="aether_mana.html" class="wiki-link">마나</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
