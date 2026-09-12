@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마나 패턴 붕괴 유도 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">마나 패턴 붕괴 유도</div>
+    <div class="wiki-date">최근 수정 시각: 998-09-14 16:21:05</div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 메커니즘</a></li>
+            <li><a href="#s-3">3. 특성 및 위험성</a>
+                <ul>
+                    <li><a href="#s-3-1">3.1. 생존 도박과 제어 불능성</a></li>
+                    <li><a href="#s-3-2">3.2. 발현 이능의 위력</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-4">4. 전승과 학계의 인식</a></li>
+            <li><a href="#s-5">5. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        생명의 위협을 느끼고 더 이상 시도할 수 있는 수단이 아무것도 남지 않은 절체절명의 순간, 마법사가 자신의 의지로 심장에 새겨진 <a href="aether_magic_system.html" class="wiki-link">마도체계</a>의 순환 패턴을 강제로 풀어버리는 행위이다.
+    </p>
+    <p>
+        마법사 사회에서는 공식 명칭 외에도 <strong>에테르 룰렛</strong>, <strong>변질 룰렛</strong>, 혹은 단순히 <strong>룰렛</strong>이라는 속칭으로 널리 불린다.
+    </p>
+
+    <h2 id="s-2">2. 메커니즘</h2>
+    <p>
+        <a href="aether_mana.html" class="wiki-link">마나</a>는 의지적 억제를 유지한 채 순환 구조로 패턴화시킨 에테르이므로, 그 순환이 강제로 깨어지는 순간 질서가 붕괴된다.
+    </p>
+    <ul>
+        <li><strong>비정제 환원:</strong> 순환 패턴이 해제된 체내의 마나는 정제 이전의 비정제 <a href="aether_aether.html" class="wiki-link">에테르</a>로 즉각 환원된다.</li>
+        <li><strong>급격한 변질화:</strong> 통제 장치를 잃은 대량의 비정제 에테르가 체내에 방류되면서 시전자에게 급격하고 치명적인 변질화를 일으킨다.</li>
+    </ul>
+
+    <h2 id="s-3">3. 특성 및 위험성</h2>
+
+    <h3 id="s-3-1">3.1. 생존 도박과 제어 불능성</h3>
+    <p>
+        이 행위의 목적은 비정제 에테르가 일으키는 폭력적인 변질화 과정 속에서, 긍정적인 변질인 <a href="aether_special_ability.html" class="wiki-link">이능</a>이 기적적으로 발현되어 눈앞의 사지를 벗어나기를 기대하는 일종의 극단적인 생존 도박이다.
+    </p>
+    <ul>
+        <li><strong>유도 불가능:</strong> 에테르가 초래하는 변질화의 방향성은 인위적으로 통제하거나 유도하는 것이 사실상 불가능하다.</li>
+        <li><strong>극히 낮은 확률:</strong> 이능이 안전하게 각성할 확률은 극히 희박하며, 대다수는 끔찍한 기형 변이나 신체 붕괴를 맞이하게 된다.</li>
+    </ul>
+
+    <h3 id="s-3-2">3.2. 발현 이능의 위력</h3>
+    <p>
+        자연 상태에서 우발적으로 이능이 발현되는 일반적인 환경에 비해, 마법사의 체내에 응축되어 있던 마나의 총량은 압도적으로 높다.
+    </p>
+    <p>
+        따라서 극소수의 확률을 뚫고 이능 발현에 성공할 경우, 그렇게 획득한 이능은 일반적인 경우보다 매우 강력한 위력을 지니는 경우가 대부분이다.
+    </p>
+
+    <h2 id="s-4">4. 전승과 학계의 인식</h2>
+    <p>
+        자폭에 가까운 파멸적인 위험성 탓에 각 <a href="aether_magic_spire.html" class="wiki-link">마탑</a> 등 공식 마법 교육 기관에서 정규 교과로 가르치는 일은 없다.
+    </p>
+    <p>
+        그러나 학술 논문이나 연구자들 간의 교류를 통해 알음알음 기록이 공유되어 왔기에, 대륙에 존재하는 대부분의 마법사는 이 행위의 개념과 속칭을 사전에 인지하고 있다.
+    </p>
+
+    <h2 id="s-5">5. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_aether.html" class="wiki-link">에테르</a></li>
+        <li><a href="aether_mana.html" class="wiki-link">마나</a></li>
+        <li><a href="aether_magic_system.html" class="wiki-link">마도체계</a></li>
+        <li><a href="aether_circle.html" class="wiki-link">서클</a></li>
+        <li><a href="aether_special_ability.html" class="wiki-link">이능</a></li>
+        <li><a href="aether_magic_spire.html" class="wiki-link">마탑</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
