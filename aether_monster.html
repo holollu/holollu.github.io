@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>괴수 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">괴수</div>
+    <div class="wiki-date">최근 수정 시각: 909-8-14 06:00:12</div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 분류</a>
+                <ul>
+                    <li><a href="#s-2-1">2.1. 오러형</a></li>
+                    <li><a href="#s-2-2">2.2. 변질형</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-3">3. 무력 수준의 표기</a></li>
+            <li><a href="#s-4">4. 생태 및 서식</a>
+                <ul>
+                    <li><a href="#s-4-1">4.1. 주요 발생처</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-5">5. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        체내에 <a href="aether_aether.html" class="wiki-link">에테르</a>를 수용하여 사용하는 동물의 총칭이다.
+    </p>
+    <p>
+        야생 동물이 자연 환경의 에테르에 적응하여 강화되거나 변이를 겪으면서 발생한다. 일반적인 대중은 이를 세밀히 구분하지 않으며, 괴수의 세부적인 유형 분류는 주로 학자나 <a href="aether_adventurers_guild.html" class="wiki-link">모험가</a> 등의 집단에서 이루어진다.
+    </p>
+
+    <h2 id="s-2">2. 분류</h2>
+
+    <h3 id="s-2-1">2.1. 오러형</h3>
+    <p>
+        체내에서 <a href="aether_aura.html" class="wiki-link">오러</a>를 각성한 동물이다.
+    </p>
+    <ul>
+        <li><strong>형질 유지:</strong> 바탕이 된 원본 동물의 본래 성향, 지능, 기본적인 외형적 구조를 그대로 유지한다.</li>
+        <li><strong>신체 강화:</strong> 오러의 영향으로 순수한 신체 능력, 체구의 크기, 식욕 등이 원본 생물에 비해 비약적으로 증폭된다.</li>
+        <li><strong>대표 예시:</strong> 매우 거대한 크기로 성장한 문어인 크라켄이 대표적이다.</li>
+    </ul>
+
+    <h3 id="s-2-2">2.2. 변질형</h3>
+    <p>
+        정제되지 않은 비정제 에테르의 직접적인 영향에 의해 본래의 구조가 비틀리고 변질된 동물이다.
+    </p>
+    <ul>
+        <li><strong>예측 불가능성:</strong> 변질화의 방향성을 사전에 가늠할 수 없기에, 개체의 지능 수준, 생태적 성향, 전투 능력의 강함, 외형의 변화 형태 등을 전혀 예측할 수 없다.</li>
+        <li><strong>복합 유형의 취급:</strong> 에테르에 의해 변질된 개체가 오러까지 각성한 복합 개체라 할지라도, 분류상으로는 오러형이 아닌 변질형으로 통합하여 취급한다.</li>
+        <li><strong>대표 예시:</strong> 이종 간 강제 번식을 시도하는 촉수 여우 등이 존재한다.</li>
+    </ul>
+
+    <h2 id="s-3">3. 무력 수준의 표기</h2>
+    <p>
+        괴수의 전투력과 위험도를 나타낼 때는 독자적인 단위를 쓰지 않고, <a href="aether_pan-human_species.html" class="wiki-link">범인류종</a>이 사용하는 <a href="aether_level.html" class="wiki-link">경지</a> 표기를 그대로 차용하여 기재한다.
+    </p>
+    <ul>
+        <li><strong>표기 방식:</strong> 특정 개체를 두고 3성 극한급 변질형 괴수라 칭한다면, 이는 3성 혹은 3서클 극한의 에테르계 에너지 사용자와 대등한 수준의 무력을 보유하고 있다는 의미이다.</li>
+        <li><strong>사회적 의뢰 난이도:</strong> <a href="aether_adventurers_guild.html" class="wiki-link">모험가 길드</a> 등에서 괴수 토벌 의뢰를 책정할 때도 해당 경지 체계를 차용하여 적정 토벌 인원의 무력을 안내한다.</li>
+    </ul>
+
+    <h2 id="s-4">4. 생태 및 서식</h2>
+
+    <h3 id="s-4-1">4.1. 주요 발생처</h3>
+    <p>
+        괴수는 에테르 밀도가 높은 마경 지역에서 가장 활발하게 발생하며 다수가 서식한다. 그러나 마경에만 국한되지 않고, 에테르가 흐르는 일반 야생 환경이나 도시 내의 어두운 지하 배수 시설 등에서도 자연 상태와 동일한 원리로 자생적인 출몰이 일어난다.
+    </p>
+
+    <h2 id="s-5">5. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_aether.html" class="wiki-link">에테르</a></li>
+        <li><a href="aether_adventurers_guild.html" class="wiki-link">모험가 길드</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
