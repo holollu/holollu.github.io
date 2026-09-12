@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>펠라고스 공작령 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 테이블 */
+        .wiki-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0 20px 0;
+            font-size: 0.92rem;
+        }
+
+        .wiki-table th, .wiki-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        .wiki-table th {
+            background-color: var(--main-color);
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">펠라고스 공작령</div>
+    <div class="wiki-date">최근 수정 시각: 999-12-30 15:40:12</div>
+
+    <div class="infobox">
+        <div class="infobox-title">펠라고스 공작령</div>
+        <table class="infobox-table">
+            <tr>
+                <th>상징</th>
+                <td>밧줄이 묶여있는 닻</td>
+            </tr>
+            <tr>
+                <th>소속</th>
+                <td><a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a></td>
+            </tr>
+            <tr>
+                <th>위치</th>
+                <td>제국 서남단 해안선</td>
+            </tr>
+            <tr>
+                <th>영주</th>
+                <td>공작 운다 펠라고스</td>
+            </tr>
+            <tr>
+                <th>지배 가문</th>
+                <td>펠라고스 가문</td>
+            </tr>
+            <tr>
+                <th>소속 기사단</th>
+                <td>템페스타 기사단</td>
+            </tr>
+            <tr>
+                <th>기후</th>
+                <td>엔테라 해성 기후</td>
+            </tr>
+            <tr>
+                <th>거주 종족</th>
+                <td>범인류종 전반 (혼혈 비율 높음)</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 지리 및 환경</a></li>
+            <li><a href="#s-3">3. 주민 구성 및 사회상</a></li>
+            <li><a href="#s-4">4. 산업 및 군사</a>
+                <ul>
+                    <li><a href="#s-4-1">4.1. 해상 무역과 원양 항로</a></li>
+                    <li><a href="#s-4-2">4.2. 조선업 및 어업</a></li>
+                    <li><a href="#s-4-3">4.3. 해군 함대와 수병</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-5">5. 펠라고스 가문</a>
+                <ul>
+                    <li><a href="#s-5-1">5.1. 개요</a></li>
+                    <li><a href="#s-5-2">5.2. 가문 기예</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-6">6. 템페스타 기사단</a>
+                <ul>
+                    <li><a href="#s-6-1">6.1. 개요 및 임무</a></li>
+                    <li><a href="#s-6-2">6.2. 무장 및 복식</a></li>
+                    <li><a href="#s-6-3">6.3. 편제 및 계급</a></li>
+                    <li><a href="#s-6-4">6.4. 지휘부의 특이성</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-7">7. 나비갈리스</a>
+                <ul>
+                    <li><a href="#s-7-1">7.1. 개요 및 방어 체계</a></li>
+                    <li><a href="#s-7-2">7.2. 계단식 도시 구획</a></li>
+                    <li><a href="#s-7-3">7.3. 주요 시설</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-8">8. 기타 직할지</a></li>
+            <li><a href="#s-9">9. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        <a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a>의 서남단 해안선에 위치한 공작령이다. 제국 개국 일등 공신 세 가문 중 하나인 펠라고스 가문이 대대로 통치하고 있으며, 영주인 공작은 제국 황제의 직속 봉신이다.
+    </p>
+    <p>
+        내해인 <a href="aether_entera_sea.html" class="wiki-link">엔테라 해</a>와 외해를 연결하는 비안테라 해협의 길목을 장악하고 있어 제국 해상 교역의 핵심 관문 역할을 수행한다. 대륙 극동 지역과 직통하는 원양 항로의 출발점이자 종착점으로, 전반적으로 개방적이고 활기찬 분위기를 띤다.
+    </p>
+
+    <h2 id="s-2">2. 지리 및 환경</h2>
+    <p>
+        여름에는 기온이 높고 건조하며 맑은 날씨가 지속되고, 겨울에는 날씨가 온화하고 비가 자주 내리는 엔테라 해성 기후를 지닌다.
+    </p>
+
+    <h2 id="s-3">3. 주민 구성 및 사회상</h2>
+    <p>
+        거주 종족은 마족을 제외한 다양한 <a href="aether_pan-human_species.html" class="wiki-link">범인류종</a>이 평범한 비율로 거주하고 있다. 다만 타 영지에 비해 여러 종족 간 혼혈의 비율이 뚜렷하게 높게 나타난다.
+    </p>
+    <p>
+        치안은 극과 극 형태의 양극화를 보인다. 귀족 가문이나 거상들이 모여 사는 중심 거주 구역은 경비가 삼엄하여 치안이 매우 뛰어나지만, 수많은 선박과 거친 선원들이 오가는 부둣가와 선창가 일대는 소란과 범죄가 잦아 치안이 열악하다.
+    </p>
+
+    <h2 id="s-4">4. 산업 및 군사</h2>
+
+    <h3 id="s-4-1">4.1. 해상 무역과 원양 항로</h3>
+    <p>
+        공작령 경제의 근간은 해상 교역에 있다. 특히 대륙 극남부에 위치한 대형 마경인 <a href="aether_tropical_rainforest.html" class="wiki-link">열대우림</a> 이남 해역을 우회하는 원양 항로를 직접 개척하여 운영하고 있다.
+    </p>
+    <p>
+        거리상의 한계로 인해 육로로는 교류가 불가능에 가까운 대륙 극동 지역과 해상으로 직접 연결되어 있으며, 극동에서 실어 온 진귀한 물품들을 제국 내륙으로 유통하며 막대한 부를 축적한다.
+    </p>
+
+    <h3 id="s-4-2">4.2. 조선업 및 어업</h3>
+    <p>
+        거친 외해의 풍파를 견딜 수 있는 대형 원양 상선과 군함을 건조하는 조선업이 대규모로 발달해 있다. 또한 연안과 근해를 아우르는 어업, 조개 채취, 해초 건조, 소금 생산 등의 해양 산업이 하류층과 연안 마을의 주된 생계 수단으로 정착되어 있다.
+    </p>
+
+    <h3 id="s-4-3">4.3. 해군 함대와 수병</h3>
+    <p>
+        영지 방어와 원양 항로 수호를 위해 독자적인 해군 함대를 구축하고 있다. 평시에도 7,000명 내외의 전문 수병을 상시 운용한다. 공작령 당국은 수병들에게 기초적인 평범한 <a href="aether_aura.html" class="wiki-link">오러단련법</a>을 보급하여 조직적으로 훈련시키고 있다.
+    </p>
+
+    <h2 id="s-5">5. 펠라고스 가문</h2>
+
+    <h3 id="s-5-1">5.1. 개요</h3>
+    <p>
+        펠라고스 공작령을 세습 지배하는 공작 가문이다. 가문 구성원의 종족은 혼혈이 섞여 있으나 대부분 인간으로 이루어져 있다. 본거지인 공작성은 무역 거점 도시인 나비갈리스의 해안 절벽 위에 자리하고 있다.
+    </p>
+
+    <h3 id="s-5-2">5.2. 가문 기예</h3>
+    <p>
+        거친 해양 환경과 승선 전투에 특화된 세 가지 고유 기예를 정립하여 계승해 오고 있다.
+    </p>
+    <ul>
+        <li><strong>풀수스 카리네:</strong> 초대 공작 카이로스 펠라고스가 창안한 고유한 <a href="aether_aura.html" class="wiki-link">오러단련법</a>이다. 오랜 풍파를 견디며 염분과 미세한 에테르를 머금어 강철보다 단단해진 퇴역 군함의 선체를 맨몸으로 타격하여 수련한다. 타격 순간 목재로부터 되돌아오는 강력한 반발력을 전신으로 받아내 오러를 뼈와 근육 깊숙이 동화시킨다. 신체와 오러에 스프링과 같은 극도의 탄성을 부여하여 외부의 물리적 충격을 일시적으로 흡수한 뒤 폭발적인 반발력으로 되돌려주는 데 특화되며, 하체와 코어 지지력이 비정상적으로 발달한다.</li>
+        <li><strong>리수스 마리스:</strong> 제7대 공작 세실리아 펠라고스가 창안한 <a href="aether_qi.html" class="wiki-link">심법</a>이다. 부드럽게 흐르다 거칠게 몰아치며 끝내 하얀 거품과 함께 유쾌하게 부서져 바다로 돌아가는 '파도의 유희'를 심상으로 품는다. 이를 연마한 수련자는 대체로 쾌활하고 호탕한 성향을 띠게 된다.</li>
+        <li><strong>코르다 앙코라:</strong> 제10대 공작 루카스 펠라고스가 창안한 변칙적인 무술이다. 긴 밧줄이나 쇠사슬이 연결된 5kg 무게의 소형 닻과 커틀러스를 함께 사용한다. 원거리에서는 닻을 투척하여 적을 끌어당기거나 중심을 무너뜨리고, 근거리에서는 커틀러스로 연속적인 공세를 몰아친다. 지형지물에 닻을 걸고 몸을 당겨 입체적인 공중 기동을 펼치는 데도 활용된다.</li>
+    </ul>
+
+    <h2 id="s-6">6. 템페스타 기사단</h2>
+
+    <h3 id="s-6-1">6.1. 개요 및 임무</h3>
+    <p>
+        펠라고스 가문이 설립하고 운용하는 영지 기사단이다. 본부는 나비갈리스 중심구획 내 공작성 남동쪽에 인접해 있다.
+    </p>
+    <ul>
+        <li><strong>규모:</strong> 소속 기사의 수는 250명 내외이다. 기사단장은 임브라 케투스가 맡고 있다.</li>
+        <li><strong>수행 임무:</strong> 주요 인사 호위와 치안 보조 등 통상적인 기사단의 임무 외에도, 해상 무역로 및 비안테라 해협 방어, 해적 및 해양 괴수 토벌, 그리고 펠라고스 함대 승선 전투 지휘를 전담한다.</li>
+    </ul>
+
+    <h3 id="s-6-2">6.2. 무장 및 복식</h3>
+    <ul>
+        <li><strong>무장:</strong> 커틀러스, 로프 혹은 쇠사슬이 연결된 소형 닻, 승선 활동에 적합하게 경량화된 방수 가죽 갑주를 사용한다.</li>
+        <li><strong>정복:</strong> 네이비색 코트, 흰색 스탠드칼라 셔츠, 네이비색 조끼, 부츠 안으로 밀어 넣는 흰색 슬림 핏 면바지, 가죽 부츠, 금색 견장줄로 구성된다.</li>
+    </ul>
+
+    <h3 id="s-6-3">6.3. 편제 및 계급</h3>
+    <p>
+        소속 기사들의 직위와 <a href="aether_level.html" class="wiki-link">경지</a> 구성은 다음과 같다.
+    </p>
+    <table class="wiki-table">
+        <tr>
+            <th>계급</th>
+            <th>해당 경지</th>
+            <th>인원 및 비고</th>
+        </tr>
+        <tr>
+            <td>견습기사</td>
+            <td>1성 ~ 3성</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>정규기사</td>
+            <td>4성 ~ 5성</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>상급기사</td>
+            <td>6성 ~ 7성</td>
+            <td>24명</td>
+        </tr>
+        <tr>
+            <td>부단장</td>
+            <td>8성 극한</td>
+            <td>3명 (바스코 코스타, 티아고 바레아, 네리다 올라스)</td>
+        </tr>
+        <tr>
+            <td>기사단장</td>
+            <td>8성 입문</td>
+            <td>1명 (임브라 케투스)</td>
+        </tr>
+    </table>
+
+    <h3 id="s-6-4">6.4. 지휘부의 특이성</h3>
+    <p>
+        기사단장보다 부단장들의 무력 경지가 더 높게 형성되어 있는 이례적인 지휘 구조를 띤다. 세 명의 부단장은 모두 동세대의 노장 기사들로, 수명이 얼마 남지 않았음을 자각하고 있다. 이들은 복잡한 행정 업무에 적성이 맞지 않아, 새롭게 8성에 진입한 임브라 케투스에게 단장 직위와 골치 아픈 사무를 넘겨준 뒤 부담 없는 부단장 직책에 머무르고 있다.
+    </p>
+
+    <h2 id="s-7">7. 나비갈리스</h2>
+
+    <h3 id="s-7-1">7.1. 개요 및 방어 체계</h3>
+    <p>
+        펠라고스 공작성이 위치한 해안 성곽도시이자 대륙 최대 규모의 무역 항만도시이다. 비안테라 해협 길목의 거대한 천연 만과 해안 절벽을 끼고 발달하였다.
+    </p>
+    <ul>
+        <li><strong>육상 방벽:</strong> 해안 절벽과 육지 시가지를 감싸는 반원형 이중 성벽으로 구성된다. 외성에는 동쪽과 북쪽에 각각 1개씩 총 2개의 육상 성문이 설치되어 있으며, 내성에는 항구 방향인 남쪽과 육지 방향인 북쪽으로 통하는 2개의 성문이 있다.</li>
+        <li><strong>해상 차단선:</strong> 만 입구의 좁은 해로 양쪽에 우뚝 솟은 두 개의 석조 요새탑 사이에 거대한 철제 쇠사슬 차단막이 설치되어 있다. 야간이나 전시, 선박 검문 시 바닥에 가라앉혀 두었던 굵은 쇠사슬을 수면 바로 위까지 끌어올려 만 전체를 해상으로부터 봉쇄한다.</li>
+    </ul>
+
+    <h3 id="s-7-2">7.2. 계단식 도시 구획</h3>
+    <p>
+        고저차와 성벽을 기준으로 시가지가 계단식으로 나누어져 있다.
+    </p>
+    <ul>
+        <li><strong>중심구획:</strong> 가장 높은 해안 절벽 위, 내성 안쪽에 위치한다. 펠라고스 공작성, 템페스타 기사단 본부, 해군 사령부가 들어서 있으며 고위 귀족과 거상들이 거주한다.</li>
+        <li><strong>중층 완경사지 구획:</strong> 내성 아래 완만한 비탈면에 위치한다. 해운 중개소, 무역 상사, 항해사·선박설계사 등 전문직과 중산층이 거주하며 고급 상가와 여관이 밀집해 있다.</li>
+        <li><strong>하층 해안 구획:</strong> 평지와 해안선에 걸쳐 형성된 구역이다. 대규모 무역항, 선창가, 어시장, 선원 및 하층민 주거지가 밀집해 유동인구가 매우 많고 소란스러우며 치안이 취약하다.</li>
+        <li><strong>성외 구획:</strong> 외성 바깥 해안선을 따라 조성된 작업 구역이다. 목재 야적장, 대형 조선소, 염장 생선 가공 공장, 선박 해체장 등이 자리 잡고 있다.</li>
+    </ul>
+
+    <h3 id="s-7-3">7.3. 주요 시설</h3>
+    <ul>
+        <li><strong>펠라고스 공작성:</strong> 중심구획 절벽 끝에 자리 잡은 백색 요새형 성채이다. 첨탑 꼭대기에는 <a href="aether_magic_tool.html" class="wiki-link">마도구</a>로 상시 불을 밝히는 대형 등대가 설치되어 있다.</li>
+        <li><strong>극동 대시장:</strong> 하층 해안 구획 동편에 자리한 상설 무역 시장이다. 원양 무역선이 실어 온 대륙 극동의 특산품들이 활발히 거래된다.</li>
+        <li><strong>퇴역선 단련장:</strong> 성외 구획 선박 해체장 한쪽에 마련된 훈련장으로, 가문 기예인 풀수스 카리네를 연마하는 공간이다.</li>
+        <li><strong>모험가 길드 나비갈리스 지부:</strong> 하층 해안 구획 중앙 부둣가 인근에 위치한다. 티크목과 석조를 결합해 지은 3층 건물로 운영된다.</li>
+        <li><strong>세리카 상회 연구실:</strong> 중층 완경사지 구획 북서쪽에 위치한 상회 소유의 시설이다. 공녀 루시아 펠라고스가 주도하는 독자 마도체계 개발 프로젝트의 거점으로 사용되고 있다.</li>
+    </ul>
+
+    <h2 id="s-8">8. 기타 직할지</h2>
+    <ul>
+        <li><strong>벤투라:</strong> 나비갈리스 북동쪽 완만한 구릉지에 위치한 전원형 소도시로, 올리브와 포도 재배가 활발하다.</li>
+        <li><strong>오라:</strong> 나비갈리스 동쪽에 위치한 소박한 어촌으로, 조개 채취와 해초 건조, 소형 어선을 이용한 연안 어업으로 생계를 잇는다.</li>
+        <li><strong>칼라:</strong> 나비갈리스 서쪽 바위 절벽 사이에 깊숙이 파고든 작은 만에 위치한 어촌으로, 소형 선박들의 피항지 역할을 겸한다.</li>
+        <li><strong>마레아:</strong> 칼라 서쪽에 위치하며 비안테라 해협 입구와 맞닿은 해안 소도시이다. 해안가에 대규모 염전이 설치되어 있어 소금을 생산한다.</li>
+    </ul>
+
+    <h2 id="s-9">9. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a></li>
+        <li><a href="aether_entera_sea.html" class="wiki-link">엔테라 해</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
