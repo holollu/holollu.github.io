@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>무상종 불교 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 인용구 스타일 */
+        blockquote {
+            margin: 15px 0;
+            padding: 10px 20px;
+            background-color: var(--main-color);
+            border-left: 4px solid var(--point-color);
+            color: #444;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">무상종 불교</div>
+    <div class="wiki-date">최근 수정 시각: 999-06-18 11:22:04</div>
+
+    <div class="infobox">
+        <div class="infobox-title">무상종 불교</div>
+        <table class="infobox-table">
+            <tr>
+                <th>공식 명칭</th>
+                <td>무상종, 무상종 불교</td>
+            </tr>
+            <tr>
+                <th>분류</th>
+                <td>종교</td>
+            </tr>
+            <tr>
+                <th>상징</th>
+                <td>☸ 혹은 卍</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 기원 및 교세</a></li>
+            <li><a href="#s-3">3. 숭배관 및 부처의 개념</a></li>
+            <li><a href="#s-4">4. 교리 체계</a>
+                <ul>
+                    <li><a href="#s-4-1">4.1. 무상과 무아</a></li>
+                    <li><a href="#s-4-2">4.2. 일중선</a></li>
+                    <li><a href="#s-4-3">4.3. 자성불과 자등명</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-5">5. 조직 및 계급</a></li>
+            <li><a href="#s-6">6. 사찰 및 생활 양식</a></li>
+            <li><a href="#s-7">7. 관습</a>
+                <ul>
+                    <li><a href="#s-7-1">7.1. 법명</a></li>
+                    <li><a href="#s-7-2">7.2. 삭발</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-8">8. 연애와 결혼 규범</a>
+                <ul>
+                    <li><a href="#s-8-1">8.1. 재가신자</a></li>
+                    <li><a href="#s-8-2">8.2. 선사와 승려</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-9">9. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        과거 <a href="aether_dimensional_lost.html" class="wiki-link">차원미아</a>가 전파한 선종이 대륙 서북부에 토착화되며 형성된 종교이다. 무상과 무아의 깨달음, 그리고 일상 속 노동을 통한 수행을 핵심 가치로 삼는다.
+    </p>
+    <p>
+        상징 문양으로는 수레바퀴 형상의 법륜 기호(☸) 혹은 만자 기호(卍)를 사용한다. 내부 신자들은 일반적으로 <strong>무상종</strong> 혹은 <strong>무상종 불교</strong>라고 지칭하며, 외부인들은 통상 <strong>불교</strong>라고 부른다.
+    </p>
+
+    <h2 id="s-2">2. 기원 및 교세</h2>
+    <p>
+        <a href="aether_calendar_era.html" class="wiki-link">제국력</a> 원년보다 1000년 이상 앞선 과거, 대륙 서북부에서 승려 <a href="aether_dimensional_lost.html" class="wiki-link">차원미아</a>가 제자들에게 선종을 가르친 것이 기원이다. 이후 이 가르침이 제자들에 의해 현지에 맞추어 토착화되는 과정에서 변형을 거쳤고, 명칭 또한 '무상종'으로 개칭되었다.
+    </p>
+    <ul>
+        <li><strong>교세:</strong> 대륙 전역을 아우르는 주류 종교의 위치는 아니나, 지식인 계층에게 물어보면 둘 중 하나는 이름을 들어봤다고 대답할 정도의 인지도를 확보하고 있다.</li>
+    </ul>
+
+    <h2 id="s-3">3. 숭배관 및 부처의 개념</h2>
+    <p>
+        다신교적 세계관 속에서 타 종교의 신을 부정하지도, 그렇다고 맹목적으로 긍정하지도 않는 관조적인 태도를 취한다.
+    </p>
+    <ul>
+        <li><strong>부처:</strong> 특정한 신의 고유명사가 아니라 '완전한 깨달음을 얻은 자'를 뜻하는 호칭이다. 무상종에서는 <em>"누구든 깨달음을 얻으면 부처가 된다"</em>고 믿는다.</li>
+    </ul>
+
+    <h2 id="s-4">4. 교리 체계</h2>
+
+    <h3 id="s-4-1">4.1. 무상과 무아</h3>
+    <p>
+        무상종의 근간을 이루는 핵심 교리이다.
+    </p>
+    <blockquote>
+        "모든 흐르는 것은 머무르지 않으니, 붙잡으려는 손끝에 고통이 맺힌다."
+        <br><br>
+        - 무상종의 기초 경전인 무상경의 첫 구절
+    </blockquote>
+    <ul>
+        <li><strong>무상:</strong> 세상의 모든 존재와 현상은 찰나의 순간에도 고정되어 있지 않고 끊임없이 변화한다. 인간이 겪는 고통은 본래 변화하는 대상을 영원히 붙잡아 두고자 갈망하는 집착에서 비롯된다.</li>
+        <li><strong>무아:</strong> '나'라는 존재 역시 영구히 고정불변하는 실체가 아니며, 수많은 인연과 조건이 얽혀 잠시 이루어진 일시적 현상에 불과하다. 이를 자각함으로써 스스로를 가두었던 아집과 헛된 욕망에서 벗어날 수 있다고 가르친다.</li>
+    </ul>
+
+    <h3 id="s-4-2">4.2. 일중선</h3>
+    <p>
+        고요히 앉아 참선하는 좌선에만 머무르지 않고, 일상적인 노동 자체를 고도의 정신 집중이자 수행으로 삼는 실천 규범이다.
+    </p>
+    <blockquote>
+        "밭을 가는 것이 참선이요, 씨앗을 뿌리는 것이 법문이다."
+        <br><br>
+        - 무연 선사가 남긴 법어
+    </blockquote>
+    <ul>
+        <li><strong>노동 수행:</strong> 흙을 일구고 땀을 흘리는 육체적 노동을 정신 수행과 분리하지 않는다.</li>
+        <li><strong>생활과의 밀착:</strong> 진정한 깨달음은 번잡한 일상과 격리된 먼 곳에 있지 않으며, 밥을 먹고 길을 걷는 일상의 모든 찰나에 깨어 있는 마음을 유지하는 것을 참된 수행으로 여긴다.</li>
+    </ul>
+
+    <h3 id="s-4-3">4.3. 자성불과 자등명</h3>
+    <p>
+        외부의 권위나 초월자에 의존하지 않고 내면의 주체성을 확립할 것을 강조한다.
+    </p>
+    <blockquote>
+        "밖에서 신을 찾지 말라. 네 안의 가려진 거울을 닦아내면, 그곳에 이미 깨달은 자가 서 있다."
+        <br><br>
+        - 무상종 승려들이 신자들에게 자주 건네는 가르침
+    </blockquote>
+    <ul>
+        <li><strong>자성불:</strong> 모든 존재는 내면에 깨달음에 도달할 수 있는 씨앗을 이미 품고 있으므로, 무지와 집착이라는 먼지만 걷어내면 누구나 스스로 부처가 될 수 있다.</li>
+        <li><strong>자등명:</strong> 다른 존재의 외적인 권위나 교리에 맹목적으로 얽매이지 않고, 자신의 이성과 실천적 경험을 등불 삼아 스스로 진리를 향해 나아가야 한다.</li>
+    </ul>
+
+    <h2 id="s-5">5. 조직 및 계급</h2>
+    <p>
+        명확한 수직적 상하 위계나 지배 복종의 관계가 아니며, 스승과 제자로 이어지는 학맥의 형태에 가깝다.
+    </p>
+    <ul>
+        <li><strong>선사:</strong> 제자를 가르치는 스승이자, 깨달음을 얻은 선승에 대한 존칭이다.</li>
+        <li><strong>승려:</strong> 세속의 삶을 떠나 사찰에서 수행에 전념하는 출가자이다.</li>
+        <li><strong>신자:</strong> 일상생활을 영위하며 가르침을 따르는 재가신자이다.</li>
+        <li><strong>신성력과의 관계:</strong> <a href="aether_qi.html" class="wiki-link">신성력</a>의 유무로 계급이나 지위가 나뉘지 않는다. 재가신자라 할지라도 신성력을 지닐 수 있고, 선사라 할지라도 신성력을 다루지 못할 수 있다. 다만 선사 위치에 오른 인물들은 대부분 신성력을 다룰 수 있다.</li>
+    </ul>
+
+    <h2 id="s-6">6. 사찰 및 생활 양식</h2>
+    <ul>
+       <li><strong>입지:</strong> 깊은 산이나 험준한 숲속은 위험 요소로 인해 재가신자들이 방문하기에 너무 위험했다. 이에 따라 사찰은 주로 접근이 용이한 도시나 마을의 외곽 지역에 세워졌다.</li>
+        <li><strong>건축 형태:</strong> 목조 구조의 뼈대 위에 기와를 얹은 독특한 양식으로 건축된다.</li>
+        <li><strong>자급자족:</strong> 스스로 사찰 인근에 밭을 일구어 농사를 지으며 생계를 유지한다.</li>
+    </ul>
+
+    <h2 id="s-7">7. 관습</h2>
+
+    <h3 id="s-7-1">7.1. 법명</h3>
+    <p>
+        무상종에 귀의한 인물들은 세속의 이름을 버리고 스승으로부터 한자 음차의 조합으로 이루어진 고유한 법명을 부여받아 사용한다.
+    </p>
+    <ul>
+        <li><strong>사용 구분:</strong> 출가한 승려는 법명을 일상적으로 사용한다. 반면 재가신자는 법명을 받더라도 세속 일상에서는 본래의 속명을 쓰며, 사찰을 방문하거나 무상종 관계자들을 대할 때 법명을 사용한다.</li>
+    </ul>
+
+    <h3 id="s-7-2">7.2. 삭발</h3>
+    <ul>
+        <li><strong>출가자:</strong> 선사와 승려는 성별에 상관없이 모두 머리를 깎는 삭발을 한다.</li>
+        <li><strong>재가신자:</strong> 특별한 행사가 없다면 삭발하지 않는다. 설령 특별한 행사가 치러지더라도 삭발 여부는 개인의 선택에 따른다.</li>
+    </ul>
+
+    <h2 id="s-8">8. 연애와 결혼 규범</h2>
+
+    <h3 id="s-8-1">8.1. 재가신자</h3>
+    <p>
+        <strong>불사음:</strong> 배우자나 연인과의 정당한 관계를 벗어난 부정한 성관계를 맺지 않으며, 도덕적인 성윤리를 지키는 선에서 자유롭게 연애하고 혼인할 수 있다.
+    </p>
+
+    <h3 id="s-8-2">8.2. 선사와 승려</h3>
+    <p>
+        <strong>불음:</strong> 온전한 수행과 깨달음에 정진하기 위해 대상을 불문하고 모든 형태의 성적 행위와 욕망을 완전히 끊는다.
+    </p>
+
+    <h2 id="s-9">9. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_dimensional_lost.html" class="wiki-link">차원미아</a></li>
+        <li><a href="aether_qi.html" class="wiki-link">기 (심법, 신성력)</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
+
