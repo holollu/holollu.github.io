@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주신교 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 인용구 스타일 */
+        blockquote {
+            margin: 15px 0;
+            padding: 10px 20px;
+            background-color: var(--main-color);
+            border-left: 4px solid var(--point-color);
+            color: #444;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">주신교</div>
+    <div class="wiki-date">최근 수정 시각: 999-11-28 14:15:30</div>
+
+    <div class="infobox">
+        <div class="infobox-title">주신교</div>
+        <table class="infobox-table">
+            <tr>
+                <th>공식 명칭</th>
+                <td>없음 (자칭: 진정한 신앙)</td>
+            </tr>
+            <tr>
+                <th>분류</th>
+                <td>종교 (유일신교)</td>
+            </tr>
+            <tr>
+                <th>성좌국</th>
+                <td><a href="aether_holy_theocracy.html" class="wiki-link">신성교국</a></td>
+            </tr>
+            <tr>
+                <th>상징</th>
+                <td>없음</td>
+            </tr>
+            <tr>
+                <th>신앙 대상</th>
+                <td>주 (유일신 창조주)</td>
+            </tr>
+            <tr>
+                <th>최고 지도자</th>
+                <td>교황 디비니타</td>
+            </tr>
+            <tr>
+                <th>계급 구조</th>
+                <td>교황 - 추기경 - 대주교 - 주교 - 사제 - 신도</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 신앙 대상: 주</a>
+                <ul>
+                    <li><a href="#s-2-1">2.1. 유일성과 무명</a></li>
+                    <li><a href="#s-2-2">2.2. 형상 묘사 금지</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-3">3. 교리 체계</a>
+                <ul>
+                    <li><a href="#s-3-1">3.1. 핵심 교리</a></li>
+                    <li><a href="#s-3-2">3.2. 사랑과 연민, 헌신</a></li>
+                    <li><a href="#s-3-3">3.3. 사후 세계와 심판</a></li>
+                    <li><a href="#s-3-4">3.4. 무지에 대한 연민</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-4">4. 신전 건축</a></li>
+            <li><a href="#s-5">5. 계급 및 성직 규범</a>
+                <ul>
+                    <li><a href="#s-5-1">5.1. 수직적 위계</a></li>
+                    <li><a href="#s-5-2">5.2. 성씨 규범</a></li>
+                    <li><a href="#s-5-3">5.3. 연애와 결혼</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-6">6. 대외 관계 및 인식</a></li>
+            <li><a href="#s-7">7. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        <a href="aether_holy_theocracy.html" class="wiki-link">신성교국</a>을 성좌국으로 삼는 유일신 신앙이다.
+    </p>
+    <p>
+        교단 스스로는 자신들의 신앙만이 유일하고 참된 믿음이라 여기므로 공식 명칭을 따로 두지 않으며, 내부적으로는 <strong>진정한 신앙</strong>이라 지칭한다. 반면 외부 사람들은 통상 주신교라 부르는데, 신자들은 이러한 외부의 호칭을 불쾌하게 여긴다. 종교를 나타내는 시각적 상징 문양은 존재하지 않는다.
+    </p>
+    <p>
+        모든 사람을 올바른 종교로 이끌어야 한다는 확고한 사명감을 품고 있으며, 성좌국인 <a href="aether_holy_theocracy.html" class="wiki-link">신성교국</a> 인근 지역을 제외하면 대륙 전반에서의 영향력은 낮은 편이다.
+    </p>
+
+    <h2 id="s-2">2. 신앙 대상: 주</h2>
+
+    <h3 id="s-2-1">2.1. 유일성과 무명</h3>
+    <p>
+        이름이 없는 유일신이자 전지전능한 창조신을 신앙의 대상으로 삼으며, 신자들은 그 대상을 단순히 <strong>주</strong>라고 지칭한다.
+    </p>
+    <p>
+        주는 세상을 창조한 유일한 근원이기에 고유한 명칭이 필요하지 않다. 인간이 신에게 특정한 이름을 붙이는 행위 자체가 주의 무한함을 유한한 인간의 틀에 가두는 불경으로 간주된다.
+    </p>
+
+    <h3 id="s-2-2">2.2. 형상 묘사 금지</h3>
+    <p>
+        주를 조각상이나 그림과 같은 시각적 형상으로 묘사하는 것은 엄격히 금지된다. 우상을 제작하는 행위는 필연적으로 피조물로 하여금 신 본질이 아닌 거짓된 형상에 기도하게 만들기 때문이다.
+    </p>
+
+    <h2 id="s-3">3. 교리 체계</h2>
+
+    <h3 id="s-3-1">3.1. 핵심 교리</h3>
+    <p>
+        창조주의 절대적인 은총을 깨닫고 이를 전파하는 것을 신앙의 중심에 둔다. 교단의 성전 첫 장에는 다음과 같은 성구가 기록되어 있다.
+    </p>
+    <blockquote>
+        "주의 크신 사랑과 연민이 우리를 구원하였으니, 마땅히 삶을 바쳐 길 잃은 이들을 주의 품으로 인도하라."
+    </blockquote>
+
+    <h3 id="s-3-2">3.2. 사랑과 연민, 헌신</h3>
+    <ul>
+        <li><strong>사랑:</strong> 무와 혼돈 속에서 세상을 창조하고 질서를 부여한 주의 절대적인 섭리 그 자체를 뜻한다. 만물이 형태를 갖추고 살아갈 수 있는 세상이 실존하는 것 자체가 무한한 사랑의 증거이다. 인간의 사랑은 변덕스럽고 불완전하지만 주의 사랑은 절대적이고 무결하며, 신자들은 자신이 이 사랑 안에 속해 있음을 의심하지 않는 것에서 신앙을 시작한다.</li>
+        <li><strong>연민:</strong> 지고지순하고 완전한 주와 달리, 피조물인 인간은 태생적으로 유혹에 취약하고 무지하며 흠결이 많은 불완전한 존재이다. 주신교에서 연민은 이러한 인간의 근원적 한계와 나약함을 굽어살피는 주의 시선을 의미한다.</li>
+        <li><strong>헌신:</strong> 주의 일방적이고 거대한 사랑과 연민을 깨달은 피조물은 마땅히 영적, 육체적 헌신을 바쳐야 한다.</li>
+    </ul>
+
+    <h3 id="s-3-3">3.3. 사후 세계와 심판</h3>
+    <p>
+        육신의 죽음 이후 영혼이 맞이하는 결과는 살아생전 행한 실천에 따라 결정된다. 주의 사랑을 실천하는 기준은 단순한 내면의 믿음이 아니라 실제적인 '행동'이다. 주는 불완전한 피조물의 무지함을 탓하지 않는다.
+    </p>
+    <ul>
+        <li><strong>영원한 안락:</strong> 주의 사랑을 행동으로 실천하여 구원받은 영혼은 무한한 빛(영광) 속에 들어가 영원한 안락을 누린다.</li>
+        <li><strong>소멸:</strong> 주의 사랑을 알지 못하여 악을 저지르거나, 알면서도 거부하고 악을 행한 영혼은 창조 이전의 혼돈 속에 버려져 영원한 상실감과 함께 소멸해 간다.</li>
+        <li><strong>환생:</strong> 영광에 들지도, 혼돈 속으로 버려지지도 않은 영혼들에게 주는 자비를 베풀어 환생을 통해 다시금 기회를 허락한다.</li>
+    </ul>
+
+    <h3 id="s-3-4">3.4. 무지에 대한 연민</h3>
+    <p>
+        타 종교를 따르는 이들에 대해 적대적 배척이 아닌 구원의 시선을 보낼 것을 규정한다.
+    </p>
+    <blockquote>
+        "헛된 그림자에 엎드린 자들을 향해 돌을 쥐지 말라. 그들은 주의 크신 사랑을 담기에 눈이 멀고 귀가 닫혀, 굽어진 메아리를 진실이라 믿는 가여운 자들일 뿐이니."
+        <br><br>
+        - 성전 3장 4절
+    </blockquote>
+    <p>
+        타 종교 신자들은 악의를 품은 적대자가 아니라, 인간의 나약함과 불완전함으로 인해 주의 거대한 사랑을 올바르게 마주하지 못한 '눈먼 자'들로 규정된다. 따라서 신자들은 이단이라는 이유로 그들을 증오하거나 무력으로 배척해서는 안 되며, 오히려 거짓된 위안 속에서 영원한 상실로 걸어가는 그들의 처지에 연민을 품어야 한다.
+    </p>
+
+    <h2 id="s-4">4. 신전 건축</h2>
+    <p>
+        평범한 일상 건물을 사용하는 <a href="aether_miracle_religion.html" class="wiki-link">기적교</a> 등과 달리, 신전의 규모가 작을지라도 주변 건물과는 명확한 시각적 차이를 보이는 석조 건물로 지어진다. 또한 대부분의 신전에는 종탑이 설치되어 있다.
+    </p>
+
+    <h2 id="s-5">5. 계급 및 성직 규범</h2>
+
+    <h3 id="s-5-1">5.1. 수직적 위계</h3>
+    <p>
+        교단 내부는 명확한 수직적 상하 관계로 편제되어 있다. 서열 구조는 다음과 같다.
+    </p>
+    <ul>
+        <li>교황 - 추기경 - 대주교 - 주교 - 사제 - 신도</li>
+    </ul>
+    <p>
+        사제와 일반 신도를 가르는 기준은 <a href="aether_qi.html" class="wiki-link">신성력</a>의 유무이다. 신성력을 각성하여 다룰 수 있는 자만이 사제 이상의 성직자가 된다.
+    </p>
+
+    <h3 id="s-5-2">5.2. 성씨 규범</h3>
+    <ul>
+        <li><strong>주교 이상:</strong> 주교 이상의 성직자는 가문의 세속적 영향력을 배제하기 위해 성씨 사용이 금지된다.</li>
+        <li><strong>사제 및 신도:</strong> 사제와 일반 신도의 성씨 사용은 허용되나, 실제로는 거의 사용하지 않는다.</li>
+    </ul>
+
+    <h3 id="s-5-3">5.3. 연애와 결혼</h3>
+    <p>
+        원칙상 최고 지도자인 교황부터 일반 신도에 이르기까지 연애와 혼인에 교리적 제약은 없다. 다만 주교 이상의 고위 성직자 중 실제로 혼인한 인물은 존재하지 않는다.
+    </p>
+
+    <h2 id="s-6">6. 대외 관계 및 인식</h2>
+    <ul>
+        <li><strong>에너지 사용자 대우:</strong> <a href="aether_aura.html" class="wiki-link">오러</a>, <a href="aether_mana.html" class="wiki-link">마나</a>, <a href="aether_qi.html" class="wiki-link">기</a> 사용자를 대할 때 특별한 차별이나 거부감 없이 일반적인 사람들을 대하듯 평범하게 대한다.</li>
+        <li><strong>타 종교관:</strong> 타 종교에서 모시는 신들을 '정령'이라 폄하하며, 타 종교의 신자들을 마땅히 바른 신앙으로 이끌어야 할 선교 및 교화의 대상으로 여긴다.</li>
+        <li><strong>타 종교 신성력 모독:</strong> 타 종교에서 발현되는 신성력을 신성한 힘이 아닌 '정령술'이라 칭하며 모독한다.</li>
+    </ul>
+
+    <h2 id="s-7">7. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_holy_theocracy.html" class="wiki-link">신성교국</a></li>
+        <li><a href="aether_qi.html" class="wiki-link">기 (신성력)</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
