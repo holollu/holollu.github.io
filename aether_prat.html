@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프랫 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">프랫</div>
+    <div class="wiki-date">최근 수정 시각: 999-07-07 18:22:15</div>
+
+    <div class="infobox">
+        <div class="infobox-title">프랫</div>
+        <table class="infobox-table">
+            <tr>
+                <th>통화 분류</th>
+                <td>대륙 공통 소액 화폐</td>
+            </tr>
+            <tr>
+                <th>통용 영역</th>
+                <td><a href="aether_pan-human_species.html" class="wiki-link">범인류종</a> 문명권 전역</td>
+            </tr>
+            <tr>
+                <th>규격</th>
+                <td>지름 2cm, 높이 1mm</td>
+            </tr>
+            <tr>
+                <th>기본 가치</th>
+                <td>흑빵 반 개 상당</td>
+            </tr>
+            <tr>
+                <th>조폐 방식</th>
+                <td>조폐 마법을 통한 탈중앙화 주조</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 형태적 특징</a></li>
+            <li><a href="#s-3">3. 조폐 및 유통 체계</a>
+                <ul>
+                    <li><a href="#s-3-1">3.1. 탈중앙화된 조폐</a></li>
+                    <li><a href="#s-3-2">3.2. 고액 거래와 귀금속 보관</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-4">4. 조폐 마법</a>
+                <ul>
+                    <li><a href="#s-4-1">4.1. 마법 부여 조건</a></li>
+                    <li><a href="#s-4-2">4.2. 발현 효과와 재질 강화</a></li>
+                    <li><a href="#s-4-3">4.3. 마법 유지와 절전</a></li>
+                    <li><a href="#s-4-4">4.4. 훼손과 위조 방지</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-5">5. 역사</a></li>
+            <li><a href="#s-6">6. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        마족을 포함한 <a href="aether_pan-human_species.html" class="wiki-link">범인류종</a> 문명권 전체에서 보편적으로 사용되는 대륙 공통 화폐이다. 단위 명칭 역시 프랫을 사용한다.
+    </p>
+    <p>
+        일상적인 상거래에서 소액 화폐로 쓰이며, 통상적으로 1프랫은 흑빵 반 개와 유사한 구매력을 지닌다. 대륙 전체에서 누구나 주조할 수 있는 탈중앙화된 마법 주화 체계로 정착되어 있다.
+    </p>
+
+    <h2 id="s-2">2. 형태적 특징</h2>
+    <p>
+        높이 1mm, 지름 2cm 규격의 원기둥 형태를 띤다.
+    </p>
+    <ul>
+        <li><strong>광학적 특성:</strong> 주화 표면에 부여된 마법의 효과로 인해 적갈색 빛만을 등방성 산란시키고 나머지 모든 파장의 빛은 흡수한다. 이로 인해 주화 표면의 입체감, 음영, 명암 등이 전혀 보이지 않아 마치 평면의 짙은 적갈색 원반처럼 관측된다.</li>
+    </ul>
+
+    <h2 id="s-3">3. 조폐 및 유통 체계</h2>
+
+    <h3 id="s-3-1">3.1. 탈중앙화된 조폐</h3>
+    <p>
+        특정한 국가 기관이나 단일 조폐청이 독점 발행하지 않는다. 대부분의 <a href="aether_magic_system.html" class="wiki-link">마도체계</a>에 포함되어 있는 '조폐 마법'을 활용하여 마법 조건을 충족하는 누구나 합법적으로 주화를 주조할 수 있다.
+    </p>
+    <ul>
+        <li><strong>발행 주체:</strong> 일반인이 금속을 규격대로 정밀 주조하고 마법을 구사하기에는 기술적 장벽이 존재하므로, 통상 거상, <a href="aether_magic_spire.html" class="wiki-link">마탑</a>, 영주 등 일정한 자본과 기술력을 갖춘 집단에서 주조를 주도한다.</li>
+    </ul>
+
+    <h3 id="s-3-2">3.2. 고액 거래와 귀금속 보관</h3>
+    <p>
+        프랫은 본질적으로 소액 결제에 맞춰진 화폐이므로, 대규모 자금을 운용할 때는 부피와 무게로 인한 한계가 따른다.
+    </p>
+    <ul>
+        <li><strong>귀금속 치환:</strong> 사람들은 일정 수준 이상으로 부를 축적하면 프랫 주화를 순은이나 순금 등의 귀금속 덩어리로 미리 바꾸어 보관한다.</li>
+        <li><strong>고액 결제 방식:</strong> 거액의 거래를 체결할 때는 프랫 주화를 수레로 운반하는 대신, 거래 대금에 상당하는 무게의 순은이나 순금을 직접 달아 결제하는 것이 보편적인 관례이다.</li>
+    </ul>
+
+    <h2 id="s-4">4. 조폐 마법</h2>
+    <p>
+        대륙 각지의 마도체계에 맞추어 호환된 판본이 널리 보급되어 있다. 2<a href="aether_circle.html" class="wiki-link">서클</a>의 마법사만 되어도 원활히 시전할 수 있을 정도로 <a href="aether_mana.html" class="wiki-link">마나</a> 소모량이 적고 난이도가 낮다.
+    </p>
+
+    <h3 id="s-4-1">4.1. 마법 부여 조건</h3>
+    <p>
+        마법을 시전하면 지정된 범위 내의 금속 물체들을 분석하여 다음의 조건을 완벽히 충족하는 대상에 한해서만 마법이 부여된다.
+    </p>
+    <ul>
+        <li><strong>원통도:</strong> 원통도 1.5mm 이하의 원기둥 형태일 것</li>
+        <li><strong>지름:</strong> 밑면의 지름이 2cm 이상일 것</li>
+        <li><strong>높이:</strong> 1mm 이상일 것</li>
+        <li><strong>중량:</strong> 전체 무게가 2.8g 이상일 것</li>
+        <li><strong>구리 함량:</strong> 질량비 기준 구리가 82% 이상일 것</li>
+        <li><strong>주석 함량:</strong> 질량비 기준 주석이 8% 이상일 것</li>
+        <li><strong>불순물 규정:</strong> 상기 조건을 만족한다면 기타 물질 및 불순물의 혼입에 제한을 두지 않는다.</li>
+    </ul>
+
+    <h3 id="s-4-2">4.2. 발현 효과와 재질 강화</h3>
+    <p>
+        조건에 부합하는 금속에 마법이 부여되면 두 가지 변화가 동시에 일어난다.
+    </p>
+    <ul>
+        <li><strong>외형 변화:</strong> 적갈색 빛만을 등방성 산란하고 나머지 빛을 흡수하여 주화의 명암과 입체감이 사라진다.</li>
+        <li><strong>원자 배열 재배치:</strong> 주화 내부의 원자 배열이 재배치되어 통상적인 청동보다 물리적 내구성이 월등히 단단해진다.</li>
+    </ul>
+
+    <h3 id="s-4-3">4.3. 마법 유지와 절전</h3>
+    <ul>
+        <li><strong>빛 흡수를 통한 유지:</strong> 주화에 비추어지는 자연광이나 조명 광선의 반사·흡수 작용 중 빛의 흡수 메커니즘을 동력 삼아 마법 효과를 스스로 유지한다.</li>
+        <li><strong>절전 및 재활성화:</strong> 달빛 수준의 최소한의 빛조차 닿지 않는 완전한 암흑 상태가 10분 이상 지속되면 마법은 절전 상태로 전환된다. 이후 다시 빛에 노출되면 거의 즉각적으로 본래의 적갈색 산란 상태로 재활성화된다.</li>
+    </ul>
+
+    <h3 id="s-4-4">4.4. 훼손과 위조 방지</h3>
+    <ul>
+        <li><strong>클리핑 및 훼손 시 가치 상실:</strong> 금속을 깎아내는 클리핑이나 물리적인 절단 등으로 인해 규격이 조건 미달로 변형되면, 부여되어 있던 마법이 즉시 해제된다. 단, 원자 재배치로 인해 강화된 물리적 내구성 자체는 마법 해제 후에도 그대로 유지된다.</li>
+        <li><strong>위조 방지 구조:</strong> 5서클 수준의 마법사라면 조폐 마법의 조건을 인위적으로 개조하는 연구를 수행할 수 있다. 그러나 금속 원가를 아끼기 위해 구리나 주석의 비율을 낮추고 값싼 잡철을 섞으면 마법 자체가 성립하지 않는다. 반대로 마법이 최소한이라도 작동하도록 조건을 수정하려 들면 구리나 주석보다 훨씬 비싼 은이나 금을 섞어야만 한다. 즉, 현재의 기준 규격이 조폐 마법을 성립시킬 수 있는 가장 저렴한 금속 배합비이므로, 조건을 왜곡하여 이득을 보려는 위조 시도 자체가 경제적으로 성립하지 않는다.</li>
+    </ul>
+
+    <h2 id="s-5">5. 역사</h2>
+    <ul>
+        <li><strong>과거:</strong> 국가마다, 심지어 동일 국가 내의 영지마다 서로 다른 이름과 금속 함량을 지닌 화폐를 제각각 사용하여 교역에 극심한 혼선이 빚어졌다.</li>
+        <li><strong><a href="aether_calendar_era.html" class="wiki-link">제국력</a> 683년:</strong> 흥미 본위로 연구를 진행하던 10서클 대마법사 라에티티아가 화폐 체계에 흥미를 느끼고 조폐 마법을 개발하기 시작하였다.</li>
+        <li><strong>제국력 692년:</strong> 라에티티아가 조폐 마법을 최종 완성하였다. 그녀는 자신이 소속된 <a href="aether_spire_transmuto.html" class="wiki-link">트란스무토 마탑</a>에 마법을 넘긴 뒤, 자신이 공부해 두었던 타 마도체계를 사용하는 각 마탑들에도 호환 판본을 전달하였다.</li>
+        <li><strong>제국력 692년~710년:</strong> 초기에는 마법사들의 흥미 위주로 주조되었을 뿐 민간에 널리 퍼지지 않았다.</li>
+        <li><strong>제국력 710년~730년:</strong> 마탑과 거래하던 상인들을 중심으로 '마탑화'라는 이름으로 불리며 서서히 시장에 유통되기 시작하였다.</li>
+        <li><strong>제국력 730년~750년:</strong> 일상적인 상거래에서도 마탑화의 통용이 보편화되었다. 출처는 명확하지 않으나 <a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a> 동쪽에서부터 '프랫'이라는 명칭으로 불리기 시작하였으며, 점차 이 이름이 공식 명칭처럼 확산되었다.</li>
+        <li><strong>제국력 757년:</strong> 총 11개 소국이 참전한 대규모 전쟁으로 국토가 황폐화된 일부 국가에서 세금을 징수할 때 자국의 기존 화폐 수납을 거부하고 프랫 주화만을 세금으로 받기 시작하였다.</li>
+        <li><strong>제국력 770년~780년:</strong> 다수의 국가에서 프랫이 준공용 통화로 쓰이기 시작하였고, 프랫을 법정 공식 통화로 지정하는 국가들이 등장하였다.</li>
+        <li><strong>제국력 804년:</strong> <a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a>이 프랫을 국가 공식 통화로 정식 채택하였다. 이를 기점으로 대륙의 거의 모든 국가가 프랫을 단일 공식 통화로 공인하게 되었다.</li>
+    </ul>
+
+    <h2 id="s-6">6. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_society.html" class="wiki-link">사회</a></li>
+        <li><a href="aether_magic.html" class="wiki-link">마법</a></li>
+        <li><a href="aether_spire_transmuto.html" class="wiki-link">트란스무토 마탑</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
