@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로미스 제국 건국사 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">프로미스 제국 건국사</div>
+    <div class="wiki-date">최근 수정 시각: 1000-01-01 00:00:00</div>
+
+    <div class="infobox">
+        <div class="infobox-title">프로미스 제국 건국사</div>
+        <table class="infobox-table">
+            <tr>
+                <th>분류</th>
+                <td>역사</td>
+            </tr>
+            <tr>
+                <th>시기</th>
+                <td><a href="aether_calendar_era.html" class="wiki-link">제국력</a> 이전 ~ 제국력 1년</td>
+            </tr>
+            <tr>
+                <th>주요 인물</th>
+                <td>프로미스, 레히트 프로미스, 초대 마왕</td>
+            </tr>
+            <tr>
+                <th>결과</th>
+                <td>해방 전쟁 승리, <a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a> 건국, 제국력 제정</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 암흑기: 인페르눔 마족국의 지배</a></li>
+            <li><a href="#s-3">3. 용사의 등장과 해방 전쟁</a></li>
+            <li><a href="#s-4">4. 마왕 친정과 최후의 결전</a></li>
+            <li><a href="#s-5">5. 용사의 서거와 후계 지명</a></li>
+            <li><a href="#s-6">6. 제국의 성립</a></li>
+            <li><a href="#s-7">7. 여담 및 기록</a></li>
+            <li><a href="#s-8">8. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        대륙 북서부 영역 전체를 지배하던 <a href="aether_infernum_demon_nation.html" class="wiki-link">인페르눔 마족국</a>의 압제에서 벗어나, 용사 '프로미스'와 그의 유지를 계승한 '레히트'에 의해 <a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a>이 건국되기까지의 역사적 과정이다.
+    </p>
+    <p>
+        이 건국을 기점으로 오늘날 대륙 전역에서 통용되는 공통 기년법인 <a href="aether_calendar_era.html" class="wiki-link">제국력</a>이 시작되었다.
+    </p>
+
+    <h2 id="s-2">2. 암흑기: 인페르눔 마족국의 지배</h2>
+    <p>
+        프로미스 제국이 개국하기 이전, 대륙 북서부 전체는 약 500년에 걸쳐 <a href="aether_infernum_demon_nation.html" class="wiki-link">인페르눔 마족국</a>의 지배하에 놓여 있었다.
+    </p>
+    <p>
+        이 시기 마족을 제외한 수인, 엘프, 인간, 드워프 등 모든 <a href="aether_pan-human_species.html" class="wiki-link">범인류종</a>은 마족의 노예로 전락하였다. 가혹한 수탈은 물론, 흡정족, 흡혈족, 타이탄 등 특정 마족 계통을 위한 식량 및 가축으로 취급되어 사육당하는 등 극한의 억압 속에 살아가야 했다. 500년간 이어진 참상으로 인해 북서부 영역의 범인류종 문명은 사실상 명맥이 끊긴 암흑기에 직면해 있었다.
+    </p>
+
+    <h2 id="s-3">3. 용사의 등장과 해방 전쟁</h2>
+    <p>
+        가혹한 압제 속에서 한 남성이 두각을 나타내며 범인류종을 규합해 대대적인 반란을 일으켰다. 그 남성의 이름은 '프로미스'였으며, 사람들은 그를 '용사'라 칭송하였다.
+    </p>
+    <p>
+        프로미스는 압도적인 무력과 카리스마를 바탕으로, 인페르눔 마족국의 변방 영토였던 현재의 <a href="aether_imperial_capital.html" class="wiki-link">황도</a> 일대부터 차례로 함락시키며 해방 전쟁을 주도해 나갔다. 이에 호응하여 각지에서 고통받던 범인류종 세력들이 잇달아 합류하였고, 해방군은 북서부 영토의 상당 부분을 탈환하는 데 성공하였다.
+    </p>
+
+    <h2 id="s-4">4. 마왕 친정과 최후의 결전</h2>
+    <p>
+        반란의 규모가 걷잡을 수 없이 확산되고 북서부의 주요 거점들이 잇따라 해방되자, <a href="aether_infernum_demon_nation.html" class="wiki-link">인페르눔 마족국</a>의 초대 마왕이 반란 세력을 일거에 섬멸하기 위해 대군을 이끌고 직접 친정에 나섰다.
+    </p>
+    <p>
+        용사 프로미스는 마왕과 전선에서 직접 격돌하였으며, 치열한 사투 끝에 초대 마왕의 목을 베어 쓰러뜨리고 승리를 거두었다. 최고 지도자를 잃은 마족의 군대는 궤멸에 가까운 타격을 입고 막대한 영토를 포기한 채 동쪽으로 퇴각하였다. 그러나 프로미스 역시 이 결전에서 회복이 불가능한 치명상을 입게 되었다.
+    </p>
+
+    <h2 id="s-5">5. 용사의 서거와 후계 지명</h2>
+    <p>
+        사투에서 극심한 부상을 입은 프로미스는 해방된 영토의 전후 혼란을 수습하며 필사적으로 1년을 버텼으나, 끝내 죽음을 맞이하게 되었다.
+    </p>
+    <p>
+        당시 프로미스에게는 자녀나 혈육이 존재하지 않았기에, 지도자이자 구심점을 잃어버린 범인류종 연합이 분열하여 자멸할 위험이 컸다. 그러나 용사 프로미스는 숨을 거두기 직전, 자신의 부하 중 가장 공정하고 통치 능력이 뛰어나며 모든 이들에게 인망이 두터웠던 '레히트'를 후계자로 지명하여 향후 국가의 수호와 운영을 일임하였다.
+    </p>
+
+    <h2 id="s-6">6. 제국의 성립</h2>
+    <p>
+        프로미스의 사후, 후계자로 지명된 레히트는 범인류종을 구원한 영웅인 '프로미스'를 제국의 제1대 황제로 추존하였다.
+    </p>
+    <ul>
+        <li><strong>가문명과 국호 선포:</strong> 레히트는 용사 프로미스의 업적과 뜻을 기리기 위해, '프로미스'를 자신과 새로 창건될 황실의 성씨로 삼았다. 이어 건국될 국가의 명칭 또한 영웅의 이름을 따 <a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a>으로 선포하였다.</li>
+        <li><strong>원년 개시:</strong> 이 해를 <a href="aether_calendar_era.html" class="wiki-link">제국력</a> 1년(원년)으로 삼았으며, 레히트 프로미스는 제국의 실질적인 통치자이자 제2대 황제로 즉위하여 제국의 통치 기틀과 법제를 다졌다.</li>
+    </ul>
+
+    <h2 id="s-7">7. 여담 및 기록</h2>
+    <ul>
+        <li><strong>무력 수준:</strong> 용사 프로미스와 초대 마왕은 모두 <a href="aether_qi.html" class="wiki-link">기</a> 사용자였으며 그 무력 <a href="aether_level.html" class="wiki-link">경지</a>는 10성에 도달해 있었던 것으로 추측된다.</li>
+        <li><strong>신앙:</strong> 용사 프로미스는 <a href="aether_miracle_religion.html" class="wiki-link">기적교</a>의 신도였던 것으로 전해진다. 다만 신성력이 아닌 기를 운용하였기 때문에 사제는 아니었다.</li>
+        <li><strong>용사상:</strong> 용사 프로미스의 위상에 비해 제국 내에 건립된 그의 동상은 지극히 드물다. 건국 당시 동상 제작 계획을 들은 용사 프로미스가 <em>"구리가 아까우니 여러 개 만들지 말고 작게 하나만 만들라"</em>고 명했기 때문이다. 이로 인해 건국 초기에 공식적으로 제작된 동상은 수도 <a href="aether_imperial_capital.html" class="wiki-link">황도</a>의 프로미스 수호 공원 중앙에 세워진 4미터 크기의 용사상 외에는 존재하지 않는다.</li>
+    </ul>
+
+    <h2 id="s-8">8. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a></li>
+        <li><a href="aether_calendar_era.html" class="wiki-link">제국력</a></li>
+        <li><a href="aether_infernum_demon_nation.html" class="wiki-link">인페르눔 마족국</a></li>
+        <li><a href="aether_miracle_religion.html" class="wiki-link">기적교</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
