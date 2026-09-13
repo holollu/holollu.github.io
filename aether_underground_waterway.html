@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>지하수로 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">지하수로</div>
+    <div class="wiki-date">최근 수정 시각: 999-12-15 11:32:05</div>
+
+    <div class="infobox">
+        <div class="infobox-title">지하수로</div>
+        <table class="infobox-table">
+            <tr>
+                <th>분류</th>
+                <td>도시 기반시설</td>
+            </tr>
+            <tr>
+                <th>정화 방식</th>
+                <td>4단계 정화 체계</td>
+            </tr>
+            <tr>
+                <th>에테르 환경</th>
+                <td>인근 지역과 유사한 수준</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 구조 및 정화 체계</a>
+                <ul>
+                    <li><a href="#s-2-1">2.1. 통로 구조</a></li>
+                    <li><a href="#s-2-2">2.2. 다단계 정화 과정</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-3">3. 관리 및 유지보수</a></li>
+            <li><a href="#s-4">4. 치안 및 안전 관리</a>
+                <ul>
+                    <li><a href="#s-4-1">4.1. 위험 요소</a></li>
+                    <li><a href="#s-4-2">4.2. 순찰 및 진압 체계</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-5">5. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        도시의 공중위생과 침수 방지를 위해 지하에 대규모로 구축된 배수 및 하수 처리 시설이다.
+    </p>
+    <p>
+        <a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a>에서 치수 사업 및 도시 기반시설 개발의 일환으로 최초로 도입하여 정착시켰다. 현재는 제국뿐만 아니라 타국에서도 채용하는 경우가 나타나고 있으며, 프로미스 제국 내에서는 대부분의 도시에 필수적으로 설치되어 있다.
+    </p>
+
+    <h2 id="s-2">2. 구조 및 정화 체계</h2>
+
+    <h3 id="s-2-1">2.1. 통로 구조</h3>
+    <p>
+        중앙에 오수가 흐르는 수로가 배치되어 있으며, 수로의 좌우 양옆에는 시설 관리자와 순찰 인원이 걸어서 이동할 수 있는 석조 보도가 마련되어 있다.
+    </p>
+
+    <h3 id="s-2-2">2.2. 다단계 정화 과정</h3>
+    <p>
+        도시에서 발생한 오수는 강이나 바다로 직접 방류되지 않으며, 환경 오염과 전염병을 막기 위해 4단계 정화 체계를 거친 후 배출된다.
+    </p>
+    <ol>
+        <li><strong>침전조:</strong> 하수도를 통해 유입된 오수를 일시적으로 모아, 무거운 오물과 불순물 찌꺼기를 중력에 의해 바닥으로 가라앉힌다.</li>
+        <li><strong>여과벽:</strong> 침전을 거친 물을 모래, 자갈, 숯 등이 다층으로 촘촘히 채워진 두꺼운 여과벽으로 통과시킨다. 이 과정을 통해 미세한 부유물과 악취를 일차적으로 걸러낸다.</li>
+        <li><strong>정화 마도구:</strong> 방류조 직전 구역에 최소 2개 이상 설치된다. 수로를 흐르는 물의 물리적 유속과 주변의 에테르를 동력으로 흡수하여 지속해서 작동하는 수질 정화용 <a href="aether_magic_tool.html" class="wiki-link">마도구</a>이다.</li>
+        <li><strong>방류조:</strong> 마도구 정화까지 마친 최종 정화수를 한데 모은 뒤, 인근의 하천이나 바다로 배출한다.</li>
+    </ol>
+
+    <h2 id="s-3">3. 관리 및 유지보수</h2>
+    <p>
+        도시 관청 소속의 하수도 관리 공무원이 주기적으로 내부 시설을 점검한다. 시설의 균열, 침전조에 쌓인 퇴적물 상태, 정화 마도구의 정상 작동 여부 등을 확인한다.
+    </p>
+    <ul>
+        <li><strong>예비 마도구 교체:</strong> 정화 마도구의 고장이나 성능 저하가 확인될 경우, 현장에서 즉시 사전에 준비된 예비 마도구로 맞교체하여 정화 공백을 막는다.</li>
+        <li><strong>마탑 수리 의뢰:</strong> 고장 난 마도구는 회수되어 해당 마도구를 최초 제작했던 <a href="aether_magic_spire.html" class="wiki-link">마탑</a>으로 이송되며, 정밀 수리와 마나 순환 정비를 거친다.</li>
+    </ul>
+
+    <h2 id="s-4">4. 치안 및 안전 관리</h2>
+
+    <h3 id="s-4-1">4.1. 위험 요소</h3>
+    <ul>
+        <li><strong>범죄자의 은신:</strong> 지상 경비대의 수사망을 피하려는 흉악범이나 도망자들이 지하수로의 미로 같은 통로를 은신처로 삼는 일이 종종 발생한다.</li>
+        <li><strong>자생적 괴수 출몰:</strong> 자연 상태에서 동물이 에테르에 노출되어 괴수가 되는 것과 동일한 원리로, 지하수로 내부에서도 변질형 및 <a href="aether_aura.html" class="wiki-link">오러</a>형 <a href="aether_monster.html" class="wiki-link">괴수</a>가 자생적으로 발생하여 출몰한다.</li>
+    </ul>
+
+    <h3 id="s-4-2">4.2. 순찰 및 진압 체계</h3>
+    <ul>
+        <li><strong>일상 순찰:</strong> 도시 경비대가 정기적으로 지하 순찰대를 편성하여 내부를 수색하거나, <a href="aether_adventurers_guild.html" class="wiki-link">모험가 길드</a>에 지하수로 정기 순찰 및 자생 괴수 소탕 의뢰를 게시하여 모험가를 고용해 치안을 유지한다.</li>
+        <li><strong>특수 진압:</strong> 경비대나 일반 모험가 선에서 대응할 수 없는 고위 <a href="aether_level.html" class="wiki-link">경지</a>의 흉악범이 잠적하거나 강력한 괴수가 출현할 경우, 해당 영지를 수호하는 기사단 소속 정규 기사가 직접 파견되어 진압한다.</li>
+    </ul>
+
+    <h2 id="s-5">5. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a></li>
+        <li><a href="aether_magic_tool.html" class="wiki-link">마도구</a></li>
+        <li><a href="aether_adventurers_guild.html" class="wiki-link">모험가 길드</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
