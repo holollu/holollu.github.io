@@ -226,32 +226,92 @@
         }
 
         /* 스포일러 접기/펼치기 */
-        .spoiler-box {
-            margin-top: 40px;
-            border: 1px solid #c8b9d8;
-            border-radius: 4px;
-            background-color: #faf9fc;
-            overflow: hidden;
+/* 양피지 두루마리 스타일 (기밀 영역) */
+        .parchment-scroll {
+            margin-top: 45px;
+            border: none;
+            border-radius: 0;
+            background: transparent;
+            position: relative;
+            transition: all 0.3s ease;
         }
 
-        .spoiler-summary {
-            padding: 12px 16px;
-            background-color: #eee9f4;
-            color: #433157;
+        /* 닫혀 있을 때 (말린 양피지 두루마리) */
+        .parchment-scroll:not([open]) .parchment-summary {
+            background: linear-gradient(180deg, #a6804e 0%, #e2cb9d 25%, #fdf5e2 50%, #cca96f 75%, #8f6734 100%);
+            color: #3b2811;
+            padding: 14px 24px;
             font-weight: 700;
+            font-size: 1.05rem;
+            text-align: center;
+            border-radius: 12px;
+            border-left: 10px solid #6b4c24;
+            border-right: 10px solid #6b4c24;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(255, 255, 255, 0.6), inset 0 -2px 4px rgba(0, 0, 0, 0.4);
             cursor: pointer;
-            outline: none;
-            user-select: none;
-            border-bottom: 1px solid transparent;
+            list-style: none;
+            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+            letter-spacing: 0.5px;
         }
 
-        .spoiler-box[open] .spoiler-summary {
-            border-bottom: 1px solid #c8b9d8;
+        .parchment-scroll:not([open]) .parchment-summary:hover {
+            filter: brightness(1.03);
         }
 
-        .spoiler-content {
-            padding: 20px;
-            background-color: #fff;
+        .parchment-scroll:not([open]) .parchment-summary::-webkit-details-marker {
+            display: none;
+        }
+
+        /* 펼쳤을 때 (펼쳐진 양피지 본문) */
+        .parchment-scroll[open] {
+            background: #fbf5e6;
+            background: linear-gradient(180deg, #f0e2be 0%, #fbf5e6 6%, #fdf9ee 94%, #e9d5aa 100%);
+            border-top: 5px solid #a6804e;
+            border-bottom: 5px solid #8f6734;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15), inset 0 0 60px rgba(184, 140, 78, 0.25);
+            padding: 10px 0 0 0;
+            border-radius: 3px;
+        }
+
+        .parchment-scroll[open] .parchment-summary {
+            background: transparent;
+            color: #7a5424;
+            padding: 10px 30px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border-bottom: 1px dashed #cfb78a;
+            cursor: pointer;
+            list-style: none;
+            letter-spacing: 0.5px;
+        }
+
+        .parchment-scroll[open] .parchment-summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .parchment-content {
+            padding: 30px 40px;
+            color: #2e2316;
+            background: transparent;
+        }
+
+        .parchment-content h3 {
+            border-left: 5px solid #8f6734;
+            color: #3b2811;
+            margin-top: 0;
+            padding-left: 10px;
+        }
+
+        .parchment-content p, .parchment-content li {
+            color: #332717;
+        }
+
+        .parchment-content .wiki-link {
+            color: #724c1f;
+        }
+
+        .parchment-content .wiki-link:hover {
+            background-color: #eee0c0;
         }
 
         /* 모바일 대응 */
@@ -422,10 +482,14 @@
         <li><a href="aether_pontis_marquisate.html" class="wiki-link">폰티스 후작령</a></li>
     </ul>
 
-    <!-- 비밀 및 내부 실상 (스포일러 방지 접기) -->
-    <details class="spoiler-box">
-        <summary class="spoiler-summary">⚠️ [기밀 열람 경고]</summary>
-        <div class="spoiler-content">
+<br>
+<br>
+<br>
+<br>
+<!-- 비밀 및 내부 실상 (양피지 두루마리 연출) -->
+    <details class="parchment-scroll">
+        <summary class="parchment-summary">📜기밀 기록</summary>
+        <div class="parchment-content">
             <h3>생명 마탑의 비밀</h3>
             <p>
                 겉으로는 가축 개량과 인도적인 의료 마법을 연구하는 온건한 학술 집단으로 위장하고 있으나, 마탑의 숨겨진 지하 연구소에서는 비윤리적인 인체 실험과 생체 병기 제작을 자행하고 있다.
@@ -439,6 +503,7 @@
             </ul>
         </div>
     </details>
+
 </div>
 
 </body>
