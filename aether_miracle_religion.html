@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기적교 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        h4 {
+            margin-top: 20px;
+            color: #444;
+            font-weight: 700;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 인용구 스타일 */
+        blockquote {
+            margin: 15px 0;
+            padding: 10px 20px;
+            background-color: var(--main-color);
+            border-left: 4px solid var(--point-color);
+            color: #444;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">기적교</div>
+    <div class="wiki-date">최근 수정 시각: 999-02-19 21:04:12</div>
+
+    <div class="infobox">
+        <div class="infobox-title">기적교</div>
+        <table class="infobox-table">
+            <tr>
+                <th>분류</th>
+                <td>종교</td>
+            </tr>
+            <tr>
+                <th>상징</th>
+                <td>둥근 고리 2개가 엮인 형상</td>
+            </tr>
+            <tr>
+                <th>신앙 대상</th>
+                <td>카림</td>
+            </tr>
+            <tr>
+                <th>핵심 교리</th>
+                <td>순환과 상호성</td>
+            </tr>
+            <tr>
+                <th>계급 구조</th>
+                <td>사제, 신도</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 숭배 대상: 카림</a>
+                <ul>
+                    <li><a href="#s-2-1">2.1. 평범성의 신비</a></li>
+                    <li><a href="#s-2-2">2.2. 부재를 통한 존재</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-3">3. 교리 체계</a>
+                <ul>
+                    <li><a href="#s-3-1">3.1. 핵심 교리: 순환과 상호성</a></li>
+                    <li><a href="#s-3-2">3.2. 상호 구원</a></li>
+                    <li><a href="#s-3-3">3.3. 기적의 일상성</a></li>
+                    <li><a href="#s-3-4">3.4. 순환</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-4">4. 조직 및 직분</a>
+                <ul>
+                    <li><a href="#s-4-1">4.1. 수평적 계급 구조</a></li>
+                    <li><a href="#s-4-2">4.2. 신전의 성격</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-5">5. 연애와 결혼 규범</a></li>
+            <li><a href="#s-6">6. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        대륙 전역에서 가장 폭넓게 신봉되는 주류 종교이다. 인간 간의 상호 구원과 일상 속에서 실천하는 선의를 핵심 가치로 삼는다.
+    </p>
+    <p>
+        상징 문양은 둥근 고리 두 개가 서로 엮여 있는 형상이다. 이는 타인과 맺는 인연의 연대와 선의의 순환을 형상화한 것이다. 대륙의 다른 종교들과 마찬가지로 다신론적 세계관의 일부를 이루고 있으나, 초월적인 절대 권능을 앞세우기보다는 평범한 일상 속 인간의 마음가짐과 실천을 중심에 둔다.
+    </p>
+
+    <h2 id="s-2">2. 숭배 대상: 카림</h2>
+
+    <h3 id="s-2-1">2.1. 평범성의 신비</h3>
+    <p>
+        기적교에서 모시는 신의 이름은 카림이다.
+    </p>
+    <p>
+        카림은 거대하거나 압도적인 위용을 자랑하는 초월적 형상으로 묘사되지 않는다. 길가에서 흔히 스쳐 지나칠 수 있는 지극히 평범한 외형의 남성 혹은 여성의 모습으로 나타난다고 전해진다. 이는 신성이 범접할 수 없이 먼 곳에 존재하는 것이 아니라, 인간과 가장 가까운 일상 속에 깃들어 있음을 의미한다.
+    </p>
+
+    <h3 id="s-2-2">2.2. 부재를 통한 존재</h3>
+    <p>
+        카림은 스스로 세상의 모든 고통과 문제를 단번에 해결하는 전능함을 과시하지 않는다.
+    </p>
+    <p>
+        오히려 신은 현실 전면에 직접 개입하지 않으며, 인간이 절망 속에서 서로를 돕고 보듬을 때 그 구원의 행위와 온정의 마음 사이에 기적이라는 형태로 자신의 존재를 드러낸다고 믿어진다.
+    </p>
+
+    <h2 id="s-3">3. 교리 체계</h2>
+
+    <h3 id="s-3-1">3.1. 핵심 교리: 순환과 상호성</h3>
+    <p>
+        기적교를 지탱하는 가장 거대한 교리적 기둥이다. 예로부터 다음과 같은 구절이 신자들 사이에서 구전되어 왔다.
+    </p>
+    <blockquote>
+        "너 또한 누군가의 카림일 수 있다."
+    </blockquote>
+
+    <h3 id="s-3-2">3.2. 상호 구원</h3>
+    <p>
+        모든 사람은 살아가는 동안 크고 작은 절망의 순간을 마주한다. 그때 나의 절망을 외면하지 않고 건져 올려주는 이는 곧 신의 대리인이자 '나의 카림'이 된다.
+    </p>
+    <p>
+        반대로 내가 타인의 고통을 덜어주고 그를 절망의 늪에서 끌어올릴 때, 나는 그 순간 그 상대에게 '카림'이 되어준다. 즉, 인간은 서로에게 신이 되어줄 수 있는 존재라는 믿음이 상호 구원의 본질이다.
+    </p>
+
+    <h3 id="s-3-3">3.3. 기적의 일상성</h3>
+    <p>
+        기적교에서 정의하는 '기적'은 하늘이 두 쪽으로 갈라지거나 망자가 살아 돌아오는 것과 같은 초자연적 이적이 아니다.
+    </p>
+    <p>
+        절망에 빠진 이에게 건네는 따뜻한 위로의 말 한마디, 굶주린 이에게 나누어 주는 빵 한 조각과 같이 타인의 삶을 긍정적인 방향으로 변화시키는 모든 일상적 선의가 곧 기적으로 분류된다.
+    </p>
+
+    <h3 id="s-3-4">3.4. 순환</h3>
+    <p>
+        도움을 받아 구원받은 자는 그 힘을 바탕으로 다시 다른 이를 돕는 자로 일어서야 한다. 일방적인 수혜에 머무르지 않고, 선의와 구원이 끊어지지 않은 채 세상 전체로 이어져 나가는 순환의 연속이야말로 기적교가 궁극적으로 지향하는 낙원이다.
+    </p>
+
+    <h2 id="s-4">4. 조직 및 직분</h2>
+
+    <h3 id="s-4-1">4.1. 수평적 계급 구조</h3>
+    <p>
+        기적교의 구성원은 사제와 신도로 구분된다. 다만 이는 엄격한 상하 위계나 지배 복종의 관계가 아니다.
+    </p>
+    <ul>
+        <li><strong>사제:</strong> 신자들 중 <a href="aether_qi.html" class="wiki-link">신성력</a>을 각성하여 다룰 수 있는 이를 뜻한다. 대륙의 신성력 사용자들이 그러하듯 깊은 신실함을 바탕으로 치유와 구호 활동에 힘쓴다.</li>
+        <li><strong>신도:</strong> 신성력을 다루지 못하는 일반 신자이다. 신성력의 유무와 상관없이 신실하게 교리를 실천할 수 있으며 사제와 동등한 신앙의 동반자로 대우받는다.</li>
+    </ul>
+
+    <h3 id="s-4-2">4.2. 신전의 성격</h3>
+    <p>
+        웅장하고 권위적인 건축물을 지양하며, 마을과 도시 곳곳의 일상적이고 평범한 건물을 예배처와 안식처로 삼는다.
+    </p>
+    <p>
+        전 대륙을 관할하는 교단 총본산이나 대신전과 같은 중앙 집권적 중심 신전은 존재하지 않으며, 각지의 신전들은 지역 주민들과 밀착하여 구호와 나눔의 공간으로 운영된다.
+    </p>
+
+    <h2 id="s-5">5. 연애와 결혼 규범</h2>
+    <p>
+        사제와 일반 신도를 불문하고 연애와 혼인에 어떠한 신분적·교리적 제약도 두지 않는다. 누구나 자신의 의지에 따라 자율적으로 이성과 교제하고 결혼할 수 있다.
+    </p>
+    <ul>
+        <li><strong>애정의 긍정:</strong> 배우자 및 연인과의 정당한 애정 표현과 성생활은 교리적으로 온전히 긍정된다.</li>
+        <li><strong>기만행위 금지:</strong> 신뢰를 저버리는 외도나 거짓, 배임과 같이 상대방의 믿음을 파괴하는 행위는 엄격히 금기시된다.</li>
+    </ul>
+
+    <h2 id="s-6">6. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_qi.html" class="wiki-link">기 (신성력)</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
