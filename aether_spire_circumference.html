@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>환결 마탑 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 테이블 */
+        .wiki-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0 20px 0;
+            font-size: 0.92rem;
+        }
+
+        .wiki-table th, .wiki-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        .wiki-table th {
+            background-color: var(--main-color);
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 인용/예시 스타일 */
+        blockquote {
+            margin: 15px 0;
+            padding: 10px 20px;
+            background-color: var(--main-color);
+            border-left: 4px solid var(--point-color);
+            color: #444;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">환결 마탑</div>
+    <div class="wiki-date">최근 수정 시각: 999-03-13 18:40:22</div>
+
+    <div class="infobox">
+        <div class="infobox-title">환결 마탑</div>
+        <table class="infobox-table">
+            <tr>
+                <th>소속 국가</th>
+                <td><a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a></td>
+            </tr>
+            <tr>
+                <th>위치</th>
+                <td>클라비스</td>
+            </tr>
+            <tr>
+                <th>설립 연도</th>
+                <td><a href="aether_calendar_era.html" class="wiki-link">제국력</a> 145년</td>
+            </tr>
+            <tr>
+                <th>마탑주</th>
+                <td>셀린 로엔</td>
+            </tr>
+            <tr>
+                <th>마도체계</th>
+                <td>환결 체계</td>
+            </tr>
+            <tr>
+                <th>소속 인원</th>
+                <td>마법사 100명 내외</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 조직 및 학풍</a>
+                <ul>
+                    <li><a href="#s-2-1">2.1. 학문적 지향</a></li>
+                    <li><a href="#s-2-2">2.2. 교육 체계와 서클 분포</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-3">3. 마도체계: 환결 체계</a>
+                <ul>
+                    <li><a href="#s-3-1">3.1. 특성 및 장단점</a></li>
+                    <li><a href="#s-3-2">3.2. 최고 도달점</a></li>
+                    <li><a href="#s-3-3">3.3. 영창 구조</a></li>
+                    <li><a href="#s-3-4">3.4. 마법진 구조</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-4">4. 편제 및 계급</a></li>
+            <li><a href="#s-5">5. 주력 사업 및 역할</a></li>
+            <li><a href="#s-6">6. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        <a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a>의 클라비스에 위치한 <a href="aether_magic_spire.html" class="wiki-link">마탑</a>이다. <a href="aether_calendar_era.html" class="wiki-link">제국력</a> 145년에 설립되었다.
+    </p>
+    <p>
+        <a href="aether_calendar_era.html" class="wiki-link">제국력</a> 215년에 마나의 경지 규격인 <a href="aether_circle.html" class="wiki-link">서클</a>이라는 개념을 최초로 개발하고 정립하여 대륙 마법 역사에 지대한 영향을 끼쳤다.
+    </p>
+
+    <h2 id="s-2">2. 조직 및 학풍</h2>
+
+    <h3 id="s-2-1">2.1. 학문적 지향</h3>
+    <p>
+        마법의 이론적 완벽성과 기하학적 형식미를 중시하는 학풍을 지닌다. 현상의 단순한 파괴력보다 <a href="aether_magic_system.html" class="wiki-link">마도체계</a> 그 자체에 대한 심도 있는 탐구와 구조적 최적화를 핵심 목표로 삼는다.
+    </p>
+
+    <h3 id="s-2-2">2.2. 교육 체계와 서클 분포</h3>
+    <p>
+        서클이라는 체계적 기준을 대륙 최초로 확립한 마탑답게 교육과 수련 체계가 극도로 정교하게 짜여 있다.
+    </p>
+    <ul>
+        <li><strong>고위 마법사 비율:</strong> 타 마탑과 비교할 때 고위 경지, 특히 7서클에 도달한 상급 마법사의 비율이 눈에 띄게 높게 나타난다.</li>
+    </ul>
+
+    <h2 id="s-3">3. 마도체계: 환결 체계</h2>
+    <p>
+        환결 마탑 소속 마법사들이 연구하고 심장에 새겨 운용하는 고유 마도체계이다. 체계의 시각적 형태는 무수히 많은 원형들이 극단적으로 겹쳐져 복잡화된 기하학적 구조를 띤다.
+    </p>
+
+    <h3 id="s-3-1">3.1. 특성 및 장단점</h3>
+    <ul>
+        <li><strong>장점:</strong> 극도의 안정성과 압도적인 <a href="aether_mana.html" class="wiki-link">마나</a> 효율을 자랑하며 마법 구현의 범용성이 매우 뛰어나다. 특히 방어 결계 구축과 마도구 제작 분야에서는 타의 추종을 불허하는 성능과 최적화를 보인다. 또한 서클을 상승시키기 위한 이론적 기준이 현존하는 마도체계 중 가장 명확하게 정립되어 있다.</li>
+        <li><strong>단점:</strong> 마법을 발현할 때마다 심장에 새겨진 마도체계의 구조를 해당 마법의 공식에 맞추어 재조정하는 과정이 선행되어야 하므로 시전 속도가 다소 느리다. 폭발적인 순간 화력을 내뿜거나 변화무쌍한 전황에 맞춘 즉각적인 임기응변 대응력이 부족하다. 형태의 완벽성을 추구하는 체계 자체의 특성상 억지스러운 마법 변형이나 편법을 시도하기가 매우 까다롭다.</li>
+    </ul>
+
+    <h3 id="s-3-2">3.2. 최고 도달점</h3>
+    <p>
+        이론적 설계를 통해 규명된 최고 도달점은 10<a href="aether_circle.html" class="wiki-link">서클</a>이다. 체계 이론의 구조적 완성도가 극히 뛰어나기에 압도적인 역량을 지닌 인물이 나타난다면 이론상 존재하는 10서클에 도달할 수 있을 것이라 공인받고 있다.
+    </p>
+    <p>
+        현재 환결 체계를 통해 직접 도달한 실질적 최고 <a href="aether_level.html" class="wiki-link">경지</a>는 9서클이다.
+    </p>
+
+    <h3 id="s-3-3">3.3. 영창 구조</h3>
+    <p>
+        허공에 하나의 원점을 선언하여 마법의 핵을 지정한 뒤, 그 원점을 중심으로 다수의 고리를 차례대로 전개하여 현상의 속성과 제약을 층층이 규정하는 방식을 취한다.
+    </p>
+    <blockquote>
+        <strong>화염구 시전 예시:</strong><br>
+        - <strong>기본 영창:</strong> 지정된 허공에 원점을 고정하라. 제1환 전개, 대기 중의 열소를 끌어모아 발화한다. 제2환 전개, 불꽃의 형태를 구형으로 압축하고 팽창을 완벽히 통제하라. 제3환 전개, 목표 좌표를 향한 투사 궤도와 가속도를 규정한다. 모든 환을 하나로 결속하여 발현하라. 화염구.<br>
+        - <strong>숙련자 단축:</strong> 원점 고정. 3중 환 동시 전개 및 결속. 화염구.
+    </blockquote>
+
+    <h3 id="s-3-4">3.4. 마법진 구조</h3>
+    <p>
+        다수의 원을 기하학적으로 교차하고 겹쳐내는 형태를 띤다. 구현하려는 마법 공식이 고도화되고 복잡해질수록 마법진 내부에 중첩되는 원의 수가 기하급수적으로 증가한다.
+    </p>
+
+    <h2 id="s-4">4. 편제 및 계급</h2>
+    <p>
+        소속 마법사는 100명 내외이며, 무력 및 서클 경지에 따라 정규 편제가 나뉜다.
+    </p>
+    <table class="wiki-table">
+        <tr>
+            <th>계급</th>
+            <th>해당 서클</th>
+            <th>인원 및 비고</th>
+        </tr>
+        <tr>
+            <td>견습 마법사</td>
+            <td>1서클 ~ 3서클</td>
+            <td>초심자</td>
+        </tr>
+        <tr>
+            <td>정규 마법사</td>
+            <td>4서클 ~ 5서클</td>
+            <td>중견</td>
+        </tr>
+        <tr>
+            <td>상급 마법사</td>
+            <td>6서클 ~ 7서클</td>
+            <td>38명</td>
+        </tr>
+        <tr>
+            <td>부탑주</td>
+            <td>8서클 초입, 8서클 중기</td>
+            <td>2명 (헤르미나 아른트 외 1명)</td>
+        </tr>
+        <tr>
+            <td>마탑주</td>
+            <td>9서클 입문</td>
+            <td>1명 (셀린 로엔)</td>
+        </tr>
+    </table>
+
+    <h2 id="s-5">5. 주력 사업 및 역할</h2>
+    <ul>
+        <li><strong>마도구 연구 및 대량 납품</strong></li>
+        <li><strong>대형 결계 설계 및 시공</strong> </li>
+    </ul>
+
+    <h2 id="s-6">6. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_magic.html" class="wiki-link">마법</a></li>
+        <li><a href="aether_magic_system.html" class="wiki-link">마도체계</a></li>
+        <li><a href="aether_magic_spire.html" class="wiki-link">마탑</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
