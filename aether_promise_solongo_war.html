@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로미스-솔롱고 전쟁 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 테이블 */
+        .wiki-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0 20px 0;
+            font-size: 0.92rem;
+        }
+
+        .wiki-table th, .wiki-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        .wiki-table th {
+            background-color: var(--main-color);
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">프로미스-솔롱고 전쟁</div>
+    <div class="wiki-date">최근 수정 시각: 998-04-14 18:32:01</div>
+
+    <div class="infobox">
+        <div class="infobox-title">프로미스-솔롱고 전쟁</div>
+        <table class="infobox-table">
+            <tr>
+                <th>전쟁 기간</th>
+                <td><a href="aether_calendar_era.html" class="wiki-link">제국력</a> 793년 12월 10일 ~ 제국력 802년 4월 14일</td>
+            </tr>
+            <tr>
+                <th>교전 세력</th>
+                <td><a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a> vs 솔롱고 대연합</td>
+            </tr>
+            <tr>
+                <th>주요 지휘관</th>
+                <td>
+                    세리아 프로미스<br>
+                    마커스 프로미스<br>
+                    피데스 울터<br>
+                    발터 파르마<br>
+                    ---<br>
+                    바투르<br>
+                    카사르<br>
+                    타르구타이<br>
+                    예수게이
+                </td>
+            </tr>
+            <tr>
+                <th>전쟁 결과</th>
+                <td>프로미스 제국의 완전한 승리, 솔롱고 대연합 해체</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 전쟁 배경</a>
+                <ul>
+                    <li><a href="#s-2-1">2.1. 솔롱고 대연합의 전성기</a></li>
+                    <li><a href="#s-2-2">2.2. 프로미스 제국의 황위 계승 혼란</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-3">3. 주요 참전 인물</a></li>
+            <li><a href="#s-4">4. 전쟁의 경과</a>
+                <ul>
+                    <li><a href="#s-4-1">4.1. 솔롱고의 기습 침공과 세리아 프로미스의 방어전</a></li>
+                    <li><a href="#s-4-2">4.2. 솔롱고의 참수작전과 세리아 황제의 서거</a></li>
+                    <li><a href="#s-4-3">4.3. 마커스 프로미스의 즉위와 총력 공세 전환</a></li>
+                    <li><a href="#s-4-4">4.4. 솔롱고 대연합 본진 궤멸 및 종전</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-5">5. 전후 영향 및 여담</a>
+                <ul>
+                    <li><a href="#s-5-1">5.1. 영토 병합 거부</a></li>
+                    <li><a href="#s-5-2">5.2. 마커스 프로미스의 후유증</a></li>
+                    <li><a href="#s-5-3">5.3. 제국 제후 및 기관의 보급 지원</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-6">6. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        <a href="aether_calendar_era.html" class="wiki-link">제국력</a> 793년 12월 10일부터 제국력 802년 4월 14일까지, 약 8년 4개월에 걸쳐 <a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a>과 유목 국가 '솔롱고 대연합' 사이에 벌어진 대규모 전쟁이다.
+    </p>
+    <p>
+        당대 유목 제국의 최전성기를 구가하던 솔롱고 대연합이 제국의 황위 계승기 혼란을 틈타 기습 침공하며 발발하였다. 제국력 800년 솔롱고 측의 기습적인 참수작전으로 제국의 제26대 황제 세리아 프로미스가 암살당하는 비극을 겪었으나, 뒤를 이어 즉위한 제27대 황제 마커스 프로미스의 맹렬한 반격과 황실기사단 및 영지 기사단의 총력전 끝에 솔롱고 대연합 지도부가 전멸하고 국가 체제가 완전히 해체되며 제국의 완전한 승리로 종결되었다.
+    </p>
+
+    <h2 id="s-2">2. 전쟁 배경</h2>
+
+    <h3 id="s-2-1">2.1. 솔롱고 대연합의 전성기</h3>
+    <p>
+        솔롱고 대연합은 북동쪽의 <a href="aether_rata_river.html" class="wiki-link">라타 강</a>과 북서쪽의 <a href="aether_ramus_river.html" class="wiki-link">라무스 강</a>을 국경선으로 삼고, 남쪽으로는 <a href="aether_ezed_desert.html" class="wiki-link">에제드 대사막</a>의 주요 오아시스 영토까지 장악하고 있던 거대 유목 국가였다.
+    </p>
+    <ul>
+        <li><strong>무력 수준:</strong> 9성 극한에 도달한 카간을 필두로 하여 높은 <a href="aether_level.html" class="wiki-link">경지</a>의 칸들을 다수 거느리고 있어, 군사적 무력 면에서 최전성기를 구가하고 있었다.</li>
+    </ul>
+
+    <h3 id="s-2-2">2.2. 프로미스 제국의 황위 계승 혼란</h3>
+    <p>
+        반면 프로미스 제국은 연속적인 군주의 서거로 인해 중앙 권력의 교체기를 겪고 있었다.
+    </p>
+    <ul>
+        <li><strong>연속된 교체:</strong> 제24대 황제 베른 프로미스가 제국력 792년 자연사한 데 이어, 제25대 황제 헥토르 프로미스가 즉위 이듬해인 제국력 793년 급사하는 사태가 벌어졌다.</li>
+        <li><strong>어린 황제의 즉위:</strong> 이에 따라 헥토르 프로미스의 맏이이자 장녀인 세리아 프로미스가 15세라는 어린 나이에 제26대 황제로 즉위하였다. 솔롱고 대연합은 제국의 연속된 황위 교체와 어린 황제의 즉위를 국방이 해이해진 절호의 기회로 판단하였다.</li>
+    </ul>
+
+    <h2 id="s-3">3. 주요 참전 인물</h2>
+    <table class="wiki-table">
+        <tr>
+            <th>진영</th>
+            <th>인물</th>
+            <th>직위 및 역할</th>
+            <th>무력 경지</th>
+        </tr>
+        <tr>
+            <td rowspan="4"><a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a></td>
+            <td>세리아 프로미스</td>
+            <td>제26대 황제 (방어전 총지휘)</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>마커스 프로미스</td>
+            <td>제27대 황제 (친정 및 총력전 지휘)</td>
+            <td>7성 ~ 8성</td>
+        </tr>
+        <tr>
+            <td>피데스 울터</td>
+            <td>황실기사단장</td>
+            <td>10성 후반</td>
+        </tr>
+        <tr>
+            <td>발터 파르마</td>
+            <td><a href="aether_parma_duchy.html" class="wiki-link">파르마 공작령</a> 공작 겸 방패 기사단장</td>
+            <td>9성 후반</td>
+        </tr>
+        <tr>
+            <td rowspan="4">솔롱고 대연합</td>
+            <td>바투르</td>
+            <td>카간 (솔롱고 대연합 군주)</td>
+            <td>9성 극한</td>
+        </tr>
+        <tr>
+            <td>카사르</td>
+            <td>칸</td>
+            <td>9성 극한</td>
+        </tr>
+        <tr>
+            <td>타르구타이</td>
+            <td>칸</td>
+            <td>9성 중기</td>
+        </tr>
+        <tr>
+            <td>예수게이</td>
+            <td>칸</td>
+            <td>9성 초입</td>
+        </tr>
+    </table>
+
+    <h2 id="s-4">4. 전쟁의 경과</h2>
+
+    <h3 id="s-4-1">4.1. 솔롱고의 기습 침공과 세리아 프로미스의 방어전</h3>
+    <p>
+        제국력 793년 12월 10일, 솔롱고 대연합은 선전포고 없이 기습적으로 국경을 넘어 제국을 향해 대규모 침공을 감행하였다.
+    </p>
+    <ul>
+        <li><strong>세리아 황제의 대응:</strong> 즉위 직후 기습적인 전면전을 맞이한 15세의 어린 세리아 프로미스 황제는 뛰어난 전략적 식견을 발휘하였다.</li>
+        <li><strong>안정적 방어 전략:</strong> 어린 황제는 아군 병사들의 희생을 최소한으로 억제하기 위한 철저한 지연전과 방어 위주의 안정적인 전략을 수립하여 전선을 통제하였다. 이로 인해 시간이 흐를수록 전황은 천천히 제국 측에 유리한 국면으로 전개되었다.</li>
+        <li><strong>피데스 울터에 대한 회피:</strong> 당대 대륙 최고 수준의 무력을 지닌 제국의 기둥, 황실기사단장 피데스 울터와의 직접적인 교전은 솔롱고 대연합 측 지휘부에서 철저하게 회피하였다.</li>
+        <li><strong>국경 방어:</strong> 최전방 접경 영지였던 <a href="aether_parma_duchy.html" class="wiki-link">파르마 공작령</a>에서는 공작이자 방패 기사단장인 발터 파르마가 직접 군을 이끌고 솔롱고 기병대의 맹렬한 진격을 최전선에서 저지하였다.</li>
+    </ul>
+
+    <h3 id="s-4-2">4.2. 솔롱고의 참수작전과 세리아 황제의 서거</h3>
+    <p>
+        장기전으로 흐르며 전황이 불리해지자, 솔롱고 대연합 지휘부는 일거에 전세를 뒤집기 위해 제국 수뇌부를 노리는 참수작전을 입안하였다.
+    </p>
+    <ul>
+        <li><strong>주력 유인:</strong> 솔롱고 군은 전선 전역에서 대대적인 총공세를 감행하여, 황실기사단장 피데스 울터를 비롯한 제국의 고위 경지 기사들을 격전지로 유인해 묶어두었다.</li>
+        <li><strong>황궁 침투:</strong> 수뇌부의 경호가 얇아진 틈을 노려, 은신과 고속 기동에 특화되어 있던 9성 중기의 타르구타이 칸이 단신으로 제국 수도 <a href="aether_imperial_capital.html" class="wiki-link">황도</a>의 황궁 내부로 은밀히 침투하였다.</li>
+        <li><strong>마커스 프로미스의 분전과 참변:</strong> 당시 7성의 황실 기사로서 친누나인 세리아 프로미스를 지근거리에서 호위하던 남동생 마커스 프로미스가 침입자를 가로막고 필사적으로 맞서 싸웠다. 그러나 7성과 9성 중기 사이의 압도적인 무력 격차를 끝내 극복하지 못하였다.</li>
+        <li><strong>황제의 서거:</strong> 세리아 프로미스는 마커스 프로미스의 눈앞에서 타르구타이의 일격에 암살당하였다. 타르구타이는 중상을 입은 마커스마저 살해하려 하였으나, 이변을 감지하고 급히 황궁으로 쇄도해 오는 다른 황실 기사들의 기척을 확인하고 퇴각하였다.</li>
+    </ul>
+
+    <h3 id="s-4-3">4.3. 마커스 프로미스의 즉위와 총력 공세 전환</h3>
+    <p>
+       자책과 분노 속에서, 마커스 프로미스는 16세의 나이로 제27대 황제에 즉위하였다.
+    </p>
+    <ul>
+        <li><strong>총력 공세 선언:</strong> 마커스 프로미스는 즉위식을 치르자마자 방어 위주였던 기존의 전략을 철회하고 솔롱고 대연합을 완전히 섬멸하기 위한 총력 공세로 작전 기조를 전면 전환하였다.</li>
+        <li><strong>황제 친정:</strong> 어린 황제는 스스로 군을 통솔하여 최전선으로 친정에 나섰다. 물러섬 없는 치열한 사투 속에서 마커스 프로미스는 자신의 무력 경지를 마침내 8성으로 끌어올렸다.</li>
+    </ul>
+
+    <h3 id="s-4-4">4.4. 솔롱고 대연합 본진 궤멸 및 종전</h3>
+    <p>
+        피데스 울터와 발터 파르마, 그리고 마커스 황제가 이끄는 제국군의 대대적인 공세 앞에 솔롱고 대연합의 전선은 붕괴하였다.
+    </p>
+    <ul>
+        <li><strong>지도부 섬멸:</strong> 솔롱고 대연합의 카간 바투르는 황실기사단장 피데스 울터의 손에 처치되었으며, 다른 고위 칸들 역시 전장에서 차례로 목숨을 잃었다.</li>
+        <li><strong>타르구타이 처형:</strong> 세리아 황제를 암살했던 타르구타이 칸은 전장에서 사로잡혀 마커스 황제의 명으로 처형되었다. 마커스 프로미스는 그의 목을 베어 창끝에 높이 꽂은 채 전장을 행진하였으며, 그의 시신은 타르구타이가 타던 애마 뒤에 쇠사슬로 결속하여 내달리게 함으로써 참변의 원수를 갚았다.</li>
+        <li><strong>완전한 승리:</strong> 제국력 802년 4월 14일, 솔롱고 대연합의 본진이 완전히 짓밟히고 유목 연합 체제가 분쇄되면서 제국의 완전한 승리로 종전이 선포되었다.</li>
+    </ul>
+
+    <h2 id="s-5">5. 전후 영향 및 여담</h2>
+
+    <h3 id="s-5-1">5.1. 영토 병합 거부</h3>
+    <p>
+        전쟁에서 압도적인 승리를 거두고 솔롱고의 본진을 완전히 파괴했음에도 불구하고, 프로미스 제국은 솔롱고의 유목 영토를 제국령으로 병합하지 않고 군을 본토로 철수시켰다.
+    </p>
+    <ul>
+        <li><strong>후속 세력의 규합:</strong> 주인을 잃고 해체된 유목 평원 지대에는 훗날 새로운 세력들이 다시 모여들었으며, 이는 오늘날의 유목 국가인 <a href="aether_karshan_khaganate.html" class="wiki-link">카르샨 카간국</a>으로 이어지게 되었다.</li>
+    </ul>
+
+    <h3 id="s-5-2">5.2. 마커스 프로미스의 후유증</h3>
+    <p>
+        마커스 황제는 8년간 이어진 격전 속에서 자신의 내상과 외상을 돌보지 않고 최전방을 누빈 대가로, 종전 이후 평생에 걸쳐 만성적인 고통과 지독한 후유증에 시달려야 했다.
+    </p>
+    <ul>
+        <li><strong>수명 단축과 강건한 통치:</strong> 8성의 고위 무인이었음에도 불구하고 전쟁 중 입은 부상으로 인해 본래 누릴 수 있었던 수명의 상당 부분을 상실하였다. 그럼에도 그는 고통을 인내하며 제국력 863년 숨을 거둘 때까지 제국을 강건하고 흔들림 없이 통치하여 '사자황'이라는 칭호로 추앙받았다.</li>
+    </ul>
+
+    <h3 id="s-5-3">5.3. 제국 제후 및 기관의 보급 지원</h3>
+    <p>
+        전쟁 기간 제국 각지의 제후 영지와 기관들이 군수 지원을 아끼지 않았다.
+    </p>
+    <ul>
+        <li><strong>세제스 공작령의 군량 공급:</strong> 당시 <a href="aether_seges_duchy.html" class="wiki-link">세제스 공작령</a>을 다스리던 제4대 공작 루키우스 세제스는 영지의 막대한 수확량을 바탕으로 제국군 전선에 필요한 군량을 사실상 수송비 수준의 명목상 대가만 받고 무제한으로 공급하여 군량난을 방지하였다.</li>
+    </ul>
+
+    <h2 id="s-6">6. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a></li>
+        <li><a href="aether_karshan_khaganate.html" class="wiki-link">카르샨 카간국</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
