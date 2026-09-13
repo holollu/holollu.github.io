@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제국력 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">제국력</div>
+    <div class="wiki-date">최근 수정 시각: 994-07-01 00:05:12</div>
+
+    <div class="infobox">
+        <div class="infobox-title">제국력</div>
+        <table class="infobox-table">
+            <tr>
+                <th>분류</th>
+                <td>기년법</td>
+            </tr>
+            <tr>
+                <th>기준 국가</th>
+                <td><a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a></td>
+            </tr>
+            <tr>
+                <th>원년 기준</th>
+                <td>프로미스 제국 개국 연도</td>
+            </tr>
+            <tr>
+                <th>사용 영역</th>
+                <td>대륙 전역 (공통 기년법)</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="toc">
+        <div class="toc-title">목차</div>
+        <ul>
+            <li><a href="#s-1">1. 개요</a></li>
+            <li><a href="#s-2">2. 대륙 공통 기년법 정착 과정</a>
+                <ul>
+                    <li><a href="#s-2-1">2.1. 독자적 기년법의 난립과 한계</a></li>
+                    <li><a href="#s-2-2">2.2. 제국력 병기의 확산</a></li>
+                    <li><a href="#s-2-3">2.3. 단일 기년법으로의 정착</a></li>
+                </ul>
+            </li>
+            <li><a href="#s-3">3. 관련 문서</a></li>
+        </ul>
+    </div>
+
+    <h2 id="s-1">1. 개요</h2>
+    <p>
+        <a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a>의 개국 연도를 원년(1년)으로 삼는 기년법이다.
+    </p>
+    <p>
+        현재 대륙 전역의 <a href="aether_pan-human_species.html" class="wiki-link">범인류종</a> 문명권 전체에서 통용되는 단일 공통 기년법으로 자리 잡고 있다.
+    </p>
+
+    <h2 id="s-2">2. 대륙 공통 기년법 정착 과정</h2>
+
+    <h3 id="s-2-1">2.1. 독자적 기년법의 난립과 한계</h3>
+    <p>
+        과거에는 각 국가나 심지어 거대 영지마다 건국일, 새로운 군주의 즉위, 혹은 특정한 역사적 사건을 기준으로 삼는 독자적인 연호를 제각기 사용하였다.
+    </p>
+    <ul>
+        <li><strong>기록의 단절:</strong> 군주가 교체되거나 정변이 일어날 때마다 기년법이 수시로 바뀌거나 초기화되었다.</li>
+        <li><strong>외교적 한계:</strong> 이러한 잦은 변동은 장기적인 역사 기록의 보존을 어렵게 만들었으며, 국가 간 외교 문서를 작성하고 상호 연대를 대조하는 데 있어 커다란 걸림돌로 작용하였다.</li>
+    </ul>
+
+    <h3 id="s-2-2">2.2. 제국력 병기의 확산</h3>
+    <p>
+        <a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a>은 건국 이래 대륙 북서부를 통치하며 긴 시간 동안 단 한 번의 중단이나 초기화 없이 제국력을 누적해 왔다. 당시 이미 500년 이상 존속하고 있던 제국력은 신뢰할 수 있는 안정적인 기년법으로 대두되었다.
+    </p>
+    <ul>
+        <li><strong>타 국가와의 비교:</strong> <a href="aether_infernum_demon_nation.html" class="wiki-link">인페르눔 마족국</a>과 같이 훨씬 더 오래 존속한 국가도 존재했으나, 마족은 타 범인류종과 적대적이므로 이들의 연대를 기준으로 삼는 것은 고려 대상조차 되지 못했다.</li>
+        <li><strong>병기 관행의 도입:</strong> 타국들은 외교, 무역, 학술 교류 등에서 발생하는 연대 환산의 혼선을 줄이기 위해, 자국의 고유 기년법과 함께 프로미스 제국의 제국력을 나란히 적는 병기 관행을 도입하기 시작하였다.</li>
+    </ul>
+
+    <h3 id="s-2-3">2.3. 단일 기년법으로의 정착</h3>
+    <p>
+        시간이 흐름에 따라 역사학자, 행정 관료, 대상단 상인들 사이에서 매번 번거롭게 환산해야 하는 자국의 개별 기년법보다, 대륙 어디에서나 통용되고 끊김이 없는 제국력을 단독으로 사용하는 편이 훨씬 실용적이라는 합의가 형성되었다.
+    </p>
+    <ul>
+        <li><strong>현재의 위상:</strong> 각국의 고유 기년법은 점차 왕실 내부의 상징적인 의례나 궁중 문서에만 국한되어 쓰이게 되었다. 민간 상업과 공식 행정 영역에서는 제국력이 단일 기년법으로 확고히 자리 잡아 통용되고 있다.</li>
+    </ul>
+
+    <h2 id="s-3">3. 관련 문서</h2>
+    <ul>
+        <li><a href="aether_society.html" class="wiki-link">사회</a></li>
+        <li><a href="aether_promise_empire.html" class="wiki-link">프로미스 제국</a></li>
+        <li><a href="aether_promise_empire_founding_history.html" class="wiki-link">프로미스 제국 건국사</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
+
