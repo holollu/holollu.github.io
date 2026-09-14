@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인물 목록 - Wiki Project</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #f9f8fb;      
+            --point-color: #594673;   
+            --bg-grey: #eeeeee;       
+            --border-color: #dcd6e4;
+            --link-color: #594673;
+            --hover-color: #f0ecf6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 25px;
+            color: #111;
+        }
+
+        /* 캐릭터 카드 그리드 */
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 24px;
+            margin-top: 10px;
+        }
+
+        /* 세로형 모깎이 카드 */
+        .character-card {
+            background-color: var(--base-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .character-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(89, 70, 115, 0.12);
+            border-color: var(--point-color);
+        }
+
+        /* 4:3 비율 이미지 래퍼 */
+        .character-image-wrapper {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background-color: var(--main-color);
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .character-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* 캐릭터 정보 본문 */
+        .character-info {
+            padding: 18px 20px 20px 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .character-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--point-color);
+            margin-bottom: 10px;
+            border-left: 4px solid var(--point-color);
+            padding-left: 8px;
+            line-height: 1.2;
+        }
+
+        .character-desc {
+            font-size: 0.93rem;
+            color: #555;
+            margin: 0;
+            word-break: keep-all;
+            line-height: 1.6;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 20px 15px;
+                box-shadow: none;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+            .character-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="https://holollu.github.io/aether.html">Wiki Project</a>
+</header>
+
+<div class="container">
+    <div class="wiki-title">인물 목록</div>
+       <!-- 이름이 '알베르트 아인슈타인' 이라면, 링크에서는 'https://itimg.kr/2574/7/알베르트_아인슈타인.webp'  -->
+    <div class="character-grid">
+        <!-- 예시 1 -->
+<!-- 네피아 프로미스 -->
+        <div class="character-card">
+            <div class="character-image-wrapper">
+                <img src="https://itimg.kr/2574/7/네피아_프로미스.webp" alt="네피아 프로미스" class="character-image" loading="lazy">
+            </div>
+            <div class="character-info">
+                <div class="character-name">네피아 프로미스</div>
+                <p class="character-desc">
+                    
+                </p>
+            </div>
+        </div>
+
+        <!-- 피데스 울터 -->
+        <div class="character-card">
+            <div class="character-image-wrapper">
+                <img src="https://itimg.kr/2574/7/피데스_울터.webp" alt="피데스 울터" class="character-image" loading="lazy">
+            </div>
+            <div class="character-info">
+                <div class="character-name">피데스 울터</div>
+                <p class="character-desc">
+                    프로미스 제국의 명예 후작이자 황실기사단을 이끄는 기사단장으로, 기 10성 후반의 초월적인 무력을 지녀 제국의 기둥이라 불리는 인물이다. 겉과 속이 일치하는 우직한 면모를 지녔으며, 황제 개인보다 프로미스 제국이라는 국가 자체의 존속과 수호를 최우선으로 삼는다.
+                </p>
+            </div>
+        </div>
+
+        <!-- 피나 팔코 -->
+        <div class="character-card">
+            <div class="character-image-wrapper">
+                <img src="https://itimg.kr/2574/7/피나_팔코.webp" alt="피나 팔코" class="character-image" loading="lazy">
+            </div>
+            <div class="character-info">
+                <div class="character-name">피나 팔코</div>
+                <p class="character-desc">
+                    황실기사단의 부기사단장이자 제국 내부 감찰을 전담하는 명예 백작으로, 기 9성 중기의 경지에 도달한 천재적인 무인이다. 활기차고 당당하며 장난기 넘치는 분위기 메이커이다. 작고 왜소한 체구와 달리 달인 수준의 신법과 기척 차단술을 구사하며 황실과 귀족가의 규율을 엄격하게 감찰한다.
+                </p>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+</body>
+</html>
+
