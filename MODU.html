@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MODU! - 트리위키</title>
+    <style>
+        /* 폰트 설정 */
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+        @font-face {
+            font-family: 'Paperozi';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+        }
+
+        :root {
+            --base-color: #ffffff;      
+            --main-color: #effcf7;      
+            --point-color: #47e1a8;   
+            --bg-grey: #eeeeee;       
+            --border-color: #b8e9d7;
+            --link-color: #16815f;
+            --hover-color: #dcf9ed;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Paperozi', sans-serif;
+            background-color: var(--bg-grey);
+            color: #373a3c;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--point-color);
+            color: #ffffff;
+            padding: 13px 22px;
+            font-weight: 800;
+            font-size: 1.55rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header a {
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        header a:hover,
+        header a:focus-visible {
+            color: #ffffff;
+        }
+
+        .brand-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+            flex: 0 0 42px;
+            display: block;
+        }
+
+        .brand-text {
+            color: #ffffff;
+            line-height: 1;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: var(--base-color);
+            padding: 30px 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        /* 위키 문서 스타일 */
+        .wiki-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .wiki-date {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        /* 인포박스 */
+        .infobox {
+            float: right;
+            width: 320px;
+            border: 1px solid var(--point-color);
+            margin-left: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .infobox-title {
+            background-color: var(--point-color);
+            color: #124b39;
+            text-align: center;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .infobox-table th, .infobox-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+        }
+
+        .infobox-table th {
+            background-color: var(--main-color);
+            width: 38%;
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 목차 */
+        .toc {
+            display: inline-block;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--main-color);
+            margin-bottom: 20px;
+            min-width: 250px;
+            border-radius: 4px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--point-color);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--link-color);
+            font-size: 0.95rem;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .toc a:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 본문 섹션 */
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            color: #222;
+            font-weight: 800;
+            clear: both;
+        }
+
+        h3 {
+            border-left: 5px solid var(--point-color);
+            padding-left: 10px;
+            margin-top: 25px;
+            color: #333;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            word-break: keep-all;
+        }
+
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            word-break: keep-all;
+        }
+
+        .wiki-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .wiki-link:hover {
+            background-color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* 테이블 */
+        .wiki-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0 20px 0;
+            font-size: 0.92rem;
+        }
+
+        .wiki-table th, .wiki-table td {
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        .wiki-table th {
+            background-color: var(--main-color);
+            color: var(--point-color);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 15px;
+                box-shadow: none;
+            }
+            .infobox {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+            }
+            .wiki-title {
+                font-size: 1.8rem;
+            }
+        }
+    
+html {scroll-behavior:smooth;scroll-padding-top:90px} *{box-sizing:border-box}
+.infobox-table th,.wiki-table th,.toc-title{color:#16815f}
+.category{font-size:.85rem;color:#777;margin:16px 0}.category span{color:#16815f}
+.group-mark{text-align:center;padding:28px 12px;background:#effcf7;font-size:2.9rem;font-weight:800;letter-spacing:2px;color:#16815f}.group-mark small{display:block;font-size:.7rem;letter-spacing:1px}
+blockquote{margin:16px 0;padding:16px 20px;background:#effcf7;border-left:4px solid #47e1a8}
+.lyrics{font-size:.95rem;line-height:1.9}.part{display:inline-block;color:#16815f;font-weight:700;min-width:85px}.track{margin:24px 0}.track h4{margin-bottom:8px;font-size:1rem}.badge{font-size:.7rem;background:#16815f;color:white;padding:3px 7px;border-radius:3px;margin-left:6px}
+.table-wrap{overflow-x:auto}footer{border-top:1px solid #b8e9d7;margin-top:38px;padding-top:16px;color:#777;font-size:.8rem}h2,h3,h4{scroll-margin-top:90px}
+@media(max-width:768px){.infobox{max-width:100%}.wiki-table{min-width:490px}.part{min-width:78px}.container{overflow-wrap:anywhere}}
+</style>
+</head>
+
+<body>
+<header>
+    <a href="#" class="brand-link" aria-label="트리위키 맨 위로 이동">
+        <!-- 흰색 단색 선만 사용하는 '책에서 자라는 나무' SVG 로고 -->
+        <svg class="brand-icon" viewBox="0 0 64 64" role="img" aria-label="책에서 자라는 나무 아이콘" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <!-- 나무의 잎사귀와 줄기 -->
+            <path d="M17 26c-4-2-5-8-2-12 2-3 5-4 9-4 2-5 6-7 11-6 5 0 9 4 10 9 5 0 9 4 9 9 0 6-4 10-10 10H22c-3 0-5-2-5-6Z" stroke-width="2.8"/>
+            <path d="M32 43V22m0 12-10-9m10 5 10-10" stroke-width="3"/>
+            <!-- 펼쳐진 책과 책장 -->
+            <path d="M32 45c-8-5-17-7-26-5v16c10-2 19 0 26 5 7-5 16-7 26-5V40c-9-2-18 0-26 5Z" stroke-width="2.8"/>
+            <path d="M32 45v16M10 45c8-1 14 1 18 3m26-3c-8-1-14 1-18 3" stroke-width="2"/>
+        </svg>
+        <span class="brand-text">트리위키</span>
+    </a>
+</header>
+
+<main class="container"><h1 class="wiki-title">MODU!</h1>
+<div class="wiki-date">문서 작성: 2026.03.26 13:22</div>
+<div class="category">분류: <span>대한민국의 걸그룹</span> · <span>4인조 음악 그룹</span> · <span>2023년 데뷔</span> · <span>2026년 해체</span></div>
+<aside class="infobox" aria-label="MODU! 기본 정보"><div class="infobox-title">MODU!<br>모두</div><div class="group-mark">MODU!<small>Moving Our Dreams Upward!</small></div><table class="infobox-table">
+<tr><th>그룹명</th><td>MODU! (모두)</td></tr><tr><th>소속사</th><td>리즌엔터테인먼트</td></tr><tr><th>구성원</th><td>소예 · 하은 · 채율 · 은별</td></tr><tr><th>데뷔</th><td>2023년 6월 5일<br>싱글 1집 《UP : START》</td></tr><tr><th>해체</th><td>2026년 3월 24일</td></tr><tr><th>데뷔곡</th><td>하이파이브!</td></tr><tr><th>리더</th><td>공식 리더 없음</td></tr><tr><th>팬덤명</th><td>미정</td></tr></table></aside>
+<nav class="toc" aria-label="목차"><div class="toc-title">목차</div><ul>
+<li><a href="#s-1">1. 개요</a></li><li><a href="#s-2">2. 멤버</a></li><li><a href="#s-3">3. 음반</a><ul><li><a href="#s-3-1">3.1. UP : START</a></li><li><a href="#s-3-2">3.2. Step Up!</a></li></ul></li><li><a href="#s-4">4. 활동</a><ul><li><a href="#s-4-1">4.1. 2023년</a></li><li><a href="#s-4-2">4.2. 2024년</a></li><li><a href="#s-4-3">4.3. 2025~2026년</a></li></ul></li><li><a href="#s-5">5. 해체</a></li><li><a href="#s-6">6. 여담</a></li></ul></nav>
+<h2 id="s-1">1. 개요</h2>
+<blockquote><strong>꿈을 향해 더 높이! 안녕하세요, MODU!입니다!</strong></blockquote>
+<p>리즌엔터테인먼트 소속으로 2023년 6월 5일 데뷔한 4인조 걸그룹. 소예, 하은, 채율, 은별로 구성되었으며, 2026년 3월 24일 해체했다.</p>
+<p>그룹명은 ‘모두’라고 읽으며, ‘Moving Our Dreams Upward!’라는 의미를 담고 있다. 소속사가 처음이자 유일하게 선보인 아이돌 그룹이다.</p>
+<p>청량하고 에너제틱한 댄스곡을 타이틀로 내세웠으며, 수록곡에서는 어쿠스틱 팝과 발라드 등도 선보였다. 활동 기간 동안 싱글 1장과 미니 앨범 1장을 발매했다.</p>
+<h2 id="s-2">2. 멤버</h2>
+<div class="table-wrap"><table class="wiki-table"><thead><tr><th>활동명</th><th>본명</th><th>생년월일</th><th>포지션</th></tr></thead><tbody>
+<tr><td>소예</td><td>정소예</td><td>2005년 4월 6일</td><td>리드보컬, 리드댄서, 올라운더</td></tr><tr><td>하은</td><td>이하은</td><td>2007년 5월 12일</td><td>메인댄서, 서브보컬</td></tr><tr><td>채율</td><td>박채율</td><td>2007년 9월 22일</td><td>메인보컬</td></tr><tr><td>은별</td><td>김은별</td><td>2008년 11월 19일</td><td>메인래퍼, 서브보컬</td></tr></tbody></table></div>
+<p>멤버 전원이 성을 제외한 본명을 활동명으로 사용했다. 공식 리더는 없으며, 팀 인사의 선창은 주로 소예가 맡았다. “둘, 셋!”이라는 선창에 맞춰 함께 팀 구호를 외치는 방식이다.</p>
+<h2 id="s-3">3. 음반</h2>
+<p>데뷔 싱글 《UP : START》와 미니 1집 《Step Up!》가 발매되었다. 곡의 완성도는 준수했으나 대중적인 인지도와 큰 반향으로 이어지지는 못했다.</p>
+<p>뮤직비디오는 각 음반의 타이틀곡에만 제작되었다.</p>
+<h3 id="s-3-1">3.1. 싱글 1집 《UP : START》</h3>
+<p><strong>발매일:</strong> 2023년 6월 5일</p>
+<div class="table-wrap"><table class="wiki-table"><tr><th>트랙</th><th>곡명</th><th>장르</th></tr><tr><td>1</td><td>하이파이브! <span class="badge">TITLE</span></td><td>틴팝, 댄스</td></tr><tr><td>2</td><td>첫 페이지</td><td>어쿠스틱 팝</td></tr><tr><td>3</td><td>하이파이브! (Inst.)</td><td>인스트루멘털</td></tr></table></div>
+<p>MODU!의 데뷔 음반. 청량한 에너지의 타이틀곡과 서정적인 어쿠스틱 팝 수록곡으로 구성되었다.</p>
+<section class="track"><h4>1. 하이파이브! · TITLE</h4><p>톡톡 튀는 브라스 세션과 청량한 신스 사운드가 돋보이는 에너제틱한 댄스곡이다.</p><p><strong>뮤직비디오:</strong> 채도 높은 파스텔톤 색감으로 폐체육관과 옥상 공터를 배경으로 한 풋풋한 모습을 담았다.</p><blockquote class="lyrics" aria-label="킬링파트 가사"><span class="part">[소예]</span> 손을 번쩍 들고 High!<br><span class="part">[하은, 은별]</span> 마주친 손끝에 Five!<br><span class="part">[채율]</span> 우리 꿈은 저 위로,<br><span class="part">[ALL]</span> 모두 다 함께 외쳐 봐!</blockquote></section><section class="track"><h4>2. 첫 페이지</h4><p>어쿠스틱 기타 리프와 담백한 비트가 어우러진 곡. 서정적이고 풋풋한 분위기의 이지리스닝 트랙이다.</p><blockquote class="lyrics" aria-label="킬링파트 가사"><span class="part">[채율]</span> 새하얀 종이 위에 적어 내려간 우리 이야기,<br><span class="part">[소예]</span> 넘어져도 괜찮아<br><span class="part">[ALL]</span> 함께 넘길 다음 장이 있잖아</blockquote></section><section class="track"><h4>3. 하이파이브! (Inst.)</h4><p>타이틀곡 「하이파이브!」의 인스트루멘털 트랙이다.</p></section><h3 id="s-3-2">3.2. 미니 1집 《Step Up!》</h3><p><strong>발매일:</strong> 2024년 5월 13일</p>
+<div class="table-wrap"><table class="wiki-table"><tr><th>트랙</th><th>곡명</th><th>장르</th></tr><tr><td>1</td><td>Intro : Ready, Set, ( )</td><td>일렉트로 팝</td></tr><tr><td>2</td><td>한 뼘 더 <span class="badge">TITLE</span></td><td>댄스 팝, 신스팝</td></tr><tr><td>3</td><td>반짝여줘</td><td>틴 팝</td></tr><tr><td>4</td><td>바람이 부는 자리</td><td>어쿠스틱 발라드</td></tr><tr><td>5</td><td>한 뼘 더 (Inst.)</td><td>인스트루멘털</td></tr></table></div>
+<p>첫 미니 앨범이자 마지막으로 발매한 음반. 당찬 분위기의 타이틀곡을 중심으로 애틋한 틴 팝과 따뜻한 위로를 담은 발라드를 수록했다.</p><section class="track"><h4>1. Intro : Ready, Set, ( )</h4><p>카운트다운 소리와 심장 박동음을 연상시키는 비트가 점차 고조되는 짧은 일렉트로 팝 인트로다.</p></section><section class="track"><h4>2. 한 뼘 더 · TITLE</h4><p>펑키한 베이스라인과 중독성 있는 후렴구가 특징인 댄스 팝·신스팝 곡이다.</p><p><strong>뮤직비디오:</strong> 네온 조명이 켜진 텅 빈 주차장과 해 질 녘 육교를 배경으로, 감각적인 야경 속에 당찬 열정을 담았다.</p><blockquote class="lyrics" aria-label="킬링파트 가사"><span class="part">[은별]</span> 아슬아슬해도 멈추지 않아,<br><span class="part">[채율]</span> 한 뼘 더 높이 올라 저 하늘에 닿게!<br><span class="part">[소예, 하은]</span> 더 높이,<br><span class="part">[ALL]</span> Just Step Up!</blockquote></section><section class="track"><h4>3. 반짝여줘</h4><p>경쾌한 리듬 속에 애틋함이 묻어나는 틴 팝 곡이다.</p><blockquote class="lyrics" aria-label="킬링파트 가사"><span class="part">[하은]</span> 어두운 밤길을 걸을 때도 길을 잃지 않게,<br><span class="part">[채율]</span> 작은 불빛 하나만<br><span class="part">[소예, 은별]</span> 내게 비춰줄래</blockquote></section><section class="track"><h4>4. 바람이 부는 자리</h4><p>멤버들의 담백한 보컬 하모니가 중심이 되는 어쿠스틱 발라드. 따뜻하고 담백한 위로를 전하는 곡이다.</p><blockquote class="lyrics" aria-label="킬링파트 가사"><span class="part">[채율]</span> 숨이 찰 땐 잠깐 쉬어가도 돼, 불어오는 바람에<br><span class="part">[ALL]</span> 우리 다시 웃자</blockquote></section><section class="track"><h4>5. 한 뼘 더 (Inst.)</h4><p>타이틀곡 「한 뼘 더」의 인스트루멘털 트랙이다.</p></section>
+<h2 id="s-4">4. 활동</h2>
+<h3 id="s-4-1">4.1. 2023년</h3>
+<p>6월 5일 싱글 1집 《UP : START》를 발매하고 정식 데뷔했다. 타이틀곡은 「하이파이브!」. 데뷔 이후 대중적인 관심을 얻지 못했고 차트 진입에도 실패했다. 지방 축제와 군부대 위문공연 등 행사 무대를 중심으로 활동했다.</p>
+<h3 id="s-4-2">4.2. 2024년</h3>
+<p>5월 13일 미니 1집 《Step Up!》를 발매하고 「한 뼘 더」로 컴백했다. 소속사가 사활을 건 음반이었으나 큰 반향을 얻지는 못했다.</p>
+<p>음악 활동 외에도 케이블 생활정보 프로그램의 리포터 보조와 중소규모 미튜브 웹예능 게스트 등으로 출연했다. 스타그램과 Y를 통한 SNS 활동도 병행했다.</p>
+<h3 id="s-4-3">4.3. 2025~2026년</h3>
+<p>2025년에는 행사와 섭외가 눈에 띄게 줄었다. 현장 매니저와 직원들이 차례로 퇴사하면서 활동을 유지하기 어려워졌다.</p>
+<p>해체 약 두 달 전부터는 별도의 매니저 없이 김영현 대표가 직접 차량을 운전하며 남은 지방 행사와 개인 일정에 동행했다.</p>
+<h2 id="s-5">5. 해체</h2>
+<p>2026년 3월 24일 저녁, MODU!의 활동 종료가 발표되었다.</p>
+<p>해체 원인은 지속적인 인기 부족과 소속사의 경영 악화였다. 3월 26일 기준으로 리즌엔터테인먼트는 대표자의 법인파산 신청을 준비 중인 상태이다.</p>
+<h2 id="s-6">6. 여담</h2>
+<ul><li>활동 당시 멤버들은 개인 스마트폰을 사용했다.</li></ul>
+</main></body></html>
